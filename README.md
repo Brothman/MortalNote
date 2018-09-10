@@ -1,5 +1,5 @@
 # MortalNote
 
-You mortal over there behind the screen. Hello. 
+You there behind the screen. Hello. 
 
 I wish you a good day kind reader.
