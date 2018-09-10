@@ -1,4 +1,4 @@
-# MORTALNOTE
+# MortalNote
 
 You mortal over there behind the screen. Hello. 
 
