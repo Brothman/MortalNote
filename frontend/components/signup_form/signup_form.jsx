@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -31,20 +32,31 @@ class SignUpForm extends React.Component {
   }
 
   render () {
-    const errors = this.props.errors.map((error) => {
-      return <p>{error}</p>;
+    const errors = this.props.errors.map((error, idx) => {
+      return <p key={idx}>{error}</p>;
     });
     return (
-      <form onSubmit={this.handleSubmit}>
-        {errors}
-        <input type="text"
-               value={this.state.email}
-               onChange={this.handleTyping("email")} />
-        <input type="password"
-               value={this.state.password}
-               onChange={this.handleTyping("password")} />
-             <input type="submit" value="Continue (Sign Up)"></input>
-      </form>
+      <div className="grid">
+        <img className="logo" src="https://i.ytimg.com/vi/EAwWPadFsOA/maxresdefault.jpg" />
+        <h1 className="app-name">MortalNote</h1>
+        <p className="positive-message">Remember something's are not important.</p>
+        <form className="signup-form" onSubmit={this.handleSubmit}>
+          {errors}
+          <input type="text"
+            value={this.state.email}
+            onChange={this.handleTyping("email")} />
+          <input type="password"
+            value={this.state.password}
+            onChange={this.handleTyping("password")} />
+          <input type="submit" value="Continue (Sign Up)"></input>
+        </form>
+        <p className="terms-of-service">
+          By creating an account, you are agreeing to our terms of service
+          and privacy policy.
+        </p>
+        <p className="already-account"> Already have an account? </p>
+        <Link className="signIn" to="/login">Sign in</Link>
+      </div>
     );
   }
 }

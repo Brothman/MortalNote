@@ -31,8 +31,8 @@ class LoginForm extends React.Component {
   }
 
   render () {
-    const errors = this.props.errors.map((error) => {
-      return <p>{error}</p>;
+    const errors = this.props.errors.map((error, idx) => {
+      return <p key={idx}>{error}</p>;
     });
     return (
       <form onSubmit={this.handleSubmit}>

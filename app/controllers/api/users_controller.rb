@@ -6,10 +6,15 @@ class Api::UsersController < ApplicationController
     #Checking to see if the user passes the model validations
     #and database constraints
     if @user.save
+      login(@user)
       render 'api/users/show'
     else
-      render :json @user.errors.full_messages, status: 422
+      errors = @user.errors.full_messages
+      render :json => errors, status: 422
     end
+  end
+
+  def show
   end
 
   private
