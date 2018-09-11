@@ -5,7 +5,7 @@ class Api::SessionsController < ApplicationController
     #If we don't have a match in the database
     #Give the user a specific error message
     if @user.nil?
-      render json: "Email Not Found", status: 404
+      render json: ["Email Not Found"], status: 404
     #If the passwords match, login in the user, and return the user
     elsif @user.is_password?(params[:user][:password])
       login(@user)
@@ -18,7 +18,7 @@ class Api::SessionsController < ApplicationController
   #To logout a user from the current session
   def destroy
     if current_user
-      logout
+      logout!
       render json: {}
     else
       render json: ['No user logged in'], status: 404

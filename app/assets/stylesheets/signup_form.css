@@ -1,0 +1,49 @@
+.grid {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 600px 1fr;
+
+  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-areas:
+  " .          .           . "
+  " .        logo          . "
+  " .      app-name        . "
+  " .   positive-message   . "
+  " .   googleSignIn       . "
+  " .         or           . "
+  " .       signup-form    . "
+  " .   terms-of-service   . "
+  " .    already-account   . "
+  " .        signIn        . "
+}
+
+.app-name {
+  grid-area: app-name;
+}
+
+.positive-message {
+  grid-area: positive-message;
+}
+
+.logo {
+  grid-area: logo;
+  width: 100px;
+  height: 100px;
+}
+.already-account {
+  grid-area: already-account;
+}
+
+.signup-form {
+  grid-area: signup-form;
+}
+
+.signIn {
+  grid-area: signIn;
+}
+
+.terms-of-service {
+  grid-area: terms-of-service;
+}

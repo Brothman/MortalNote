@@ -23,7 +23,7 @@ class User < ApplicationRecord
   #Allows us to hash the users password so we don't have
   #to save plaintext passwords
   def password=(password)
-    self.password = password
+    @password = password
     self.password_digest = BCrypt::Password.create(password)
   end
 
