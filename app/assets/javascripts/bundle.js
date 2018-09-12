@@ -219,7 +219,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ComponentWrapper = function ComponentWrapper(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Hello", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/login",
     component: _login_form_login_form_container_js__WEBPACK_IMPORTED_MODULE_2__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -458,36 +458,60 @@ function (_React$Component) {
         }, error);
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "grid-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grid"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "logo",
-        src: "https://i.ytimg.com/vi/EAwWPadFsOA/maxresdefault.jpg"
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo.png"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "app-name"
       }, "MortalNote"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "positive-message"
-      }, "Remember something's are not important."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "Remember some things are not important."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "googleSignIn"
+      }, "Sign In With Google"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "or"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "grey-border"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "or-text"
+      }, "or"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "grey-border"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "signup-form",
         onSubmit: this.handleSubmit
       }, errors, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        autofocus: "autofocus",
         value: this.state.email,
-        onChange: this.handleTyping("email")
+        className: "signup-email-input",
+        onChange: this.handleTyping("email"),
+        placeholder: "Email"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         value: this.state.password,
-        onChange: this.handleTyping("password")
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "submit",
-        value: "Continue (Sign Up)"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "signup-password-input",
+        onChange: this.handleTyping("password"),
+        placeholder: "Password"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "signup-submit"
+      }, " Continue (Sign Up) ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "terms-of-service"
-      }, "By creating an account, you are agreeing to our terms of service and privacy policy."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, "By creating an account, you are agreeing to our", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "form-links",
+        href: "https://evernote.com/legal/terms-of-service",
+        target: "_blank"
+      }, " Terms of Service "), "and", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "form-links",
+        href: "https://evernote.com/privacy",
+        target: "_blank"
+      }, " Privacy Policy"), "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "already-account"
       }, " Already have an account? "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "signIn",
         to: "/login"
-      }, "Sign in"));
+      }, "Sign in")));
     }
   }]);
 

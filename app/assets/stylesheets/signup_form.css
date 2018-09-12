@@ -1,49 +1,236 @@
 .grid {
   display: grid;
-  width: 100%;
+  grid-area: griddy;
+  /* width: 50%; */
+  justify-self: center;
+  /* position: relative;
+  z-index: 1; */
+  top: 100px;
+
+  background-color: white;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+
   justify-items: center;
   align-items: center;
-  grid-template-columns: 1fr 600px 1fr;
+  grid-template-columns: 100px 314px 100px;
 
-  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+/* 44px after positivity */
+
+  /* grid-template-rows: repeat(auto-fit, minmax(auto, 1fr)); */
+  grid-template-rows: 45px 82px 40px 60px 30px 42px 60px 146px 60px 15px 25px 30px 45px;
   grid-template-areas:
   " .          .           . "
   " .        logo          . "
   " .      app-name        . "
   " .   positive-message   . "
+  " .         .            . "
   " .   googleSignIn       . "
   " .         or           . "
   " .       signup-form    . "
   " .   terms-of-service   . "
+  " .         .            . "
   " .    already-account   . "
   " .        signIn        . "
+  " .         .            . "
+}
+
+.grid-container {
+  height: 100vh;
+  width: 100wh;
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/signup-background.png");
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr auto 4fr;
+   grid-template-areas:
+  "       .        "
+  "     griddy     "
+  "       .        "
+}
+
+@media only screen and (max-width: 709px){
+   .grid-container {
+     background-image: none;
+   }
+
+   .grid {
+     box-shadow: none;
+   }
 }
 
 .app-name {
+  margin: 0;
   grid-area: app-name;
+  font-size: 40px;
+  /*Evernote uses svgs for a propietary logo. This is the closest font I found. */
+  font-family: "Abril Fatface";
 }
 
+/* Styling copied off Evernote login page */
 .positive-message {
+  margin: 0;
   grid-area: positive-message;
+  color: #333333;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .logo {
+  margin: 0;
+  padding: 0;
   grid-area: logo;
-  width: 100px;
-  height: 100px;
+  width: 82px;
+  height: 82px;
+  background-color: inherit;
 }
+
+/* Styling copied off Evernote login page */
 .already-account {
+  margin: 0;
   grid-area: already-account;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #737373;
 }
 
+/* Turn the form into its own grid for styling purposes */
 .signup-form {
+  margin: 0;
+  width: 100%;
   grid-area: signup-form;
+  display: grid;
+  grid-gap: 6px;
+  grid-template-rows: 45px 45px 1px 46px;
+  grid-template-areas:
+  " signup-email-input "
+  " signup-password-input "
+  "         .          "
+  " signup-submit "
 }
 
+.signup-email-input {
+  grid-area: signup-email-input;
+}
+
+.signup-password-input {
+  grid-area: signup-password-input
+}
+
+.signup-email-input, .signup-password-input {
+  /* width: 100%; */
+  border-radius: 7px;
+  border: 1px solid #DEDEDE;
+  text-indent: 15px;
+}
+
+.signup-email-input:focus, .signup-password-input:focus {
+  outline: none;
+  border: 2px solid #DFF2E7;
+}
+
+.signup-email-input::placeholder, .signup-password-input::placeholder {
+  /* padding-left: 15px; */
+  font-size: 16px;
+  color: #8A8A8A;
+  font-weight: 200;
+}
+
+/* Styling copied off Evernote login page */
+.signup-submit {
+  height: 100%;
+  grid-area: signup-submit;
+  background-color: #00a82d;
+  border-radius: 7px;
+  color: white;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  transition: all .2s ease;
+}
+
+.signup-submit:hover {
+  background-color: #008f26;
+  cursor: pointer;
+}
+
+/* Styling copied off Evernote login page */
 .signIn {
+  margin: 0;
   grid-area: signIn;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  color: #00c32d;
+  text-decoration: none;
 }
 
+/* Styling copied off Evernote login page */
 .terms-of-service {
+  margin: 0;
   grid-area: terms-of-service;
+  width: 280px;
+  line-height: 15px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  font-size: 12px;
+  color: #a6a6a6;
+}
+
+/* Make 'or' a grid with the two elements on the side as the border */
+.or {
+  margin: 0;
+  grid-area: or;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-gap: 10px;
+  align-items: center;
+}
+
+.or-text {
+  margin: 0;
+  color: #ababab;
+  font-size: 14px;
+  font-weight: 100;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+}
+
+ .grey-border {
+
+    height: 2px;
+    background-color: #E5E5E5;
+    content: '\a0';
+  }
+
+.googleSignIn {
+  margin: 0;
+  grid-area: googleSignIn;
+  height: 42px;
+  width: 100%;
+  border: 1px solid #d0d0d0;
+  background-color: inherit;
+  border-radius: 7px;
+  transition: all .2s ease;
+}
+
+.googleSignIn:hover {
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.form-links {
+  text-decoration: none;
+  color: #00c32d;
+  font-weight: 400;
 }
