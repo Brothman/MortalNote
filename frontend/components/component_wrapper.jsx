@@ -6,7 +6,6 @@ import SignUpForm from './signup_form/signup_form_container.js';
 const ComponentWrapper = (props) => {
   return (
     <div>
-      Hello
       <Route path='/login' component={LoginForm} />
       <Route path='/signup' component={SignUpForm} />
     </div>

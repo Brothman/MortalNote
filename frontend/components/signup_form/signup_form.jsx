@@ -36,26 +36,45 @@ class SignUpForm extends React.Component {
       return <p key={idx}>{error}</p>;
     });
     return (
-      <div className="grid">
-        <img className="logo" src="https://i.ytimg.com/vi/EAwWPadFsOA/maxresdefault.jpg" />
-        <h1 className="app-name">MortalNote</h1>
-        <p className="positive-message">Remember something's are not important.</p>
-        <form className="signup-form" onSubmit={this.handleSubmit}>
-          {errors}
-          <input type="text"
-            value={this.state.email}
-            onChange={this.handleTyping("email")} />
-          <input type="password"
-            value={this.state.password}
-            onChange={this.handleTyping("password")} />
-          <input type="submit" value="Continue (Sign Up)"></input>
-        </form>
-        <p className="terms-of-service">
-          By creating an account, you are agreeing to our terms of service
-          and privacy policy.
-        </p>
-        <p className="already-account"> Already have an account? </p>
-        <Link className="signIn" to="/login">Sign in</Link>
+      <div className="grid-container">
+        <div className="grid">
+          <img className="logo" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo.png" />
+          <h1 className="app-name">MortalNote</h1>
+          <p className="positive-message">Remember some things are not important.</p>
+          <button className="googleSignIn">Sign In With Google</button>
+          <div className="or">
+            <div className="grey-border" />
+            <p className="or-text">or</p>
+            <div className="grey-border" />
+          </div>
+          <form className="signup-form" onSubmit={this.handleSubmit}>
+            {errors}
+            <input type="text" autofocus="autofocus"
+              value={this.state.email} 
+              className="signup-email-input"
+              onChange={this.handleTyping("email")}
+              placeholder="Email" />
+            <input type="password"
+              value={this.state.password}
+              className="signup-password-input"
+              onChange={this.handleTyping("password")}
+              placeholder="Password" />
+            <button className ="signup-submit"> Continue (Sign Up) </button>
+          </form>
+          <p className="terms-of-service">
+            By creating an account, you are agreeing to our
+            <a className="form-links"
+              href="https://evernote.com/legal/terms-of-service"
+              target="_blank"> Terms of Service </a>
+            and
+            <a className="form-links"
+               href="https://evernote.com/privacy"
+               target="_blank"> Privacy Policy</a>
+             .
+          </p>
+          <p className="already-account"> Already have an account? </p>
+          <Link className="signIn" to="/login">Sign in</Link>
+        </div>
       </div>
     );
   }
