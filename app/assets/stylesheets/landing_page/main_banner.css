@@ -7,6 +7,7 @@
   grid-template-columns: 1fr 464px 464px 1fr;
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 100px;
+  grid-row-gap: 25px;
   grid-template-areas:
   " .       .                     .         . "
   " .   main-header           main-image    . "
@@ -18,6 +19,7 @@
 .main-header {
   grid-area: main-header;
   font-size: 56px;
+  line-height: 72px;
   /* font-family: "Soleil_Medium", Helvetica, Arial, sans-serif; */
   font-family: "soleil", Helvetica, Arial, sans-serif;
 }
@@ -26,7 +28,9 @@
   grid-area: main-tagline;
   font-family: "soleil", Helvetica, Arial, sans-serif;
   font-size: 24px;
+  line-height: 40px;
   font-weight: 300;
+  opacity: 0.9 /* to make it look lighter */
   -webkit-font-smoothing: antialiased;
 }
 
