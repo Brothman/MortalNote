@@ -1,0 +1,14 @@
+.landing-page {
+  display: grid;
+  grid-template-rows: 130px 697px 510px 916px 2351px 925px 971px 728px 854px;
+  grid-template-areas:
+  "        header         "
+  "      main-banner      "
+  "   promotional-offer   "
+  "  motivational-message "
+  "    pricing-banner     "
+  "      how-it-works     "
+  "   popular-features    "
+  "  landing-signup-form  "
+  "        footer         "
+}

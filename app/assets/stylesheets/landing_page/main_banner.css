@@ -1,0 +1,50 @@
+.main-banner-grid {
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/main-green.png");
+  background-color: #00a82d;
+  color: #fff;
+
+  display: grid;
+  grid-template-columns: 1fr 464px 464px 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 100px;
+  grid-template-areas:
+  " .       .                     .         . "
+  " .   main-header           main-image    . "
+  " .   main-tagline          main-image    . "
+  " .   free-signup-button    main-image    . "
+  " .         .                     .       . "
+}
+
+.main-header {
+  grid-area: main-header;
+  font-size: 56px;
+  font-family: "Soleil_Medium", Helvetica, Arial, sans-serif;
+}
+
+.main-tagline {
+  grid-area: main-tagline;
+  font-family: "Soleil_Light", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 100;
+  -webkit-font-smoothing: antialiased;
+}
+
+.free-signup-button  {
+  grid-area: free-signup-button ;
+  color: #00a82d;
+  background-color: #fff;
+  font-family: "Soleil_Bold", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  width: 240px;
+  height: 58px;
+  border-radius: 5px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.free-signup-button:hover {
+  cursor: pointer;
+}
+
+.main-image {
+  grid-area: main-image;
+}
