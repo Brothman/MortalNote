@@ -18,14 +18,15 @@
 .main-header {
   grid-area: main-header;
   font-size: 56px;
-  font-family: "Soleil_Medium", Helvetica, Arial, sans-serif;
+  /* font-family: "Soleil_Medium", Helvetica, Arial, sans-serif; */
+  font-family: "soleil", Helvetica, Arial, sans-serif;
 }
 
 .main-tagline {
   grid-area: main-tagline;
-  font-family: "Soleil_Light", Helvetica, Arial, sans-serif;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
   font-size: 24px;
-  font-weight: 100;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -33,7 +34,8 @@
   grid-area: free-signup-button ;
   color: #00a82d;
   background-color: #fff;
-  font-family: "Soleil_Bold", Helvetica, Arial, sans-serif;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
   font-size: 16px;
   width: 240px;
   height: 58px;
