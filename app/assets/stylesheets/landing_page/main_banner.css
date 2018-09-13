@@ -30,7 +30,8 @@
   font-size: 24px;
   line-height: 40px;
   font-weight: 300;
-  opacity: 0.9 /* to make it look lighter */
+  /* to make it look lighter */
+  opacity: 0.9;
   -webkit-font-smoothing: antialiased;
 }
 
