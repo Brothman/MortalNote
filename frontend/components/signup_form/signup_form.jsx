@@ -18,6 +18,7 @@ class SignUpForm extends React.Component {
 
     //login in an object with a key of user, that holds an Object
     //with keys of email and password
+
     this.props.signup({user: this.state});
   }
 
@@ -38,7 +39,10 @@ class SignUpForm extends React.Component {
     return (
       <div className="grid-container">
         <div className="grid">
-          <img className="logo" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo.png" />
+          <Link className="logo" to="/">
+            <img className="logo"
+              src="https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo.png" />
+          </Link>
           <h1 className="app-name">MortalNote</h1>
           <p className="positive-message">Remember some things are not important.</p>
           <button className="googleSignIn">Sign In With Google</button>
@@ -49,8 +53,8 @@ class SignUpForm extends React.Component {
           </div>
           <form className="signup-form" onSubmit={this.handleSubmit}>
             {errors}
-            <input type="text" autofocus="autofocus"
-              value={this.state.email} 
+            <input type="text" autoFocus="autoFocus"
+              value={this.state.email}
               className="signup-email-input"
               onChange={this.handleTyping("email")}
               placeholder="Email" />

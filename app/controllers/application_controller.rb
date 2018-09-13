@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def login(user)
     #Store the users session token in session storage
-    debugger
+    
     session[:session_token] = user.session_token
     #Return the session token in case we want it later
     user.session_token
