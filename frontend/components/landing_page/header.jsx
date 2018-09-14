@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 const Header = (props) => {
   return (
     <div className="header">
-      <img className="logo-image" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo.png" />
+      <Link className="logo-image" to="/">
+        <img className="logo-image" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo.png" />
+      </Link>
       <h6 className="mortal-note">MortalNote</h6>
       <div className="nav-bar-grid">
-        <Link className="nav-bar-links why-evernote" to ="/why-evernote">Why MortalNote</Link>
+        <Link className="nav-bar-links why-evernote" to ="/why-mortalnote">Why MortalNote</Link>
         <Link className="nav-bar-links plans" to ="/plans">Plans </Link>
         <Link className="nav-bar-links help-and-learning" to ="/help-and-learning">Help & Learning</Link>
         <Link className="nav-bar-links about-us" to ="/about-us">About Us</Link>

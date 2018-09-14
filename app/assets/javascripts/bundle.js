@@ -214,7 +214,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _login_form_login_form_container_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login_form/login_form_container.js */ "./frontend/components/login_form/login_form_container.js");
 /* harmony import */ var _signup_form_signup_form_container_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./signup_form/signup_form_container.js */ "./frontend/components/signup_form/signup_form_container.js");
 /* harmony import */ var _landing_page_landing_page_container_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./landing_page/landing_page_container.jsx */ "./frontend/components/landing_page/landing_page_container.jsx");
-/* harmony import */ var _utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/route_util.jsx */ "./frontend/utils/route_util.jsx");
+/* harmony import */ var _why_mortalnote_why_mortalnote_container_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./why_mortalnote/why_mortalnote_container.jsx */ "./frontend/components/why_mortalnote/why_mortalnote_container.jsx");
+/* harmony import */ var _utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/route_util.jsx */ "./frontend/utils/route_util.jsx");
+
 
 
 
@@ -228,10 +230,13 @@ var ComponentWrapper = function ComponentWrapper(props) {
     exact: true,
     path: "/",
     component: _landing_page_landing_page_container_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/why-mortalnote",
+    component: _why_mortalnote_why_mortalnote_container_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
     path: "/login",
     component: _login_form_login_form_container_js__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
     path: "/signup",
     component: _signup_form_signup_form_container_js__WEBPACK_IMPORTED_MODULE_3__["default"]
   }));
@@ -280,16 +285,19 @@ __webpack_require__.r(__webpack_exports__);
 var Header = function Header(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    className: "logo-image",
+    to: "/"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "logo-image",
     src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo.png"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "mortal-note"
   }, "MortalNote"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "nav-bar-grid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "nav-bar-links why-evernote",
-    to: "/why-evernote"
+    to: "/why-mortalnote"
   }, "Why MortalNote"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "nav-bar-links plans",
     to: "/plans"
@@ -953,6 +961,75 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_signup_form_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/why_mortalnote/why_mortalnote_container.jsx":
+/*!*************************************************************************!*\
+  !*** ./frontend/components/why_mortalnote/why_mortalnote_container.jsx ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../landing_page/header.jsx */ "./frontend/components/landing_page/header.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var WhyMortalNote =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(WhyMortalNote, _React$Component);
+
+  function WhyMortalNote() {
+    _classCallCheck(this, WhyMortalNote);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(WhyMortalNote).apply(this, arguments));
+  }
+
+  _createClass(WhyMortalNote, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "why-mortalnote-grid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "why-mortalnote-htag"
+      }, "Why MortalNote?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "why-mortalnote-hidden-potential"
+      }, "MortalNote helps people realize their hidden potential. It's where ", "dreams become reality, where life dances with death, and where humans become gods."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "why-mortalnote-evernote-better"
+      }, "See why virtually 0 users implement MoralNote's products. ", "Hint: it's because Evernote is better."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "why-mortalnote-img",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/why-evernote-hero-desktop.png"
+      }));
+    }
+  }]);
+
+  return WhyMortalNote;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (WhyMortalNote);
 
 /***/ }),
 
