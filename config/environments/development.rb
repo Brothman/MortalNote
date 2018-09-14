@@ -4,9 +4,9 @@ Rails.application.configure do
   # Add Rack::LiveReload to the bottom of the middleware stack with the default options:
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
 
-  # # This handles cross-origin resource sharing.
-  # # See: https://github.com/cyu/rack-cors
-  # config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+  # This handles cross-origin resource sharing.
+  # See: https://github.com/cyu/rack-cors
+  # config.middleware.insert_before ActionDispatch::Static, Rack::Cors, :debug => true do
   #   allow do
   #     # In development, we don't care about the origin.
   #     origins '*'

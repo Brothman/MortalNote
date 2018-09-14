@@ -85,7 +85,16 @@ class LoginForm extends React.Component {
     };
   }
 
+  //Ensures the title of the tab goes back to normal when the user leaves the
+  //login form.
+  componentWillUnmount() {
+    document.title = "MortalNote";
+  }
+
   render () {
+    //Set the title in the tab to match Evernote
+    document.title="Welcome Back";
+
     const errors = this.props.errors.map((error, idx) => {
       return <p key={idx}>{error}</p>;
     });
@@ -98,7 +107,9 @@ class LoginForm extends React.Component {
           </Link>
           <h1 className="app-name">MortalNote</h1>
           <p className="positive-message">Remember some things are not important.</p>
-          <button className="googleSignIn">Sign In With Google</button>
+          <a href="/auth/google_oauth2" className="googleSignIn" >
+            <button className="googleSignIn">Sign In With Google</button>
+          </a>
           <div className="or">
             <div className="grey-border" />
             <p className="or-text">or</p>

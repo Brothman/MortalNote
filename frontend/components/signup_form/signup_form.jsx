@@ -13,6 +13,7 @@ class SignUpForm extends React.Component {
     this.handleGoogleSignIn = this.handleGoogleSignIn.bind(this);
   }
 
+
   handleSubmit(event) {
     //don't refresh the page on submit
     event.preventDefault();
@@ -34,10 +35,20 @@ class SignUpForm extends React.Component {
   }
 
   handleGoogleSignIn() {
-    return $.ajax({url: '/auth/google_oauth2'});
+    // this.props.googleLogin();
+    //Trying something different
+  }
+
+  //Ensures the title of the tab goes back to normal when the user leaves the
+  //login form.
+  componentWillUnmount() {
+    document.title = "MortalNote";
   }
 
   render () {
+    //Set the title in the tab to match Evernote
+    document.title = "Create a MortalNote account";
+
     const errors = this.props.errors.map((error, idx) => {
       return <p key={idx}>{error}</p>;
     });
@@ -50,7 +61,9 @@ class SignUpForm extends React.Component {
           </Link>
           <h1 className="app-name">MortalNote</h1>
           <p className="positive-message">Remember some things are not important.</p>
+          <a href="/auth/google_oauth2" className="googleSignIn" >
           <button className="googleSignIn" onClick={this.handleGoogleSignIn}>Sign In With Google</button>
+          </a>
           <div className="or">
             <div className="grey-border" />
             <p className="or-text">or</p>
