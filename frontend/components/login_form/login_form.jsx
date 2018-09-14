@@ -91,9 +91,14 @@ class LoginForm extends React.Component {
     document.title = "MortalNote";
   }
 
+  //Set the title in the tab to match Evernote
+  componentDidMount() {
+    document.title = "Welcome Back";
+  }
+
   render () {
     //Set the title in the tab to match Evernote
-    document.title="Welcome Back";
+    // document.title="Welcome Back";
 
     const errors = this.props.errors.map((error, idx) => {
       return <p key={idx}>{error}</p>;

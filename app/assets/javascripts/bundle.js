@@ -703,12 +703,18 @@ function (_React$Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       document.title = "MortalNote";
+    } //Set the title in the tab to match Evernote
+
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.title = "Welcome Back";
     }
   }, {
     key: "render",
     value: function render() {
       //Set the title in the tab to match Evernote
-      document.title = "Welcome Back";
+      // document.title="Welcome Back";
       var errors = this.props.errors.map(function (error, idx) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           key: idx
@@ -960,12 +966,18 @@ function (_React$Component) {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       document.title = "MortalNote";
+    } //Set the title in the tab to match Evernote
+
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.title = "Create a MortalNote account";
     }
   }, {
     key: "render",
     value: function render() {
       //Set the title in the tab to match Evernote
-      document.title = "Create a MortalNote account";
+      // document.title = "Create a MortalNote account";
       var errors = this.props.errors.map(function (error, idx) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
           key: idx
