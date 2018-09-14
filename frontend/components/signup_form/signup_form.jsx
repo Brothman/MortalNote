@@ -10,6 +10,7 @@ class SignUpForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTyping = this.handleTyping.bind(this);
+    this.handleGoogleSignIn = this.handleGoogleSignIn.bind(this);
   }
 
   handleSubmit(event) {
@@ -32,6 +33,10 @@ class SignUpForm extends React.Component {
     };
   }
 
+  handleGoogleSignIn() {
+    return $.ajax({url: '/auth/google_oauth2'});
+  }
+
   render () {
     const errors = this.props.errors.map((error, idx) => {
       return <p key={idx}>{error}</p>;
@@ -45,7 +50,7 @@ class SignUpForm extends React.Component {
           </Link>
           <h1 className="app-name">MortalNote</h1>
           <p className="positive-message">Remember some things are not important.</p>
-          <button className="googleSignIn">Sign In With Google</button>
+          <button className="googleSignIn" onClick={this.handleGoogleSignIn}>Sign In With Google</button>
           <div className="or">
             <div className="grey-border" />
             <p className="or-text">or</p>

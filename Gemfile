@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.3.1'
 
+#for oauth login with google
+gem 'omniauth-google-oauth2'
 #for ajax requests
 gem 'jquery-rails'
 #for a better REPL
@@ -60,6 +62,9 @@ group :development do
   #for live reload
   gem 'guard-livereload'
   gem 'rack-livereload'
+
+  #for Cross Site Origin Requests, to sign in with Google on localhost:3000
+  gem 'rack-cors', require: 'rack/cors'
 end
 
 group :test do

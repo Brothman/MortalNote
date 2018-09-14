@@ -4,16 +4,16 @@
   color: #fff;
 
   display: grid;
-  grid-template-columns: 1fr 464px 464px 1fr;
+  grid-template-columns: 2fr 464px 1fr 464px 2fr;
   grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 100px;
+  /* grid-column-gap: 100px; */
   grid-row-gap: 25px;
   grid-template-areas:
-  " .       .                     .         . "
-  " .   main-header           main-image    . "
-  " .   main-tagline          main-image    . "
-  " .   free-signup-button    main-image    . "
-  " .         .                     .       . "
+  " .       .                .         .          . "
+  " .   main-header          .      main-image    . "
+  " .   main-tagline         .      main-image    . "
+  " .   free-signup-button   .      main-image    . "
+  " .         .              .         .          . "
 }
 
 .main-header {
@@ -54,4 +54,5 @@
 
 .main-image {
   grid-area: main-image;
+
 }
