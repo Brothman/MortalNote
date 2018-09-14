@@ -13,6 +13,7 @@
         window.currentUser = <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
       </script>
     <% end %>
+    <%= favicon_link_tag "https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo-favicon.png", :rel => 'icon', :type => 'image/png' %>
   </head>
 
   <body>
