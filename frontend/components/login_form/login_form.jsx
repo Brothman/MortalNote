@@ -113,7 +113,10 @@ class LoginForm extends React.Component {
           <h1 className="app-name">MortalNote</h1>
           <p className="positive-message">Remember some things are not important.</p>
           <a href="/auth/google_oauth2" className="googleSignIn" >
-            <button className="googleSignIn">Continue with Google</button>
+            <button className="googleSignIn">
+              <img className="google-logo"src="https://s3.us-east-2.amazonaws.com/mortalnote-images/google-logo.png" />
+              Continue with Google
+            </button>
           </a>
           <div className="or">
             <div className="grey-border" />

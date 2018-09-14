@@ -739,7 +739,10 @@ function (_React$Component) {
         className: "googleSignIn"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "googleSignIn"
-      }, "Continue with Google")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "google-logo",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/google-logo.png"
+      }), "Continue with Google")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "or"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grey-border"
@@ -1027,7 +1030,10 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "googleSignIn",
         onClick: this.handleGoogleSignIn
-      }, "Continue with Google")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "google-logo",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/google-logo.png"
+      }), "Continue with Google")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "or"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grey-border"
