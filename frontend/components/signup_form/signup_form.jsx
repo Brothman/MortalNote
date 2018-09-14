@@ -45,9 +45,14 @@ class SignUpForm extends React.Component {
     document.title = "MortalNote";
   }
 
+  //Set the title in the tab to match Evernote
+  componentDidMount() {
+    document.title = "Create a MortalNote account";
+  }
+
   render () {
     //Set the title in the tab to match Evernote
-    document.title = "Create a MortalNote account";
+    // document.title = "Create a MortalNote account";
 
     const errors = this.props.errors.map((error, idx) => {
       return <p key={idx}>{error}</p>;
