@@ -67,7 +67,7 @@ class SignUpForm extends React.Component {
           <h1 className="app-name">MortalNote</h1>
           <p className="positive-message">Remember some things are not important.</p>
           <a href="/auth/google_oauth2" className="googleSignIn" >
-          <button className="googleSignIn" onClick={this.handleGoogleSignIn}>Sign In With Google</button>
+          <button className="googleSignIn" onClick={this.handleGoogleSignIn}>Continue with Google</button>
           </a>
           <div className="or">
             <div className="grey-border" />
