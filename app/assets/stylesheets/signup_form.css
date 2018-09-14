@@ -241,6 +241,8 @@
   background-color: inherit;
   border-radius: 7px;
   transition: all .2s ease;
+  font-size: 15px;
+  color: #6a6a6a;
 }
 
 .googleSignIn:hover {
@@ -260,3 +262,9 @@
   height: 100%;
   width: 100%;
 } */
+
+.google-logo {
+  position: relative;
+  right: 7px;
+  top: 4px;
+}
