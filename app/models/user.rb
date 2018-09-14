@@ -19,6 +19,16 @@ class User < ApplicationRecord
     return nil
   end
 
+  def self.find_or_create_from_auth_hash(auth)
+    where(email: auth.info.email).first_or_initialize.tap do |user|
+      user.email = auth.info.email
+      #insecure, but necessary to save into database. Will come up with a better
+      #solution.
+      user.password_digest = "123456789"
+      user.save!
+    end
+  end
+
 
   #Allows us to hash the users password so we don't have
   #to save plaintext passwords

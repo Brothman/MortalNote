@@ -459,6 +459,8 @@ var LandingSignupForm = function LandingSignupForm(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 
 
 var MainBanner = function MainBanner(props) {
@@ -468,9 +470,12 @@ var MainBanner = function MainBanner(props) {
     className: "main-header"
   }, "Feel alive without the worry"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "main-tagline"
-  }, "MortalNote helps you capture and prioritize the memories that make life worth living, so that you don't have to. Live well."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, "MortalNote helps you capture and prioritize the memories that make life worth living, so that you don't have to. Live well."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    className: "free-signup-button",
+    to: "/signup"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "free-signup-button"
-  }, "SIGN UP FOR FREE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  }, "SIGN UP FOR FREE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "main-image",
     src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/homepage-hero-desktop.png"
   }));
@@ -829,6 +834,7 @@ function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleTyping = _this.handleTyping.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleGoogleSignIn = _this.handleGoogleSignIn.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -854,6 +860,13 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "handleGoogleSignIn",
+    value: function handleGoogleSignIn() {
+      return $.ajax({
+        url: '/auth/google_oauth2'
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var errors = this.props.errors.map(function (error, idx) {
@@ -876,7 +889,8 @@ function (_React$Component) {
       }, "MortalNote"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "positive-message"
       }, "Remember some things are not important."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "googleSignIn"
+        className: "googleSignIn",
+        onClick: this.handleGoogleSignIn
       }, "Sign In With Google"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "or"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

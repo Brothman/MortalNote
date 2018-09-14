@@ -36,6 +36,8 @@ Temporary Items
 
 ### Ruby ###
 
+/config/initializers/api.rb
+
 Gemfile.lock
 *.gem
 *.rbc
