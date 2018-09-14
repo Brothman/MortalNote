@@ -36,7 +36,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //JQUERY OVER
 
-  const store = configureStore();
+//begin bootstrapping the current user
+let store;
+if (window.currentUser) {
+  //use some handy object destructuring
+  const { currentUser } = window;
+  const { id } = currentUser;
+
+  const preloadedState = {
+    entities: {
+      user: {
+        [id]: currentUser
+      }
+    },
+    session: { id }
+  };
+  store = configureStore(preloadedState);
+
+  //Cleaning up to ensure no one else has access to currentUser
+  delete window.currentUser;
+}
+else {
+  store = configureStore();
+}
+
   //REMOVE THE FOLLOWING LINE BEFORE I DEPLOY FOR PRODUCTION
   window.getState = store.getState;
   const root = document.getElementById('root');

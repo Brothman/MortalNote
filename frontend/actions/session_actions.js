@@ -67,3 +67,15 @@ export const signup = (user) => {
     );
   };
 };
+
+export const googleLogin = () => {
+  return (dispatch) => {
+    SessionAPIUtil.googleLogin()
+    .then(
+      //on success, add the current user to the state
+      (jsonUser) => dispatch(receiveCurrentUser(jsonUser)),
+      //errback, i.e. error callback to be called on failure
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    );
+  };
+};

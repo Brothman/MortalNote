@@ -19,13 +19,16 @@ class User < ApplicationRecord
     return nil
   end
 
+  #A method to handle user creation and login from google
   def self.find_or_create_from_auth_hash(auth)
     where(email: auth.info.email).first_or_initialize.tap do |user|
       user.email = auth.info.email
       #insecure, but necessary to save into database. Will come up with a better
       #solution.
-      user.password_digest = "123456789"
+      user.password_digest = BCrypt::Password.create("123456789")
       user.save!
+      #used to log the user in the sessions controller
+      return user
     end
   end
 

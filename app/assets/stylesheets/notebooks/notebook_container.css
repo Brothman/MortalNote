@@ -1,0 +1,6 @@
+.notebook-container-grid {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/crisp-paper.jpeg");
+  /* background-color: green; */
+}

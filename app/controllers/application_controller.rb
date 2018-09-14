@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper_method :current_user, :logged_in?
   #return the current user or nil
   def current_user
     User.find_by(session_token: session[:session_token])
@@ -11,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def login(user)
     #Store the users session token in session storage
-    
+
     session[:session_token] = user.session_token
     #Return the session token in case we want it later
     user.session_token

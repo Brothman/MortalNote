@@ -20,3 +20,10 @@ export const logout = () => {
     url: 'api/session',
   });
 };
+
+export const googleLogin = () => {
+  return $.ajax({
+    method: 'GET',
+    url: '/auth/google_oauth2'
+  });
+};
