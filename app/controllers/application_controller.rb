@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
   end
 
   def logout!
-    #clear out browsers session token
-    session[:session_token] = nil
     #change users session token, effectively logging it out everywhere
     current_user.reset_session_token!
+    #clear out browsers session token
+    session[:session_token] = nil
     #return nil
     nil
   end
