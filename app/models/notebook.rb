@@ -13,4 +13,6 @@ class Notebook < ApplicationRecord
   validates :title, :user_id, presence: true
   #Ensures that each user can only have one notebook with a given title
   validates :title, uniqueness: { scope: :user_id }
+
+  has_many :notes
 end

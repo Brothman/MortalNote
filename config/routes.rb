@@ -9,8 +9,9 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
 
     #Create and destroy for creation and deletion. Show to pass information to
-    #The client for Redux and React to store and render.
-    resources :notebooks, only: [:create, :destroy, :show]
+    #The client for Redux and React to store and render. Index to gather all
+    #notebooks at once.
+    resources :notebooks, only: [:create, :destroy, :show, :index]
     resources :notes, only: [:create, :destroy, :show]
   end
 end
