@@ -15,6 +15,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
+    render 'api/users/show'
   end
 
   private
