@@ -17,5 +17,5 @@ class Note < ApplicationRecord
   #at the beginning (i.e. note.content = "" when empty)
   validates :title, :content, :content_plain, :user_id, :notebook_id, presence: true
 
-  belongs_to :note
+  belongs_to :notebook
 end

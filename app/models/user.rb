@@ -17,6 +17,9 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+  has_many :notebooks
+  has_many :notes
+
   attr_reader :password
 
   #A handy method to find if we have a user in the database
