@@ -7,5 +7,10 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, only: [:show, :create]
     resource :session, only: [:create, :destroy]
+
+    #Create and destroy for creation and deletion. Show to pass information to
+    #The client for Redux and React to store and render.
+    resources :notebooks, only: [:create, :destroy, :show]
+    resources :notes, only: [:create, :destroy, :show]
   end
 end
