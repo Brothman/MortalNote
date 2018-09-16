@@ -86,6 +86,48 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/notebook_actions.js":
+/*!**********************************************!*\
+  !*** ./frontend/actions/notebook_actions.js ***!
+  \**********************************************/
+/*! exports provided: RECEIVE_NOTEBOOKS_AND_NOTES, receiveNotebooksAndNotes, fetchNotebooksAndNotes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_NOTEBOOKS_AND_NOTES", function() { return RECEIVE_NOTEBOOKS_AND_NOTES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveNotebooksAndNotes", function() { return receiveNotebooksAndNotes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchNotebooksAndNotes", function() { return fetchNotebooksAndNotes; });
+/* harmony import */ var _utils_notebook_api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/notebook_api_util.js */ "./frontend/utils/notebook_api_util.js");
+var RECEIVE_NOTEBOOKS_AND_NOTES = "RECEIVE_NOTEBOOKS_AND_NOTES";
+ //Regular action creator, return a plain old Javascript object.
+//Destructure notes and notebooks out of the argument for cleaner code
+
+var receiveNotebooksAndNotes = function receiveNotebooksAndNotes(_ref) {
+  var notebooks = _ref.notebooks,
+      notes = _ref.notes;
+  return {
+    type: RECEIVE_NOTEBOOKS_AND_NOTES,
+    notes: notes,
+    notebooks: notebooks
+  };
+}; //Return a function that takes a dispatch (Thunk Action)
+//Then use an AJAX request to get our notebooks and notes from the database
+//On success, call receiveNoteBooksAndNotes with the response to add the
+//notebooks and notes to our web application's state/store.
+
+var fetchNotebooksAndNotes = function fetchNotebooksAndNotes() {
+  return function (dispatch) {
+    _utils_notebook_api_util_js__WEBPACK_IMPORTED_MODULE_0__["fetchNotebooksAndNotes"]().then(function (notebooksAndNotes) {
+      return dispatch(receiveNotebooksAndNotes(notebooksAndNotes));
+    }, function (error) {
+      return console.log(error);
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -794,6 +836,241 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/notebooks/note_index_item.jsx":
+/*!***********************************************************!*\
+  !*** ./frontend/components/notebooks/note_index_item.jsx ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var NoteIndexItem = function NoteIndexItem(_ref) {
+  var note = _ref.note;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "note-index-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "notebook-dark-icon move-right",
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/white-paper-icon.svg"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-item-title move-extra-right"
+  }, note.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-notes-number "
+  }, " (13)")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-created-by"
+  }, " Bob"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-updated"
+  }, "Today"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-shared-with"
+  }, " Only you "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "notebook-actions"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NoteIndexItem);
+
+/***/ }),
+
+/***/ "./frontend/components/notebooks/notebook_index.jsx":
+/*!**********************************************************!*\
+  !*** ./frontend/components/notebooks/notebook_index.jsx ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _notebook_index_item_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./notebook_index_item.jsx */ "./frontend/components/notebooks/notebook_index_item.jsx");
+/* harmony import */ var _reducers_selectors_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors.js */ "./frontend/reducers/selectors.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var NotebookIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(NotebookIndex, _React$Component);
+
+  function NotebookIndex() {
+    _classCallCheck(this, NotebookIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(NotebookIndex).apply(this, arguments));
+  }
+
+  _createClass(NotebookIndex, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var notebookIndexItems = function notebookIndexItems() {
+        //Need to ensure I have a selector that turns the state of Notebooks
+        //into an Array of all the notebook objects
+        return _this.props.notebooks.map(function (notebook, idx) {
+          // Since data is normalized, each notebook is under a key of its id
+          // Consequently we need to get the values, which turns out to be an
+          // array of one object, and thus we must take the first item of the
+          // resulting array.
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notebook_index_item_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            key: idx,
+            notebook: notebook,
+            user: _this.props.user,
+            notes: Object(_reducers_selectors_js__WEBPACK_IMPORTED_MODULE_3__["getNotebooksNotes"])(_this.props.notes, notebook.notes)
+          });
+        });
+      };
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "notebook-index-grid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "notebook-title"
+      }, "Notebooks"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "top-of-notebook-index-items"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "my-notebook-list"
+      }, "My notebook list"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "new-notebook-icon"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "new-notebook"
+      }, "New Notebook"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "sort-by-icon"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "column-names"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "title-cn"
+      }, "TITLE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "created-by-cn"
+      }, "CREATED BY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "updated-cn"
+      }, "UPDATED"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "shared-with-cn"
+      }, "SHARED WITH"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "actions-cn"
+      }, "ACTIONS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "selected-column-arrow"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "notebook-index-items"
+      }, notebookIndexItems())));
+    }
+  }]);
+
+  return NotebookIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component); // Destructure entities out of state for cleaner code
+
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var entities = _ref.entities;
+  return {
+    notebooks: Object(_reducers_selectors_js__WEBPACK_IMPORTED_MODULE_3__["getAllNotebooks"])(entities),
+    user: Object.values(entities.user)[0],
+    notes: entities.notes
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(NotebookIndex));
+
+/***/ }),
+
+/***/ "./frontend/components/notebooks/notebook_index_item.jsx":
+/*!***************************************************************!*\
+  !*** ./frontend/components/notebooks/notebook_index_item.jsx ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _note_index_item_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./note_index_item.jsx */ "./frontend/components/notebooks/note_index_item.jsx");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+
+
+ //Destructure notebook out of props for cleaner code
+
+var NotebookIndexItem = function NotebookIndexItem(_ref) {
+  var notebook = _ref.notebook,
+      user = _ref.user,
+      notes = _ref.notes;
+  console.log(notebook);
+  var d = new Date(notebook.updated_at);
+  var month = d.getMonth();
+  var day = d.getDay();
+
+  var handleNoteDropDown = function handleNoteDropDown(e) {
+    var target = e.currentTarget.parentNode; //pass props in here, we want to create divs inside the parent div
+
+    notes.forEach(function (note) {
+      var div = document.createElement('div');
+      div.className = "wrapper-div";
+      react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_index_item_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        note: note
+      }), div);
+      target.parentNode.insertBefore(div, target.nextSibling);
+    });
+  }; // const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  // const options = { year: 'numeric', month: 'short', day: 'numeric' };
+
+
+  var options = {
+    month: 'short',
+    day: 'numeric'
+  };
+  var username = user.email.substring(0, user.email.lastIndexOf("@"));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-index-item"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "sideways-arrow-icon",
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/Sidways-arrow-icon.svg",
+    onClick: handleNoteDropDown
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "notebook-dark-icon",
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/dark-notebook-icon-v2.svg"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-item-title"
+  }, notebook.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-notes-number"
+  }, " (", notebook.notes.length, ")")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-created-by"
+  }, " ", username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-updated"
+  }, d.toLocaleDateString("en-US", options)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "notebook-shared-with"
+  }, " Only you "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "notebook-actions"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NotebookIndexItem);
+
+/***/ }),
+
 /***/ "./frontend/components/notebooks/notebooks_container.jsx":
 /*!***************************************************************!*\
   !*** ./frontend/components/notebooks/notebooks_container.jsx ***!
@@ -807,6 +1084,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions.js */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _sidebar_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sidebar.jsx */ "./frontend/components/notebooks/sidebar.jsx");
+/* harmony import */ var _notebook_index_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./notebook_index.jsx */ "./frontend/components/notebooks/notebook_index.jsx");
+/* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -829,6 +1109,9 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
+
+
 var NotebooksContainer =
 /*#__PURE__*/
 function (_React$Component) {
@@ -845,16 +1128,24 @@ function (_React$Component) {
   }
 
   _createClass(NotebooksContainer, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // this.props.fetchNotebooksAndNotes();
+      console.log(this.props.fetchNotebooksAndNotes());
+    }
+  }, {
     key: "handleLogout",
     value: function handleLogout() {
-      this.props.logout();
+      this.props.logout(); // console.log(this.props.fetchNotebooksAndNotes())
     }
   }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notebook-container-grid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidebar_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        user: this.props.user
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notebook_index_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "logout",
         onClick: this.handleLogout
       }, "Logout"));
@@ -864,15 +1155,115 @@ function (_React$Component) {
   return NotebooksContainer;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
+var mapStateToProps = function mapStateToProps(_ref) {
+  var entities = _ref.entities;
+  return {
+    user: Object.values(entities.user)[0]
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    fetchNotebooksAndNotes: function fetchNotebooksAndNotes() {
+      return dispatch(Object(_actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_5__["fetchNotebooksAndNotes"])());
+    },
     logout: function logout() {
       return dispatch(Object(_actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__["logout"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(NotebooksContainer));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(NotebooksContainer));
+
+/***/ }),
+
+/***/ "./frontend/components/notebooks/searchbar.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/notebooks/searchbar.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var SearchBar = function SearchBar(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "searchbar"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "searchbar",
+    placeholder: "Search all notes..."
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "search-icon"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchBar);
+
+/***/ }),
+
+/***/ "./frontend/components/notebooks/sidebar.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/notebooks/sidebar.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _searchbar_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar.jsx */ "./frontend/components/notebooks/searchbar.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+
+
+
+var Sidebar = function Sidebar(props) {
+  var username = props.user.email.substring(0, props.user.email.lastIndexOf("@"));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sidebar-grid"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "user-info"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "user-avatar"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "username"
+  }, username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "white-down-arrow"
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchbar_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "new-note"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "add-note-plus-circle"
+  }), "New Note"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "all-notes"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "notes-icon",
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/all-notes-icon-v2.svg"
+  }), "All Notes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "notebooks-button"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "notebook-icon",
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/notebooks-icon.svg"
+  }), "Notebooks"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "trash"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "trash-icon",
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/trash-icon.svg"
+  }), "Trash"));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    email: state.entities.user[2].email
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(Sidebar));
 
 /***/ }),
 
@@ -1282,10 +1673,16 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer.js */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _notes_reducer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./notes_reducer.js */ "./frontend/reducers/notes_reducer.js");
+/* harmony import */ var _notebooks_reducer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./notebooks_reducer.js */ "./frontend/reducers/notebooks_reducer.js");
+
+
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  user: _users_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"]
+  user: _users_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  notes: _notes_reducer_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  notebooks: _notebooks_reducer_js__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -1308,6 +1705,74 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
   session: _session_errors_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/notebooks_reducer.js":
+/*!************************************************!*\
+  !*** ./frontend/reducers/notebooks_reducer.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
+ //default state is the empty Object
+
+var notebooksReducer = function notebooksReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  //Never mutate the original state in Redux
+  Object.freeze(state);
+
+  switch (action.type) {
+    //Add the notebooks to the store. Only called on initial run to notebooks page
+    //So can replace entire old store
+    case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NOTEBOOKS_AND_NOTES"]:
+      return action.notebooks;
+    //for most actions, do nothing and return the old state
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (notebooksReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/notes_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/notes_reducer.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
+ //default state is the empty Object
+
+var notesReducer = function notesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  //Never mutate the original state in Redux
+  Object.freeze(state);
+
+  switch (action.type) {
+    //Add the notes to the store. Includes all the users notes
+    //So can replace entire old store
+    case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NOTEBOOKS_AND_NOTES"]:
+      return action.notes;
+    //for most actions, do nothing and return the old state
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (notesReducer);
 
 /***/ }),
 
@@ -1334,6 +1799,35 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   errors: _errors_reducer_js__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/selectors.js":
+/*!****************************************!*\
+  !*** ./frontend/reducers/selectors.js ***!
+  \****************************************/
+/*! exports provided: getAllNotebooks, getNotebooksNotes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotebooks", function() { return getAllNotebooks; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotebooksNotes", function() { return getNotebooksNotes; });
+//Destructure notebooks out of the state for cleaner code
+var getAllNotebooks = function getAllNotebooks(_ref) {
+  var notebooks = _ref.notebooks;
+  //Since we normalized our data, each notebook is under a key of its ID
+  //So we map through each ID key, and return an array filled with the notebooks
+  //Underneath each ID.
+  return Object.keys(notebooks).map(function (id) {
+    return notebooks[id];
+  });
+};
+var getNotebooksNotes = function getNotebooksNotes(notes, noteIDS) {
+  return noteIDS.map(function (noteID) {
+    return notes[noteID];
+  });
+};
 
 /***/ }),
 
@@ -1493,6 +1987,25 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/utils/notebook_api_util.js":
+/*!*********************************************!*\
+  !*** ./frontend/utils/notebook_api_util.js ***!
+  \*********************************************/
+/*! exports provided: fetchNotebooksAndNotes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchNotebooksAndNotes", function() { return fetchNotebooksAndNotes; });
+var fetchNotebooksAndNotes = function fetchNotebooksAndNotes() {
+  // Implicit GET request
+  return $.ajax({
+    url: '/api/notebooks'
+  });
+};
 
 /***/ }),
 

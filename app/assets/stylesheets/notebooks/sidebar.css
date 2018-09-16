@@ -1,0 +1,67 @@
+.sidebar-grid {
+  display: grid;
+  background-color: #191919;
+  color: #ccc;
+  grid-template-columns: 10px 1fr 10px;
+  grid-template-rows: 56px 33px 10px 42px 10px repeat(4, 32px) 1fr;
+  grid-template-areas:
+  " .      user-info       . "
+  " .      searchbar       . "
+  " .           .          . "
+  " .      new-note        . "
+  " .         .            . "
+  " .       all-notes      . "
+  " .   notebooks-button   . "
+  " .         trash        . "
+  " .          tester           . ";
+}
+
+.tester {
+  grid-area: tester;
+}
+
+.notes-icon, .trash-icon, .notebook-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.user-info {
+  grid-area: user-info;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.searchbar {
+  grid-area: searchbar;
+}
+
+.new-note {
+  grid-area: new-note;
+  justify-self: flex-start;
+}
+
+.all-notes {
+  grid-area: all-notes;
+}
+
+.notebooks-button {
+  grid-area: notebooks-button;
+}
+
+.trash {
+  grid-area: trash;
+}
+
+.new-note, .all-notes, .notebooks-button, .trash {
+  background-color: inherit;
+  color: #ccc;
+  border: 0;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.all-notes, .notebooks-button, .trash {
+  justify-self: flex-start;
+}
