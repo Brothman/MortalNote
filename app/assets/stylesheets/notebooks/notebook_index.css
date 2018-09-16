@@ -1,0 +1,90 @@
+.notebook-index-grid {
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  grid-template-rows: 80px 25px 11px 1fr;
+  /* grid-auto-rows: 40px; */
+  align-items: center;
+  grid-template-areas:
+  " .       notebook-title             . "
+  " .   top-of-notebook-index-items    . "
+  " .               .                  . "
+  " .       column-names               . ";
+}
+
+.notebook-index-items {
+  grid-area: notebookIndexItems;
+  display: grid;
+  grid-auto-rows: 40px;
+  height: 100%;
+  /* align-items: center; */
+}
+
+
+.top-of-notebook-index-items {
+  display: grid;
+  grid-auto-flow: column;
+  grid-area: top-of-notebook-index-items;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+/*Column-Names Grid START */
+
+.column-names {
+  display: grid;
+  grid-area: column-names;
+  grid-template-columns: 10px 77px 10fr 77px 1fr 77px 2fr 77px 6fr 77px 10px;
+  grid-template-rows: 38px;
+  grid-auto-rows: 40px;
+  background-color: #f8f8f8;
+  border-top: 2px solid #666;
+  text-rendering: optimizeLegibility;
+  height: 100%;
+  align-items: center;
+  grid-template-areas:
+  " .  title-cn  .   created-by-cn  .  updated-cn   .   shared-with-cn  .  actions-cn  . "
+  " notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems ";
+  /* As a test  */
+}
+
+.title-cn {
+  grid-area: title-cn;
+}
+
+.created-by-cn {
+  grid-area: created-by-cn;
+}
+
+.updated-cn {
+  grid-area: updated-cn;
+}
+
+.shared-with-cn {
+  grid-area: shared-with-cn;
+}
+
+.actions-cn {
+  grid-area: actions-cn;
+}
+
+
+
+/* Column-Names Grid FINISH */
+
+.column-names p {
+  color: #b3b3b3;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.notebook-title {
+  font-size: 20px;
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  grid-area: notebook-title;
+}
