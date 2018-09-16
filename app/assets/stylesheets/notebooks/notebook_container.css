@@ -1,14 +1,15 @@
 .notebook-container-grid {
   width: 100vw;
   height: 100vh;
-  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/crisp-paper.jpeg");
+  /* background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/crisp-paper.jpeg"); */
   /* background-color: green; */
   display: grid;
+  grid-template-columns: 241px 10fr 1fr;
 }
 
 .logout {
-  width: 600px;
-  height: 200px;
+  width: 120px;
+  height: 40px;
   justify-self: center;
   align-self: center;
   background-color: #00a82d;

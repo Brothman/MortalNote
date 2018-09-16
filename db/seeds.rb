@@ -30,4 +30,11 @@ Note.create([{
     content_plain: "Isn't the world nice? We get to do all these cool things. Hell yeah.",
     user_id: 1,
     notebook_id: 2,
+  },
+  {
+    title: "Jazzy Wazzy",
+    content: "Wazza Bazzle Doozle.",
+    content_plain: "Wazza Bazzle Doozle.",
+    user_id: 1,
+    notebook_id: 2,
   }])
