@@ -501,9 +501,9 @@ var MainBanner = function MainBanner(props) {
     className: "main-banner-grid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "main-header"
-  }, "Feel alive without the worry"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, "Feel mortal without the fear"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "main-tagline"
-  }, "MortalNote helps you capture and prioritize the memories that make life worth living, so that you don't have to. Live well."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "MortalNote helps you capture and prioritize the memories that make life worth living, so that you can forget them. Live well."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "free-signup-button",
     to: "/signup"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
