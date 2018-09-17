@@ -1,0 +1,139 @@
+.plans-grid {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-rows: 130px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  "           header            "
+  " why-mortalnote-banner-grid  "
+
+}
+
+.plans-banner-grid {
+  grid-area: why-mortalnote-banner-grid;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 368px 15px 368px 15px 368px 1fr;
+  grid-template-rows: 2fr 90px 130px 371px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  " .            .            .              .                  .              .          .   "
+  " .            .        choose-plan   choose-plan       choose-plan          .          .   "
+  " .            .      plan-paragraph  plan-paragraph   plan-paragraph        .          .   "
+  " .          plan-free-1    .      plan-free-2                .          plan-free-3    .   "
+  " .            .            .              .                  .              .          .   ";
+  -webkit-font-smoothing: antialiased;
+  background-color: #fafafa;
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/main-green.png")
+}
+
+.choose-plan {
+  grid-area: choose-plan;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 72px;
+}
+
+.plan-paragraph {
+  grid-area: plan-paragraph;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 40px;
+  white-space: nowrap;
+  position: relative;
+  right: 68px;
+}
+
+.plan-free-1 {
+  grid-area: plan-free-1;
+}
+
+.plan-free-2 {
+  grid-area: plan-free-2;
+}
+
+.plan-free-3 {
+  grid-area: plan-free-3;
+}
+
+.plan {
+  display: grid;
+  grid-template-rows: 40px 22px 30px 73px 40px 82px 58px 35px;
+  grid-template-columns: 22px 1fr 20px;
+  grid-template-areas:
+  "   .          .           .    "
+  "   .      plan-name       .    "
+  "   .           .          .    "
+  "   .         FREE         .    "
+  "   .   plan-description   .    "
+  "   .           .          .    "
+  "   .   signup-for-free    .    "
+  "   .         .            .    ";
+  -webkit-font-smoothing: antialiased;
+  border: 2px solid #000;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+}
+
+.plan-name {
+  grid-area: plan-name;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+}
+
+.FREE {
+  grid-area: FREE;
+  font-size: 52px;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  line-height: 40px;
+}
+
+.plan-description {
+  grid-area: plan-description;
+  font-size: 22px;
+  letter-spacing: 0;
+  line-height: 40px;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+}
+
+.signup-for-free {
+  grid-area: signup-for-free;
+  color: white;
+  background-color: #00a82d;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  width: 240px;
+  height: 58px;
+  border-radius: 5px;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  width: 100%;
+}
+
+.signup-for-free:hover {
+  background-color: #14cc45;
+}
+
+.signup-for-free:focus {
+  outline: 0;
+}
+
+.signup-for-free:active {
+  outline: 0;
+  /* border: 1px solid rgb(216, 216, 216); */
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  border-width: 1px;
+  border-style: solid;
+}
+
+.no-border:active {
+  border: 0;
+}

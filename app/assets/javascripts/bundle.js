@@ -132,7 +132,7 @@ var fetchNotebooksAndNotes = function fetchNotebooksAndNotes() {
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_USER, LOGOUT_USER, RECEIVE_ERRORS, receiveCurrentUser, logoutCurrentUser, receiveErrors, login, logout, signup, googleLogin */
+/*! exports provided: RECEIVE_USER, LOGOUT_USER, RECEIVE_ERRORS, CLEAR_ERRORS, receiveCurrentUser, logoutCurrentUser, receiveErrors, clearErrors, login, logout, signup, googleLogin */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -140,9 +140,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_USER", function() { return RECEIVE_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER", function() { return LOGOUT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ERRORS", function() { return RECEIVE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_ERRORS", function() { return CLEAR_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveCurrentUser", function() { return receiveCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logoutCurrentUser", function() { return logoutCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearErrors", function() { return clearErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
@@ -150,7 +152,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_session_api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/session_api_util.js */ "./frontend/utils/session_api_util.js");
 var RECEIVE_USER = "RECEIVE_USER";
 var LOGOUT_USER = "LOGOUT_USER";
-var RECEIVE_ERRORS = "RECEIVE_ERRORS"; //signup, login, and logout are the three methods we want from SessionAPIUtil
+var RECEIVE_ERRORS = "RECEIVE_ERRORS";
+var CLEAR_ERRORS = "CLEAR_ERRORS"; //signup, login, and logout are the three methods we want from SessionAPIUtil
 
  //Regular Action Creator, i.e. returns a POJO, 'Plain Old Javascript Object'
 
@@ -172,6 +175,12 @@ var receiveErrors = function receiveErrors(errors) {
     type: RECEIVE_ERRORS,
     //shortcut for errors: errors
     errors: errors
+  };
+}; //Regular Action Creator
+
+var clearErrors = function clearErrors(errors) {
+  return {
+    type: CLEAR_ERRORS
   };
 }; //Thunk Action Creator, i.e. returns a function
 
@@ -224,6 +233,42 @@ var googleLogin = function googleLogin() {
 
 /***/ }),
 
+/***/ "./frontend/components/about_us/about_us_container.jsx":
+/*!*************************************************************!*\
+  !*** ./frontend/components/about_us/about_us_container.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../landing_page/header.jsx */ "./frontend/components/landing_page/header.jsx");
+
+
+
+var AboutUs = function AboutUs(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "about-us-grid"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "about-us-banner-grid"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "about-us-htag"
+  }, "About MortalNote"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "about-us-description"
+  }, "MortalNote was founded to address a growing problem that technology helped to create: how to gain web development experience without a web development job."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "about-us-description-explained"
+  }, "Our purpose is to give Benji the necessary portfolio piece and experience so that he can focus on what matters most: coding."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "about-us-img",
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/about-us-hero.png"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (AboutUs);
+
+/***/ }),
+
 /***/ "./frontend/components/component_wrapper.jsx":
 /*!***************************************************!*\
   !*** ./frontend/components/component_wrapper.jsx ***!
@@ -241,7 +286,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _landing_page_landing_page_container_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./landing_page/landing_page_container.jsx */ "./frontend/components/landing_page/landing_page_container.jsx");
 /* harmony import */ var _why_mortalnote_why_mortalnote_container_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./why_mortalnote/why_mortalnote_container.jsx */ "./frontend/components/why_mortalnote/why_mortalnote_container.jsx");
 /* harmony import */ var _notebooks_notebooks_container_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./notebooks/notebooks_container.jsx */ "./frontend/components/notebooks/notebooks_container.jsx");
-/* harmony import */ var _utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/route_util.jsx */ "./frontend/utils/route_util.jsx");
+/* harmony import */ var _about_us_about_us_container_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./about_us/about_us_container.jsx */ "./frontend/components/about_us/about_us_container.jsx");
+/* harmony import */ var _plans_plans_container_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./plans/plans_container.jsx */ "./frontend/components/plans/plans_container.jsx");
+/* harmony import */ var _utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/route_util.jsx */ "./frontend/utils/route_util.jsx");
+
+
 
 
 
@@ -253,7 +302,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ComponentWrapper = function ComponentWrapper(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_9__["AuthRoute"], {
     exact: true,
     path: "/",
     component: _landing_page_landing_page_container_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -261,15 +310,21 @@ var ComponentWrapper = function ComponentWrapper(props) {
     path: "/why-mortalnote",
     component: _why_mortalnote_why_mortalnote_container_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/plans",
+    component: _plans_plans_container_jsx__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/about-us",
+    component: _about_us_about_us_container_jsx__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "auth/:provider/callback",
     component: _why_mortalnote_why_mortalnote_container_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_9__["AuthRoute"], {
     path: "/login",
     component: _login_form_login_form_container_js__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_7__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_9__["AuthRoute"], {
     path: "/signup",
     component: _signup_form_signup_form_container_js__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_7__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_9__["ProtectedRoute"], {
     path: "/notebooks",
     component: _notebooks_notebooks_container_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]
   }));
@@ -710,12 +765,13 @@ function (_React$Component) {
         _this2.setState(_defineProperty({}, field, event.target.value));
       };
     } //Ensures the title of the tab goes back to normal when the user leaves the
-    //login form.
+    //login form. Also clears errors.
 
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       document.title = "MortalNote";
+      this.props.clearErrors();
     } //Set the title in the tab to match Evernote
 
   }, {
@@ -733,6 +789,19 @@ function (_React$Component) {
           key: idx
         }, error);
       });
+      var grid = document.getElementsByClassName('grid-login');
+      var signUpForm = document.getElementsByClassName('signup-form'); //grid[0] because getElementsByClassName returns an array of HTMLNodes.
+      //ensure the grid has rendered on the page before trying to change its style
+
+      if (errors.length === 1 && grid[0]) {
+        grid[0].style.gridTemplateRows = "45px 82px 40px 60px 30px 42px 60px 168px 60px 15px 25px 30px 45px";
+        signUpForm[0].style.gridTemplateRows = "45px 45px 23px 46px";
+      } //add more space if we two errors, i.e. for email and password fields
+      else if (errors.length === 2 && grid[0]) {
+          grid[0].style.gridTemplateRows = "45px 82px 40px 60px 30px 42px 60px 179px 60px 15px 25px 30px 45px";
+          signUpForm[0].style.gridTemplateRows = "45px 45px 34px 46px";
+        }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grid-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -766,7 +835,7 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "signup-form",
         onSubmit: this.handleSubmit
-      }, errors, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         autoFocus: "autoFocus",
         value: this.state.email,
@@ -781,7 +850,9 @@ function (_React$Component) {
         placeholder: "Password"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "signup-submit-login signup-submit"
-      }, " Continue (Sign in) ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, " Continue (Sign in) "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "errors-container"
+      }, errors)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "remember-me"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "checkbox"
@@ -828,6 +899,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     //pass a function through props called login that expects a user argument
     login: function login(user) {
       return dispatch(Object(_actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
+    },
+    clearErrors: function clearErrors() {
+      return dispatch(Object(_actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__["clearErrors"])());
     }
   };
 };
@@ -1267,6 +1341,113 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./frontend/components/plans/plans_container.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/plans/plans_container.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../landing_page/header.jsx */ "./frontend/components/landing_page/header.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Plans =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Plans, _React$Component);
+
+  function Plans() {
+    _classCallCheck(this, Plans);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Plans).apply(this, arguments));
+  }
+
+  _createClass(Plans, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "plans-grid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "plans-banner-grid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "choose-plan"
+      }, "Choose a plan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "plan-paragraph"
+      }, "Find the MortalNote solution that fits your needs."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "plan-free-1 plan"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "plan-name"
+      }, "MORTALNOTE BASIC"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "FREE"
+      }, "FREE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "plan-description"
+      }, "Take superb notes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "no-border signup-for-free",
+        to: "/signup"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "signup-for-free"
+      }, "SIGN UP FOR FREE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "plan-free-2 plan"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "plan-name"
+      }, "MORTALNOTE PREMIUM"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "FREE"
+      }, "FREE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "plan-description"
+      }, "Organize your life"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "no-border signup-for-free",
+        to: "/signup"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "signup-for-free"
+      }, "SIGN UP FOR FREE"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "plan-free-3 plan"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "plan-name"
+      }, "MORTALNOTE BUSINESS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "FREE"
+      }, "FREE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "plan-description"
+      }, "Make your company whole"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "no-border signup-for-free",
+        to: "/signup"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "signup-for-free"
+      }, "SIGN UP FOR FREE")))));
+    }
+  }]);
+
+  return Plans;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Plans);
+
+/***/ }),
+
 /***/ "./frontend/components/root.jsx":
 /*!**************************************!*\
   !*** ./frontend/components/root.jsx ***!
@@ -1307,7 +1488,9 @@ var Root = function Root(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1327,6 +1510,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -1378,12 +1562,13 @@ function (_React$Component) {
     value: function handleGoogleSignIn() {} // this.props.googleLogin();
     //Trying something different
     //Ensures the title of the tab goes back to normal when the user leaves the
-    //login form.
+    //login form. Also clears errors.
 
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       document.title = "MortalNote";
+      this.props.clearErrors();
     } //Set the title in the tab to match Evernote
 
   }, {
@@ -1401,11 +1586,24 @@ function (_React$Component) {
           key: idx
         }, error);
       });
+      var grid = document.getElementsByClassName('grid');
+      var signUpForm = document.getElementsByClassName('signup-form'); //grid[0] because getElementsByClassName returns an array of HTMLNodes.
+      //ensure the grid has rendered on the page before trying to change its style
+
+      if (errors.length === 1 && grid[0]) {
+        grid[0].style.gridTemplateRows = "45px 82px 40px 60px 30px 42px 60px 168px 60px 15px 25px 30px 45px";
+        signUpForm[0].style.gridTemplateRows = "45px 45px 23px 46px";
+      } //add more space if we two errors, i.e. for email and password fields
+      else if (errors.length === 2 && grid[0]) {
+          grid[0].style.gridTemplateRows = "45px 82px 40px 60px 30px 42px 60px 179px 60px 15px 25px 30px 45px";
+          signUpForm[0].style.gridTemplateRows = "45px 45px 34px 46px";
+        }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grid-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         className: "logo",
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1435,7 +1633,7 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "signup-form",
         onSubmit: this.handleSubmit
-      }, errors, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         autoFocus: "autoFocus",
         value: this.state.email,
@@ -1448,7 +1646,9 @@ function (_React$Component) {
         className: "signup-password-input",
         onChange: this.handleTyping("password"),
         placeholder: "Password"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "errors-container"
+      }, errors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "signup-submit"
       }, " Continue (Sign Up) ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "terms-of-service"
@@ -1462,7 +1662,7 @@ function (_React$Component) {
         target: "_blank"
       }, " Privacy Policy"), "."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "already-account"
-      }, " Already have an account? "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, " Already have an account? "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         className: "signIn",
         to: "/login"
       }, "Sign in")));
@@ -1503,6 +1703,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     //pass a function through props called signup that expects a user argument
     signup: function signup(user) {
       return dispatch(Object(_actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__["signup"])(user));
+    },
+    clearErrors: function clearErrors() {
+      return dispatch(Object(_actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__["clearErrors"])());
     }
   };
 };
@@ -1560,7 +1763,9 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "why-mortalnote-grid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "why-mortalnote-banner-grid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "why-mortalnote-htag"
       }, "Why MortalNote?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "why-mortalnote-hidden-potential"
@@ -1569,7 +1774,7 @@ function (_React$Component) {
       }, "See why virtually 0 users implement MoralNote's products. ", "Hint: it's because Evernote is better."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "why-mortalnote-img",
         src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/why-evernote-hero-desktop.png"
-      }));
+      })));
     }
   }]);
 
@@ -1857,6 +2062,10 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
 
     case _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ERRORS"]:
       return action.errors;
+    //remove all errors
+
+    case _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_0__["CLEAR_ERRORS"]:
+      return [];
     //for most actions, do nothing and return the old state
 
     default:

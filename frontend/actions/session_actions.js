@@ -1,6 +1,7 @@
 export const RECEIVE_USER = "RECEIVE_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 //signup, login, and logout are the three methods we want from SessionAPIUtil
 import * as SessionAPIUtil from '../utils/session_api_util.js';
@@ -26,6 +27,13 @@ export const receiveErrors = (errors) => {
     type: RECEIVE_ERRORS,
     //shortcut for errors: errors
     errors,
+  };
+};
+
+//Regular Action Creator
+export const clearErrors = (errors) => {
+  return {
+    type: CLEAR_ERRORS,
   };
 };
 

@@ -268,3 +268,9 @@
   right: 7px;
   top: 4px;
 }
+
+.errors-container {
+  color: #cc4539;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-size: 75%;
+}

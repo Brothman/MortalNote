@@ -86,9 +86,10 @@ class LoginForm extends React.Component {
   }
 
   //Ensures the title of the tab goes back to normal when the user leaves the
-  //login form.
+  //login form. Also clears errors.
   componentWillUnmount() {
     document.title = "MortalNote";
+    this.props.clearErrors();
   }
 
   //Set the title in the tab to match Evernote
@@ -103,6 +104,24 @@ class LoginForm extends React.Component {
     const errors = this.props.errors.map((error, idx) => {
       return <p key={idx}>{error}</p>;
     });
+
+    let grid = document.getElementsByClassName('grid-login');
+    let signUpForm = document.getElementsByClassName('signup-form');
+
+  //grid[0] because getElementsByClassName returns an array of HTMLNodes.
+  //ensure the grid has rendered on the page before trying to change its style
+    if (errors.length === 1 && grid[0]) {
+      grid[0].style.gridTemplateRows =
+      "45px 82px 40px 60px 30px 42px 60px 168px 60px 15px 25px 30px 45px";
+      signUpForm[0].style.gridTemplateRows = "45px 45px 23px 46px";
+    }
+    //add more space if we two errors, i.e. for email and password fields
+    else if (errors.length === 2 && grid[0]) {
+      grid[0].style.gridTemplateRows =
+      "45px 82px 40px 60px 30px 42px 60px 179px 60px 15px 25px 30px 45px";
+      signUpForm[0].style.gridTemplateRows = "45px 45px 34px 46px";
+    }
+
     return (
       <div className="grid-container">
         <div className="grid-login">
@@ -123,8 +142,8 @@ class LoginForm extends React.Component {
             <p className="or-text">or</p>
             <div className="grey-border" />
           </div>
+
           <form className="signup-form" onSubmit={this.handleSubmit}>
-            {errors}
             <input type="text" autoFocus="autoFocus"
               value={this.state.email}
               className="signup-email-input-login signup-email-input"
@@ -136,7 +155,11 @@ class LoginForm extends React.Component {
               onChange={this.handleTyping("password")}
               placeholder="Password" />
             <button className ="signup-submit-login signup-submit"> Continue (Sign in) </button>
+            <div className="errors-container">
+              {errors}
+            </div>
           </form>
+
           <p className="remember-me">
             <input type="checkbox" /> Remember me for thirty days
           </p>
