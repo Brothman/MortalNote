@@ -1,4 +1,4 @@
-import { RECEIVE_ERRORS, RECEIVE_USER } from '../actions/session_actions.js';
+import { RECEIVE_ERRORS, RECEIVE_USER, CLEAR_ERRORS } from '../actions/session_actions.js';
 
 const sessionErrorsReducer = (state = [], action) => {
   //Never mutate the original state in Redux
@@ -10,6 +10,9 @@ const sessionErrorsReducer = (state = [], action) => {
     //add the errors to the sessionErrors slice of state
     case(RECEIVE_ERRORS):
       return action.errors;
+    //remove all errors
+    case(CLEAR_ERRORS):
+      return [];
     //for most actions, do nothing and return the old state
     default:
       return state;

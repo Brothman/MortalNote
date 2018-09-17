@@ -1,0 +1,63 @@
+.about-us-grid {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-rows: 130px 1fr;
+  -webkit-font-smoothing: antialiased;
+  grid-template-areas:
+  "          header        "
+  " about-us-banner-grid   ";
+}
+
+.header {
+  grid-area: header;
+}
+
+.about-us-banner-grid {
+  grid-area: about-us-banner-grid;
+  height: 100%;
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/about-us-background.png");
+  display: grid;
+  grid-template-columns: 2fr 564px 1fr 4fr 1fr;
+  grid-template-rows:  2fr 100px 200px 85px 200px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  " .            .                         .          .                    .   "
+  " .      about-us-htag                   .       about-us-img            .   "
+  " .      about-us-description            .       about-us-img            .   "
+  " .            .                         .       about-us-img            .   "
+  " .    about-us-description-explained    .       about-us-img            .   "
+  " .            .                         .          .                    .   ";
+  -webkit-font-smoothing: antialiased;
+  background-color: #00a82d;
+  color: white;
+}
+
+.about-us-htag {
+  grid-area: about-us-htag;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-size: 56px;
+  line-height: 72px;
+  font-weight: 700;
+}
+
+.about-us-description {
+  grid-area: about-us-description;
+}
+
+.about-us-description-explained {
+  grid-area: about-us-description-explained;
+}
+
+.about-us-description-explained, .about-us-description {
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 48px;
+  font-size: 27px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.about-us-img {
+  grid-area: about-us-img;
+  align-self: center;
+}
