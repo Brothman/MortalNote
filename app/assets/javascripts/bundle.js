@@ -973,13 +973,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -991,21 +991,88 @@ var NotebookIndex =
 function (_React$Component) {
   _inherits(NotebookIndex, _React$Component);
 
-  function NotebookIndex() {
+  function NotebookIndex(props) {
+    var _this;
+
     _classCallCheck(this, NotebookIndex);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(NotebookIndex).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NotebookIndex).call(this, props)); // this.handleNewNotebook = this.handleNewNotebook.bind(this);
+
+    _this.state = {
+      newNotebookName: ""
+    };
+    _this.updateTypedState = _this.updateTypedState.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleSubmitModal = _this.handleSubmitModal.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleCloseModal = _this.handleCloseModal.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
   _createClass(NotebookIndex, [{
+    key: "updateTypedState",
+    value: function updateTypedState(e) {
+      var _this2 = this;
+
+      this.setState({
+        newNotebookName: e.target.value
+      }, function () {
+        if (_this2.state.newNotebookName.length > 0) {
+          var notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[0];
+          notebookSubmitButton.className = "notebook-continue-green";
+        } else {
+          var _notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[0];
+          _notebookSubmitButton.className = "notebook-continue-grey";
+        }
+      });
+    }
+  }, {
+    key: "handleSubmitModal",
+    value: function handleSubmitModal(e) {
+      var notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[0];
+
+      if (notebookSubmitButton.className === "notebook-continue-green") {
+        //for demonstration purposes
+        this.handleCloseModal();
+      } else {//do nothing
+      }
+    } //displays the modal on the screen
+
+  }, {
+    key: "handleNewNotebook",
+    value: function handleNewNotebook() {
+      var addNotebookModalContainer = document.getElementsByClassName('add-notebook-modal-container')[0];
+      addNotebookModalContainer.style.display = "block";
+      var addNotebookModalCard = document.getElementsByClassName('add-notebook-modal-card')[0];
+      addNotebookModalCard.style.display = "grid"; //ensure the cursor is ready to go in the input textbox
+      //Adds ease of use for the user as they can start typing right away
+
+      var notebookInput = document.getElementsByClassName('notebook-modal-input')[0];
+      notebookInput.focus();
+    } //close the modal
+
+  }, {
+    key: "handleCloseModal",
+    value: function handleCloseModal() {
+      var addNotebookModalContainer = document.getElementsByClassName('add-notebook-modal-container')[0];
+      addNotebookModalContainer.style.display = "none";
+      var addNotebookModalCard = document.getElementsByClassName('add-notebook-modal-card')[0];
+      addNotebookModalCard.style.display = "none"; //clear the input field when the modal closes
+
+      this.setState({
+        newNotebookName: ""
+      }); //Ensure the button becomes grey again
+
+      var notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[0];
+      notebookSubmitButton.className = "notebook-continue-grey";
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this3 = this;
 
       var notebookIndexItems = function notebookIndexItems() {
         //Need to ensure I have a selector that turns the state of Notebooks
         //into an Array of all the notebook objects
-        return _this.props.notebooks.map(function (notebook, idx) {
+        return _this3.props.notebooks.map(function (notebook, idx) {
           // Since data is normalized, each notebook is under a key of its id
           // Consequently we need to get the values, which turns out to be an
           // array of one object, and thus we must take the first item of the
@@ -1013,8 +1080,8 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notebook_index_item_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
             key: idx,
             notebook: notebook,
-            user: _this.props.user,
-            notes: Object(_reducers_selectors_js__WEBPACK_IMPORTED_MODULE_3__["getNotebooksNotes"])(_this.props.notes, notebook.notes)
+            user: _this3.props.user,
+            notes: Object(_reducers_selectors_js__WEBPACK_IMPORTED_MODULE_3__["getNotebooksNotes"])(_this3.props.notes, notebook.notes)
           });
         });
       };
@@ -1028,11 +1095,14 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "my-notebook-list"
       }, "My notebook list"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "new-notebook-icon"
+        className: "new-notebook-icon",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/add-notebook-icon.svg"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "new-notebook"
+        className: "new-notebook",
+        onClick: this.handleNewNotebook
       }, "New Notebook"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "sort-by-icon"
+        className: "sort-by-icon",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/actions-big-icon.svg"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "column-names"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -1049,7 +1119,38 @@ function (_React$Component) {
         className: "selected-column-arrow"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notebook-index-items"
-      }, notebookIndexItems())));
+      }, notebookIndexItems())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "add-notebook-modal-container",
+        onClick: this.handleCloseModal
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "add-notebook-modal-card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "notebook-modal-header"
+      }, "Create new notebook"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "notebook-modal-text"
+      }, "Notebooks are useful for grouping notes around a common topic. They can be private or shared."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "notebook-modal-name"
+      }, "Name", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "notebook-modal-input",
+        placeholder: "Notebook name",
+        value: this.state.newNotebookName,
+        onChange: this.updateTypedState
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "grey-tiny-border"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "notebook-modal-buttons"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "notebook-cancel",
+        onClick: this.handleCloseModal
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "notebook-continue-grey",
+        onClick: this.handleSubmitModal
+      }, "Continue")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "x-icon",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/x-icon2.svg",
+        onClick: this.handleCloseModal
+      })));
     }
   }]);
 
@@ -1084,62 +1185,134 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _note_index_item_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./note_index_item.jsx */ "./frontend/components/notebooks/note_index_item.jsx");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
- //Destructure notebook out of props for cleaner code
-
-var NotebookIndexItem = function NotebookIndexItem(_ref) {
-  var notebook = _ref.notebook,
-      user = _ref.user,
-      notes = _ref.notes;
-  console.log(notebook);
-  var d = new Date(notebook.updated_at);
-  var month = d.getMonth();
-  var day = d.getDay();
-
-  var handleNoteDropDown = function handleNoteDropDown(e) {
-    var target = e.currentTarget.parentNode; //pass props in here, we want to create divs inside the parent div
-
-    notes.forEach(function (note) {
-      var div = document.createElement('div');
-      div.className = "wrapper-div";
-      react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_index_item_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        note: note
-      }), div);
-      target.parentNode.insertBefore(div, target.nextSibling);
-    });
-  }; // const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  // const options = { year: 'numeric', month: 'short', day: 'numeric' };
 
 
-  var options = {
-    month: 'short',
-    day: 'numeric'
-  };
-  var username = user.email.substring(0, user.email.lastIndexOf("@"));
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "notebook-index-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "sideways-arrow-icon",
-    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/Sidways-arrow-icon.svg",
-    onClick: handleNoteDropDown
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "notebook-dark-icon",
-    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/dark-notebook-icon-v2.svg"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "notebook-item-title"
-  }, notebook.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "notebook-notes-number"
-  }, " (", notebook.notes.length, ")")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "notebook-created-by"
-  }, " ", username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "notebook-updated"
-  }, d.toLocaleDateString("en-US", options)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "notebook-shared-with"
-  }, " Only you "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "notebook-actions"
-  }));
-};
+
+var NotebookIndexItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(NotebookIndexItem, _React$Component);
+
+  function NotebookIndexItem(props) {
+    var _this;
+
+    _classCallCheck(this, NotebookIndexItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NotebookIndexItem).call(this, props));
+    _this.handleNoteDropDown = _this.handleNoteDropDown.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.state = {
+      noteDropDown: false
+    };
+    return _this;
+  }
+
+  _createClass(NotebookIndexItem, [{
+    key: "handleNoteDropDown",
+    value: function handleNoteDropDown(e) {
+      var _this2 = this;
+
+      var target = e.currentTarget.parentNode;
+      var arrow = e.currentTarget;
+      this.setState({
+        noteDropDown: !this.state.noteDropDown
+      }, function () {
+        //add notes to the page
+        if (_this2.state.noteDropDown) {
+          _this2.props.notes.forEach(function (note) {
+            var div = document.createElement('div'); //Add a specific key to the className so we can remove a notebooks
+            //specific notes on click, while allowing other notebooks notes
+            //to remain visible.
+
+            div.className = "wrapper-div-".concat(_this2.props.notebook.title); // div.className = 'wrapper-div'
+
+            react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_index_item_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              note: note
+            }), div);
+            target.parentNode.insertBefore(div, target.nextSibling); //Turn the arrow upside down (fun effect to show dropdown is open)
+
+            arrow.style.transform = "rotate(90deg)";
+          });
+        } //delete notes from the page
+        else {
+            var notes = document.getElementsByClassName("wrapper-div-".concat(_this2.props.notebook.title));
+            var notesToRemove = []; //Add each note to a new array. Needed to fix a duplicates bug
+            //I was encountering. I wish I had more time to delve into why this is
+            //Happening.
+
+            for (var i = 0; i < notes.length; i++) {
+              notesToRemove.push(notes[i]);
+            } //Tell the parent to remove the child, instead of removing ourselves.
+            //Also to fix that weird bug.
+
+
+            for (var _i = 0; _i < notesToRemove.length; _i++) {
+              notesToRemove[_i].remove();
+            } //Turn the arrow sideways (fun effect to show dropdown is closed)
+
+
+            arrow.style.transform = "rotate(0)";
+          }
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var notebook = this.props.notebook;
+      var user = this.props.user;
+      var d = new Date(notebook.updated_at); // const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      // const options = { year: 'numeric', month: 'short', day: 'numeric' };
+
+      var options = {
+        month: 'short',
+        day: 'numeric'
+      };
+      var username = user.email.substring(0, user.email.lastIndexOf("@"));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "notebook-index-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "sideways-arrow-icon",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/Sidways-arrow-icon.svg",
+        onClick: this.handleNoteDropDown
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "notebook-dark-icon",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/dark-notebook-icon-v2.svg"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "notebook-item-title"
+      }, notebook.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "notebook-notes-number"
+      }, " (", notebook.notes.length, ")")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "notebook-created-by"
+      }, " ", username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "notebook-updated"
+      }, d.toLocaleDateString("en-US", options)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "notebook-shared-with"
+      }, " Only you "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "notebook-actions"
+      }));
+    }
+  }]);
+
+  return NotebookIndexItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (NotebookIndexItem);
 
@@ -1269,10 +1442,11 @@ var SearchBar = function SearchBar(props) {
     className: "searchbar"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
-    className: "searchbar",
+    className: "searchbar-input",
     placeholder: "Search all notes..."
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "search-icon"
+    className: "search-icon",
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/search-icon-gray.svg"
   }));
 };
 
@@ -1293,6 +1467,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _searchbar_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar.jsx */ "./frontend/components/notebooks/searchbar.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 
 
 
@@ -1309,26 +1485,47 @@ var Sidebar = function Sidebar(props) {
     className: "username"
   }, username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "white-down-arrow"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchbar_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_searchbar_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "new-note"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "add-note-plus-circle"
-  }), "New Note"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "all-notes"
+    className: "new-note-plus-circle",
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/Add-Note-Plus-Icon.svg"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "new-note-text"
+  }, "New Note")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+    to: "/notes",
+    className: "all-notes",
+    activeStyle: {
+      'backgroundColor': '#404040'
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "notes-icon",
     src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/all-notes-icon-v2.svg"
-  }), "All Notes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "notebooks-button"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "all-notes-text"
+  }, "  All Notes ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+    to: "/notebooks",
+    className: "notebooks-button",
+    activeStyle: {
+      'backgroundColor': '#404040'
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "notebook-icon",
     src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/notebooks-icon.svg"
-  }), "Notebooks"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "trash"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "notebooks-button-text"
+  }, "  Notebooks ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+    to: "/trash",
+    className: "trash",
+    activeStyle: {
+      'backgroundColor': '#404040'
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "trash-icon",
     src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/trash-icon.svg"
-  }), "Trash"));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "trash-text"
+  }, "  Trash ")));
 };
 
 var mapStateToProps = function mapStateToProps(state) {

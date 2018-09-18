@@ -29,7 +29,9 @@
   grid-template-areas:
   " .  sideways-arrow-icon  notebook-dark-icon   notebook-item-title  .  notebook-created-by  notebook-created-by  notebook-updated   notebook-updated  notebook-shared-with   notebook-shared-with  notebook-actions  .";
 }
-.wrapper-div:nth-child(odd) {
+
+/* Nifty trick to select all div elements starting with 'wrapper-div' */
+div[class^="wrapper-div"]:nth-child(odd) {
   background-color: white;
 }
 
