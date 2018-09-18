@@ -4,6 +4,7 @@ import NotebookIndexItem from './notebook_index_item.jsx';
 import NoteNotebookIndexItem from './note_notebook_index_item.jsx';
 import { getAllNotebooks, getNotebooksNotes } from '../../reducers/selectors.js';
 import { createNotebook } from '../../actions/notebook_actions.js';
+import { createNote } from '../../actions/note_actions.js';
 
 class NotebookIndex extends React.Component {
   constructor(props) {
@@ -11,10 +12,34 @@ class NotebookIndex extends React.Component {
     // this.handleNewNotebookModal = this.handleNewNotebookModal.bind(this);
     this.state = {
       newNotebookName: "",
+      chosenNotebook: false,
+      chosenNotebookSpan: false,
     };
     this.updateTypedState = this.updateTypedState.bind(this);
     this.handleSubmitModal = this.handleSubmitModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.selectNotebook = this.selectNotebook.bind(this);
+    this.handleNoteSubmitModal = this.handleNoteSubmitModal.bind(this);
+  }
+
+  selectNotebook(notebook, e) {
+    const target = e.currentTarget;
+    //reset the former chosen background, if a span is in state
+    if (this.state.chosenNotebookSpan) {
+      this.state.chosenNotebookSpan.style.backgroundColor = "white";
+    }
+
+    this.setState({
+      chosenNotebook: notebook,
+      chosenNotebookSpan: target
+    }, () => {
+        //ensure we change the add-note-modal submit button
+        const notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[1];
+        notebookSubmitButton.className = "notebook-continue-green";
+
+        //lets change the background color of the specific notebook chosen
+        target.style.backgroundColor = "#f5f5f5";
+    });
   }
 
   updateTypedState(e) {
@@ -39,6 +64,37 @@ class NotebookIndex extends React.Component {
       //for demonstration purposes
       const userId = this.props.user.id;
       this.props.createNotebook(this.state.newNotebookName, userId);
+
+      //close the modal
+      this.handleCloseModal();
+    }
+    else {
+      //do nothing
+    }
+  }
+
+  handleNoteSubmitModal(e) {
+    //ensure it's the add-note-modal-submit button
+    const notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[1];
+    if (notebookSubmitButton.className === "notebook-continue-green") {
+      //for demonstration purposes
+      const user_id = this.props.user.id;
+      const notebook_id = this.state.chosenNotebook.id;
+      const content = "";
+      const plain_content = "";
+      const title = "TEST TITLE";
+
+      const note = {
+        note: {
+          user_id,
+          notebook_id,
+          content,
+          plain_content,
+          title
+        }
+      };
+
+      this.props.createNote(note);
 
       //close the modal
       this.handleCloseModal();
@@ -76,9 +132,19 @@ class NotebookIndex extends React.Component {
 
     //clear the input field when the modal closes
     this.setState({newNotebookName: ""});
-    //Ensure the button becomes grey again
-    const notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[0];
-    notebookSubmitButton.className = "notebook-continue-grey";
+
+    //clear chosen notebook when the add-note-modal closes
+    if (this.state.chosenNotebookSpan) {
+      this.state.chosenNotebookSpan.style.backgroundColor = "white";
+    }
+    this.setState({chosenNotebook: false, chosenNotebookSpan: false});
+
+    //Ensure the new-notebook-button becomes grey again
+    const notebookSubmitButton1 = document.querySelectorAll("[class^=notebook-continue]")[0];
+    notebookSubmitButton1.className = "notebook-continue-grey";
+    //Ensure the new-note-button becomes grey again
+    const notebookSubmitButton2 = document.querySelectorAll("[class^=notebook-continue]")[1];
+    notebookSubmitButton2.className = "notebook-continue-grey";
   }
 
   render() {
@@ -94,8 +160,8 @@ class NotebookIndex extends React.Component {
                                   notebook={notebook}
                                   user={this.props.user}
                                   notes={getNotebooksNotes(this.props.notes, notebook.notes)}/>;
-      })
-    }
+        });
+    };
 
     const addNoteNotebookItems = () => {
       return this.props.notebooks.map((notebook, idx) => {
@@ -104,9 +170,10 @@ class NotebookIndex extends React.Component {
           // array of one object, and thus we must take the first item of the
           // resulting array.
           return <NoteNotebookIndexItem key={idx}
-                                    notebook={notebook} />;
-        })
-    }
+                                    notebook={notebook}
+                                    selectNotebook={this.selectNotebook.bind(this, notebook)} />;
+        });
+    };
 
     return (
       <div className="notebook-index-grid">
@@ -176,7 +243,7 @@ class NotebookIndex extends React.Component {
             <button className="notebook-cancel" onClick={this.handleCloseModal}>
               Cancel
             </button>
-            <button className="notebook-continue-grey" onClick={this.handleSubmitModal}>
+            <button className="notebook-continue-grey" onClick={this.handleNoteSubmitModal}>
               Continue
             </button>
           </div>
@@ -200,7 +267,8 @@ const mapStateToProps = ( { entities } ) => {
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
-    createNotebook: (title, user_id) => dispatch(createNotebook({title, user_id}))
+    createNotebook: (title, user_id) => dispatch(createNotebook({title, user_id})),
+    createNote: (note) => dispatch(createNote(note)),
   };
 };
 

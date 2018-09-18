@@ -1,4 +1,5 @@
 import { RECEIVE_NOTEBOOKS_AND_NOTES, CLEAR_NOTEBOOKS_AND_NOTES } from '../actions/notebook_actions.js';
+import { RECEIVE_NEW_NOTE } from '../actions/note_actions.js';
 
 //default state is the empty Object
 const notesReducer = (state = {}, action) => {
@@ -16,6 +17,10 @@ const notesReducer = (state = {}, action) => {
       else {
         return action.notes;
       }
+      //Add note to the Store when we receive a newly created note from the backend
+    case(RECEIVE_NEW_NOTE):
+      const newState = Object.assign({}, state, {[action.note.id]: action.note});
+      return newState;
     //return an empty object to symbolize empty state, i.e. no notes
     case(CLEAR_NOTEBOOKS_AND_NOTES):
       return {};

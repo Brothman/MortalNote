@@ -28,7 +28,9 @@ class NotebookIndexItem extends React.Component {
           //to remain visible.
           div.className = `wrapper-div-${this.props.notebook.title}`;
           // div.className = 'wrapper-div'
-          ReactDOM.render(<NoteIndexItem note={note}/>, div);
+          const user = this.props.user;
+          const username = user.email.substring(0, user.email.lastIndexOf("@"));
+          ReactDOM.render(<NoteIndexItem username={username} note={note}/>, div);
           target.parentNode.insertBefore(div, target.nextSibling);
 
           //Turn the arrow upside down (fun effect to show dropdown is open)

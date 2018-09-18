@@ -15,7 +15,8 @@
 class Note < ApplicationRecord
   #making the assumption that content and content_plain will both hold an empty string
   #at the beginning (i.e. note.content = "" when empty)
-  validates :title, :content, :content_plain, :user_id, :notebook_id, presence: true
+  validates :user_id, :notebook_id, presence: true
+  validates :title, :content, :content_plain, presence: true, allow_blank: true
 
   belongs_to :notebook
 end
