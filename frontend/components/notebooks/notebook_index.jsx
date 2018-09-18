@@ -80,8 +80,8 @@ class NotebookIndex extends React.Component {
       //for demonstration purposes
       const user_id = this.props.user.id;
       const notebook_id = this.state.chosenNotebook.id;
-      const content = "";
-      const plain_content = "";
+      const content = "test content I have written a lot of words to see what happens when a note becomes very long. Will it hide the excess text?";
+      const plain_content = "Test content";
       const title = "TEST TITLE";
 
       const note = {

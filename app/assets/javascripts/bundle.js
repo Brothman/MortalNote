@@ -1194,8 +1194,8 @@ function (_React$Component) {
         //for demonstration purposes
         var user_id = this.props.user.id;
         var notebook_id = this.state.chosenNotebook.id;
-        var content = "";
-        var plain_content = "";
+        var content = "test content I have written a lot of words to see what happens when a note becomes very long. Will it hide the excess text?";
+        var plain_content = "Test content";
         var title = "TEST TITLE";
         var note = {
           note: {
@@ -1807,13 +1807,101 @@ var mapStateToProps = function mapStateToProps(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-var Note = function Note(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "note"
-  });
-};
+
+var Note =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Note, _React$Component);
+
+  function Note() {
+    _classCallCheck(this, Note);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Note).apply(this, arguments));
+  }
+
+  _createClass(Note, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // const toolbarOptions = [
+      //   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      //   ['blockquote', 'code-block'],
+      //
+      //   [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      //   [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      //   [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      //   [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      //   [{ 'direction': 'rtl' }],                         // text direction
+      //
+      //   [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      //   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      //
+      //   [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      //   [{ 'font': [] }],
+      //   [{ 'align': [] }],
+      //
+      //   ['clean']                                         // remove formatting button
+      // ];
+      var editor = new Quill('#editor', {
+        modules: {
+          toolbar: '#toolbar'
+        },
+        theme: 'snow'
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "note"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "toolbar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "ql-size"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "small"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        defaultValue: true
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "large"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "huge"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "ql-bold"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "ql-script",
+        value: "sub"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "ql-script",
+        value: "super"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "editor"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "note-text"
+      }, "Hello World!")));
+    }
+  }]);
+
+  return Note;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Note);
 
@@ -1855,7 +1943,7 @@ var NoteIndex = function NoteIndex(_ref) {
     className: "note-index-top-items"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "number-of-notes"
-  }, " 1921 Notes "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+  }, " ", notes.length, " Notes "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "note-index-action-icon",
     src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/actions-big-icon.svg"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
