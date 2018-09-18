@@ -1,0 +1,39 @@
+.note-index-grid {
+  display: grid;
+  align-items: center;
+  grid-template-rows: 40px 50px 20px 1fr;
+  grid-template-columns: 10px 1fr 10px;
+  grid-template-areas:
+  "  .                  note-index-header                .        "
+  "  .                          .                        .        "
+  "  .                   note-index-top-items            .        "
+  "  all-notes-grid      all-notes-grid          all-notes-grid   ";
+}
+
+.note-index-header {
+  grid-area: note-index-header;
+}
+
+.note-index-top-items {
+  grid-area: note-index-top-items;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.note-index-action-icon {
+  width: 25px;
+}
+
+.all-notes-grid {
+  grid-area: all-notes-grid;
+  display: grid;
+  grid-auto-rows: 120px;
+  align-self: flex-start;
+}
+
+.note-index-item-grid {
+  display: grid;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+
+}
