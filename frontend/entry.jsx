@@ -26,9 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (next.length !== 0 && getComputedStyle(next[0]).opacity != 0) {
             next.focus();
         } else {
-          submit = form.find('button');
-          submit.click();
-            // form.submit();
+          //for the addNotebook Modal
+         if (form.find('button').context.className === "notebook-modal-input") {
+           const submitNotebookButton = document.querySelectorAll("[class^=notebook-continue]")[0];
+           submitNotebookButton.click();
+         }
+         //for regular Auth
+         else {
+           submit = form.find('button');
+           submit.click();
+           // form.submit();
+         }
         }
         return false;
     }

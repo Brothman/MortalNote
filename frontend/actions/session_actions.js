@@ -2,6 +2,7 @@ export const RECEIVE_USER = "RECEIVE_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+import { clearNotebooksAndNotes } from './notebook_actions.js';
 
 //signup, login, and logout are the three methods we want from SessionAPIUtil
 import * as SessionAPIUtil from '../utils/session_api_util.js';
@@ -58,6 +59,11 @@ export const logout = () => {
       //on success, logout
       () => dispatch(logoutCurrentUser()),
       //errback, i.e. error callback to be called on failure
+      (errors) => dispatch(receiveErrors(errors.responseJSON))
+    )
+    //ensures we logout first, then clear the users notebooks and notes
+    .then(
+      () => dispatch(clearNotebooksAndNotes()),
       (errors) => dispatch(receiveErrors(errors.responseJSON))
     );
   };
