@@ -86,6 +86,41 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/note_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/note_actions.js ***!
+  \******************************************/
+/*! exports provided: RECEIVE_NEW_NOTE, receiveNewNote, createNote */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_NEW_NOTE", function() { return RECEIVE_NEW_NOTE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveNewNote", function() { return receiveNewNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNote", function() { return createNote; });
+/* harmony import */ var _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/note_api_util.js */ "./frontend/utils/note_api_util.js");
+var RECEIVE_NEW_NOTE = "RECEIVE_NEW_NOTE";
+ //Regular action creator, return a plain old Javascript object.
+
+var receiveNewNote = function receiveNewNote(note) {
+  return {
+    type: RECEIVE_NEW_NOTE,
+    note: note
+  };
+}; //Return a function that expects a dispatch as argument (Thunk Action)
+
+var createNote = function createNote(note) {
+  return function (dispatch) {
+    _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__["createNote"](note).then(function (noteJSON) {
+      return dispatch(receiveNewNote(noteJSON));
+    }, function (error) {
+      return console.log(error);
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/notebook_actions.js":
 /*!**********************************************!*\
   !*** ./frontend/actions/notebook_actions.js ***!
@@ -970,7 +1005,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var NoteIndexItem = function NoteIndexItem(_ref) {
-  var note = _ref.note;
+  var note = _ref.note,
+      username = _ref.username;
+  var d = new Date(note.updated_at);
+  var options = {
+    month: 'short',
+    day: 'numeric'
+  };
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "note-index-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -978,13 +1019,11 @@ var NoteIndexItem = function NoteIndexItem(_ref) {
     src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/white-paper-icon.svg"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "notebook-item-title move-extra-right"
-  }, note.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "notebook-notes-number "
-  }, " (13)")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, note.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "notebook-created-by"
-  }, " Bob"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, " ", username, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "notebook-updated"
-  }, "Today"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, d.toLocaleDateString("en-US", options)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "notebook-shared-with"
   }, " Only you "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "notebook-actions"
@@ -1009,9 +1048,11 @@ __webpack_require__.r(__webpack_exports__);
  //Destructure notebook out of props for cleaner code
 
 var NoteNotebookIndexItem = function NoteNotebookIndexItem(_ref) {
-  var notebook = _ref.notebook;
+  var notebook = _ref.notebook,
+      selectNotebook = _ref.selectNotebook;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "note-notebook-index-item"
+    className: "note-notebook-index-item",
+    onClick: selectNotebook
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "notebook-dark-icon",
     src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/dark-notebook-icon-v2.svg"
@@ -1040,6 +1081,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _note_notebook_index_item_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./note_notebook_index_item.jsx */ "./frontend/components/notebooks/note_notebook_index_item.jsx");
 /* harmony import */ var _reducers_selectors_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selectors.js */ "./frontend/reducers/selectors.js");
 /* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
+/* harmony import */ var _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/note_actions.js */ "./frontend/actions/note_actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1065,6 +1107,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
 var NotebookIndex =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1078,15 +1121,39 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(NotebookIndex).call(this, props)); // this.handleNewNotebookModal = this.handleNewNotebookModal.bind(this);
 
     _this.state = {
-      newNotebookName: ""
+      newNotebookName: "",
+      chosenNotebook: false,
+      chosenNotebookSpan: false
     };
     _this.updateTypedState = _this.updateTypedState.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleSubmitModal = _this.handleSubmitModal.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleCloseModal = _this.handleCloseModal.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.selectNotebook = _this.selectNotebook.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleNoteSubmitModal = _this.handleNoteSubmitModal.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(NotebookIndex, [{
+    key: "selectNotebook",
+    value: function selectNotebook(notebook, e) {
+      var target = e.currentTarget; //reset the former chosen background, if a span is in state
+
+      if (this.state.chosenNotebookSpan) {
+        this.state.chosenNotebookSpan.style.backgroundColor = "white";
+      }
+
+      this.setState({
+        chosenNotebook: notebook,
+        chosenNotebookSpan: target
+      }, function () {
+        //ensure we change the add-note-modal submit button
+        var notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[1];
+        notebookSubmitButton.className = "notebook-continue-green"; //lets change the background color of the specific notebook chosen
+
+        target.style.backgroundColor = "#f5f5f5";
+      });
+    }
+  }, {
     key: "updateTypedState",
     value: function updateTypedState(e) {
       var _this2 = this;
@@ -1112,6 +1179,34 @@ function (_React$Component) {
         //for demonstration purposes
         var userId = this.props.user.id;
         this.props.createNotebook(this.state.newNotebookName, userId); //close the modal
+
+        this.handleCloseModal();
+      } else {//do nothing
+      }
+    }
+  }, {
+    key: "handleNoteSubmitModal",
+    value: function handleNoteSubmitModal(e) {
+      //ensure it's the add-note-modal-submit button
+      var notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[1];
+
+      if (notebookSubmitButton.className === "notebook-continue-green") {
+        //for demonstration purposes
+        var user_id = this.props.user.id;
+        var notebook_id = this.state.chosenNotebook.id;
+        var content = "";
+        var plain_content = "";
+        var title = "TEST TITLE";
+        var note = {
+          note: {
+            user_id: user_id,
+            notebook_id: notebook_id,
+            content: content,
+            plain_content: plain_content,
+            title: title
+          }
+        };
+        this.props.createNote(note); //close the modal
 
         this.handleCloseModal();
       } else {//do nothing
@@ -1144,10 +1239,22 @@ function (_React$Component) {
 
       this.setState({
         newNotebookName: ""
-      }); //Ensure the button becomes grey again
+      }); //clear chosen notebook when the add-note-modal closes
 
-      var notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[0];
-      notebookSubmitButton.className = "notebook-continue-grey";
+      if (this.state.chosenNotebookSpan) {
+        this.state.chosenNotebookSpan.style.backgroundColor = "white";
+      }
+
+      this.setState({
+        chosenNotebook: false,
+        chosenNotebookSpan: false
+      }); //Ensure the new-notebook-button becomes grey again
+
+      var notebookSubmitButton1 = document.querySelectorAll("[class^=notebook-continue]")[0];
+      notebookSubmitButton1.className = "notebook-continue-grey"; //Ensure the new-note-button becomes grey again
+
+      var notebookSubmitButton2 = document.querySelectorAll("[class^=notebook-continue]")[1];
+      notebookSubmitButton2.className = "notebook-continue-grey";
     }
   }, {
     key: "render",
@@ -1179,7 +1286,8 @@ function (_React$Component) {
           // resulting array.
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_notebook_index_item_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
             key: idx,
-            notebook: notebook
+            notebook: notebook,
+            selectNotebook: _this3.selectNotebook.bind(_this3, notebook)
           });
         });
       };
@@ -1268,7 +1376,7 @@ function (_React$Component) {
         onClick: this.handleCloseModal
       }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "notebook-continue-grey",
-        onClick: this.handleSubmitModal
+        onClick: this.handleNoteSubmitModal
       }, "Continue")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "add-note-x-icon",
         src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/x-icon2.svg",
@@ -1297,6 +1405,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
         title: title,
         user_id: user_id
       }));
+    },
+    createNote: function createNote(note) {
+      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_6__["createNote"])(note));
     }
   };
 };
@@ -1378,7 +1489,10 @@ function (_React$Component) {
 
             div.className = "wrapper-div-".concat(_this2.props.notebook.title); // div.className = 'wrapper-div'
 
+            var user = _this2.props.user;
+            var username = user.email.substring(0, user.email.lastIndexOf("@"));
             react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_index_item_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+              username: username,
               note: note
             }), div);
             target.parentNode.insertBefore(div, target.nextSibling); //Turn the arrow upside down (fun effect to show dropdown is open)
@@ -2478,9 +2592,11 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/note_actions.js */ "./frontend/actions/note_actions.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
  //default state is the empty Object
@@ -2502,11 +2618,17 @@ var notebooksReducer = function notebooksReducer() {
         return action.notebooks;
       }
 
+    case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_NEW_NOTE"]:
+      //Add the new notes Id into the notes Array for the corresponding notebook
+      var newState = Object.assign({}, state);
+      var notebookId = action.note.notebook_id;
+      newState[notebookId].notes.push(action.note.id);
+      return newState;
     //When we create a new notebook
 
     case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NEW_NOTEBOOK"]:
-      var newState = Object.assign({}, state, _defineProperty({}, action.notebook.id, action.notebook));
-      return newState;
+      var newState1 = Object.assign({}, state, _defineProperty({}, action.notebook.id, action.notebook));
+      return newState1;
     //return an empty object to symbolize empty state, i.e. no notebooks
 
     case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__["CLEAR_NOTEBOOKS_AND_NOTES"]:
@@ -2532,6 +2654,10 @@ var notebooksReducer = function notebooksReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
+/* harmony import */ var _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/note_actions.js */ "./frontend/actions/note_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
  //default state is the empty Object
 
 var notesReducer = function notesReducer() {
@@ -2551,6 +2677,11 @@ var notesReducer = function notesReducer() {
           return action.notes;
         }
 
+    //Add note to the Store when we receive a newly created note from the backend
+
+    case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_NEW_NOTE"]:
+      var newState = Object.assign({}, state, _defineProperty({}, action.note.id, action.note));
+      return newState;
     //return an empty object to symbolize empty state, i.e. no notes
 
     case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__["CLEAR_NOTEBOOKS_AND_NOTES"]:
@@ -2791,6 +2922,27 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/utils/note_api_util.js":
+/*!*****************************************!*\
+  !*** ./frontend/utils/note_api_util.js ***!
+  \*****************************************/
+/*! exports provided: createNote */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNote", function() { return createNote; });
+//Jquery AJAX request to send the new note data to the database
+var createNote = function createNote(note) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/notes',
+    data: note
+  });
+};
 
 /***/ }),
 

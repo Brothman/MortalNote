@@ -78,7 +78,8 @@
   "   .   notebook-dark-icon    notebook-item-title    .   ";
 }
 
+/* The !important flag tells CSS to prioritze this over inline styles */
 .note-notebook-index-item:hover {
-  background-color: #f5f5f5;
+  background-color: #f5f5f5!important;
   cursor: pointer;
 }
