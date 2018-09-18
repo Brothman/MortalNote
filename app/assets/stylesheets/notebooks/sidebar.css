@@ -2,18 +2,18 @@
   display: grid;
   background-color: #191919;
   color: #ccc;
-  grid-template-columns: 10px 1fr 10px;
-  grid-template-rows: 56px 33px 10px 42px 10px repeat(4, 32px) 1fr;
+  /* grid-template-columns: 10px 1fr 10px; */
+  grid-template-rows: 66px 28px 20px 42px 20px repeat(4, 32px) 1fr;
   grid-template-areas:
-  " .      user-info       . "
-  " .      searchbar       . "
-  " .           .          . "
-  " .      new-note        . "
-  " .         .            . "
-  " .       all-notes      . "
-  " .   notebooks-button   . "
-  " .         trash        . "
-  " .          tester           . ";
+  "      user-info        "
+  "      searchbar        "
+  "           .           "
+  "      new-note         "
+  "         .             "
+  "       all-notes       "
+  "   notebooks-button    "
+  "         trash         "
+  "          tester       ";
 }
 
 .tester {
@@ -34,11 +34,80 @@
 
 .searchbar {
   grid-area: searchbar;
+  display: grid;
+  grid-template-columns: 14px 1fr 14px;
+  grid-template-areas:
+  "  .  searchbar-input  search-icon   .";
+}
+
+.searchbar-input {
+  height: 28px;
+  background-color: #333333;
+  grid-area: searchbar-input;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+  text-indent: 12px;
+  line-height: 30px;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.searchbar-input::placeholder {
+  /* font-size: 40px; */
+  color: #aaa;
+}
+
+.searchbar-input:focus {
+  outline: none;
+}
+
+.search-icon {
+  width: 30px;
+  grid-area: search-icon;
+  position: relative;
+  right: 30px;
+}
+
+.sidebar-grid a {
+  text-decoration: none;
 }
 
 .new-note {
   grid-area: new-note;
+  width: 100%;
   justify-self: flex-start;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 18px 36px 2px 70px 20px;
+  grid-template-areas:
+  "  .  new-note-plus-circle  .  new-note-text  .";
+  cursor: pointer;
+}
+
+.new-note-plus-circle {
+  grid-area: new-note-plus-circle;
+  width: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Transform to make it appear like the circle image is expanding from one center */
+.new-note:hover .new-note-plus-circle {
+  width: 35px;
+  transform: translateX(-3px);
+}
+
+.new-note-text {
+  grid-area: new-note-text;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  top: 1px;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .all-notes {
@@ -64,4 +133,24 @@
 
 .all-notes, .notebooks-button, .trash {
   justify-self: flex-start;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 18px 28px 70px 20px;
+  grid-template-areas:
+  "  .  icon   text  .";
+  cursor: pointer;
+}
+
+.all-notes:hover, .notebooks-button:hover, .trash:hover {
+  background-color: #333333;
+}
+
+.all-notes-text, .notebooks-button-text, .trash-text {
+  display: inline-block;
+  grid-area: text;
+}
+
+.notes-icon, .notebook-icon, .trash-icon {
+  grid-area: icon;
 }

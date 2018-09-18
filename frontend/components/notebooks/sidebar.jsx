@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from './searchbar.jsx';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = (props) => {
   const username = props.user.email.substring(0, props.user.email.lastIndexOf("@"));
@@ -12,31 +13,31 @@ const Sidebar = (props) => {
         <img className="white-down-arrow" />
       </span>
       <SearchBar />
-      <button className="new-note">
-        <img className="add-note-plus-circle" />
-        New Note
-      </button>
+      <div className="new-note">
+        <img className="new-note-plus-circle" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/Add-Note-Plus-Icon.svg" />
+        <p className="new-note-text">New Note</p>
+      </div>
 
-      <button className="all-notes">
+      <NavLink to="/notes" className="all-notes" activeStyle={{ 'backgroundColor': '#404040'}}>
         <img className="notes-icon"
              src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/all-notes-icon-v2.svg" />
-        All Notes
-      </button>
+        <p className="all-notes-text">  All Notes </p>
+      </NavLink>
 
-      <button className="notebooks-button">
+      <NavLink to="/notebooks" className="notebooks-button" activeStyle={{ 'backgroundColor': '#404040'}}>
         <img className="notebook-icon"
              src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/notebooks-icon.svg" />
-        Notebooks
-      </button>
+        <p className="notebooks-button-text">  Notebooks </p>
+      </NavLink>
 
-      <button className="trash">
+      <NavLink to="/trash" className="trash" activeStyle={{ 'backgroundColor': '#404040'}}>
         <img className="trash-icon"
              src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/trash-icon.svg" />
-        Trash
-      </button>
+        <p className="trash-text">  Trash </p>
+      </NavLink>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => {
   return {

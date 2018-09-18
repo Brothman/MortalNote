@@ -20,15 +20,58 @@
 }
 
 
+/* Top of Notebook Index Items START  */
+
 .top-of-notebook-index-items {
   display: grid;
-  grid-auto-flow: column;
+  align-items: center;
   grid-area: top-of-notebook-index-items;
+  grid-template-columns: 150px 1fr 26px 115px 22px;
+  grid-template-areas:
+  "my-notebook-list   .    new-notebook-icon   new-notebook   .    sort-by-icon";
   font-size: 15px;
   font-weight: 500;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   text-rendering: optimizeLegibility;
 }
+
+.my-notebook-list {
+  grid-area: my-notebook-list;
+}
+
+.new-notebook-icon {
+  width: 24px;
+  grid-area: new-notebook-icon;
+}
+
+.new-notebook {
+  grid-area: new-notebook;
+  color: #00a82d;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  bottom: 1px;
+}
+
+.new-notebook, .new-notebook-icon {
+  cursor: pointer;
+}
+
+.new-notebook-icon:hover, .new-notebook:hover {
+  opacity: 0.8;
+}
+
+.sort-by-icon {
+  grid-area: sort-by-icon;
+  width: 25px;
+  cursor: pointer;
+}
+
+/* Top of Notebook Index Items FINISH  */
+
 
 /*Column-Names Grid START */
 
@@ -67,6 +110,7 @@
 
 .actions-cn {
   grid-area: actions-cn;
+  justify-self: flex-end;
 }
 
 
@@ -87,4 +131,165 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   text-rendering: optimizeLegibility;
   grid-area: notebook-title;
+}
+
+.add-notebook-modal-container {
+  display: none;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(42, 51, 60, .4);
+  z-index: 1;
+}
+
+.add-notebook-modal-card {
+  grid-area: add-notebook-modal-card;
+  display: none;
+  grid-template-columns: 20px 500px 20px;
+  grid-template-rows: 25px 30px 5px 30px 30px 65px 20px 20px 40px 20px;
+  grid-template-areas:
+  "   .                        .                                 .   "
+  "   .               notebook-modal-header                      .   "
+  "   .                        .                                 .   "
+  "   .                 notebook-modal-text                      .   "
+  "   .                        .                                 .   "
+  "   .                 notebook-modal-name                      .   "
+  "  grey-tiny-border   grey-tiny-border           grey-tiny-border  "
+  "   .                        .                                 .   "
+  "   .               notebook-modal-buttons                     .   "
+  "   .                        .                                 .   ";
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 2px 15px rgba(0, 0, 0, .2);
+  z-index: 2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.notebook-modal-header {
+  grid-area: notebook-modal-header;
+  font-size: 18px;
+  color: #555555;
+  font-weight: 500;
+}
+
+.notebook-modal-text {
+  grid-area: notebook-modal-text;
+  font-size: 13px;
+  color: #777777;
+  line-height: 18px;
+  font-weight: 300;
+}
+
+.notebook-modal-name {
+  grid-area: notebook-modal-name;
+  display: flex;
+  flex-direction: column;
+  color: #7a8083;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.notebook-modal-input {
+  position: relative;
+  top: 5px;
+  font-size: 16px;
+  height: 40px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .7);
+  text-indent: 10px;
+}
+
+.notebook-modal-input:focus {
+  outline: 0;
+}
+
+.grey-tiny-border {
+  grid-area: grey-tiny-border;
+  border-bottom: 1px solid #ededed;
+  height: 100%;
+  width: 100%;
+}
+
+.x-icon {
+  width: 16px;
+  position: relative;
+  left: 500px;
+  top: 25px;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: all 0.1s ease-out;
+}
+
+.x-icon:hover {
+  opacity: 0.5;
+}
+
+.notebook-modal-buttons {
+  grid-area: notebook-modal-buttons;
+  display: grid;
+  grid-template-columns: 1fr 75px 10px 75px;
+  grid-template-areas:
+  " .    notebook-cancel   .    notebook-continue ";
+}
+
+.notebook-cancel {
+  grid-area: notebook-cancel;
+  color: #b3b3b3;
+  border: 1px solid #ededed;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+}
+
+.notebook-cancel:hover {
+  border: 1px solid #c3c3c3;
+  background: Transparent;
+  color: #999;
+}
+
+.notebook-cancel:focus, .notebook-continue-grey:focus, .notebook-continue-green:focus {
+  outline: 0;
+}
+
+.notebook-continue-grey {
+  grid-area: notebook-continue;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #dcdfe3;
+  border: 0;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: all 0.1s ease-out;
+}
+
+.notebook-continue-green {
+  grid-area: notebook-continue;
+  cursor: pointer;
+  background-color: #00a82d;
+  border: none;
+  color: #ffffff;
+  border: 0;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: all 0.1s ease-out;
+}
+
+.notebook-continue-green:hover {
+  background: #0e753d;
 }
