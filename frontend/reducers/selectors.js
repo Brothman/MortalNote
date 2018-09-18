@@ -11,3 +11,10 @@ export const getNotebooksNotes = ( notes, noteIDS ) => {
     return notes[noteID];
   });
 }
+
+export const getAllNotes = ( { notes }) => {
+  //Since we normalized our data, each notebook is under a key of its ID
+  //So we map through each ID key, and return an array filled with the notebooks
+  //Underneath each ID.
+  return Object.keys(notes).map(id => notes[id]);
+};
