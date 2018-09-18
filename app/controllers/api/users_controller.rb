@@ -5,7 +5,9 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     #Checking to see if the user passes the model validations
     #and database constraints
-    if @user.save
+    if @user.email.index('@').nil?
+      render :json => ["Invalid Email Address. Must Include '@'"], status: 422
+    elsif @user.save
       login(@user)
       render 'api/users/show'
     else

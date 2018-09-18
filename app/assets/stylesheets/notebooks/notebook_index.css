@@ -77,6 +77,7 @@
 
 .column-names {
   display: grid;
+  overflow: scroll;
   grid-area: column-names;
   grid-template-columns: 10px 77px 10fr 77px 1fr 77px 2fr 77px 6fr 77px 10px;
   grid-template-rows: 38px;
@@ -132,6 +133,8 @@
   text-rendering: optimizeLegibility;
   grid-area: notebook-title;
 }
+
+/* NOTEBOOK MODAL START */
 
 .add-notebook-modal-container {
   display: none;
@@ -293,3 +296,5 @@
 .notebook-continue-green:hover {
   background: #0e753d;
 }
+
+/* NOTEBOOK MODAL FINISH */

@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NotebookIndexItem from './notebook_index_item.jsx';
+import NoteNotebookIndexItem from './note_notebook_index_item.jsx';
 import { getAllNotebooks, getNotebooksNotes } from '../../reducers/selectors.js';
+import { createNotebook } from '../../actions/notebook_actions.js';
 
 class NotebookIndex extends React.Component {
   constructor(props) {
     super(props);
-    // this.handleNewNotebook = this.handleNewNotebook.bind(this);
+    // this.handleNewNotebookModal = this.handleNewNotebookModal.bind(this);
     this.state = {
       newNotebookName: "",
     };
@@ -35,6 +37,10 @@ class NotebookIndex extends React.Component {
     const notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[0];
     if (notebookSubmitButton.className === "notebook-continue-green") {
       //for demonstration purposes
+      const userId = this.props.user.id;
+      this.props.createNotebook(this.state.newNotebookName, userId);
+
+      //close the modal
       this.handleCloseModal();
     }
     else {
@@ -43,7 +49,7 @@ class NotebookIndex extends React.Component {
   }
 
   //displays the modal on the screen
-  handleNewNotebook() {
+  handleNewNotebookModal() {
     const addNotebookModalContainer = document.getElementsByClassName('add-notebook-modal-container')[0];
     addNotebookModalContainer.style.display = "block";
 
@@ -63,6 +69,10 @@ class NotebookIndex extends React.Component {
 
     const addNotebookModalCard = document.getElementsByClassName('add-notebook-modal-card')[0];
     addNotebookModalCard.style.display = "none";
+
+    //ensure both modals close
+    const addNoteModalCard = document.getElementsByClassName('add-note-modal-card')[0];
+    addNoteModalCard.style.display = "none";
 
     //clear the input field when the modal closes
     this.setState({newNotebookName: ""});
@@ -87,6 +97,17 @@ class NotebookIndex extends React.Component {
       })
     }
 
+    const addNoteNotebookItems = () => {
+      return this.props.notebooks.map((notebook, idx) => {
+          // Since data is normalized, each notebook is under a key of its id
+          // Consequently we need to get the values, which turns out to be an
+          // array of one object, and thus we must take the first item of the
+          // resulting array.
+          return <NoteNotebookIndexItem key={idx}
+                                    notebook={notebook} />;
+        })
+    }
+
     return (
       <div className="notebook-index-grid">
         <h6 className="notebook-title">Notebooks</h6>
@@ -94,7 +115,7 @@ class NotebookIndex extends React.Component {
         <span className="top-of-notebook-index-items">
           <p className="my-notebook-list">My notebook list</p>
           <img className="new-notebook-icon" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/add-notebook-icon.svg"/>
-          <p className="new-notebook" onClick={this.handleNewNotebook}>New Notebook</p>
+          <p className="new-notebook" onClick={this.handleNewNotebookModal}>New Notebook</p>
           <img className= "sort-by-icon" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/actions-big-icon.svg" />
         </span>
 
@@ -109,6 +130,7 @@ class NotebookIndex extends React.Component {
             {notebookIndexItems()}
           </div>
         </span>
+
         <div className="add-notebook-modal-container" onClick={this.handleCloseModal}>
         </div>
         <div className="add-notebook-modal-card">
@@ -138,6 +160,30 @@ class NotebookIndex extends React.Component {
                src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/x-icon2.svg"
                onClick={this.handleCloseModal} />
         </div>
+
+
+        <div className="add-notebook-modal-container" onClick={this.handleCloseModal}>
+        </div>
+
+        <div className="add-note-modal-card">
+          <h6 className="note-modal-header">Create new note in...</h6>
+          <div className="grey-tiny-border-1" />
+          <div className="add-note-notebook-items">
+            {addNoteNotebookItems()}
+          </div>
+          <div className="grey-tiny-border-2" />
+          <div className="notebook-modal-buttons">
+            <button className="notebook-cancel" onClick={this.handleCloseModal}>
+              Cancel
+            </button>
+            <button className="notebook-continue-grey" onClick={this.handleSubmitModal}>
+              Continue
+            </button>
+          </div>
+          <img className="add-note-x-icon"
+               src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/x-icon2.svg"
+               onClick={this.handleCloseModal} />
+        </div>
       </div>
     );
   }
@@ -151,4 +197,11 @@ const mapStateToProps = ( { entities } ) => {
     notes: entities.notes,
   };
 };
-export default connect(mapStateToProps)(NotebookIndex);
+
+const mapDispatchToProps = ( dispatch ) => {
+  return {
+    createNotebook: (title, user_id) => dispatch(createNotebook({title, user_id}))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotebookIndex);

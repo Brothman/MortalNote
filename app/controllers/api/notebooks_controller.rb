@@ -8,7 +8,8 @@ class Api::NotebooksController < ApplicationController
 
   #I have a feeling I want the ability to gather all the notebooks
   def index
-    @notebooks = Notebook.all
+    #Pre-loading note data to avoid N+1 database queries
+    @notebooks = Notebook.where(user_id: current_user.id).includes(:notes)
     render 'api/notebooks/index'
   end
 

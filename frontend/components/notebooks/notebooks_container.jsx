@@ -19,7 +19,6 @@ class NotebooksContainer extends React.Component {
 
   handleLogout() {
     this.props.logout();
-      // console.log(this.props.fetchNotebooksAndNotes())
   }
 
   render() {
@@ -36,8 +35,8 @@ class NotebooksContainer extends React.Component {
 const mapStateToProps = ( { entities } ) => {
   return {
     user: Object.values(entities.user)[0],
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {

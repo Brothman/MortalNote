@@ -4,3 +4,12 @@ export const fetchNotebooksAndNotes = () => {
     url: '/api/notebooks'
   });
 };
+
+export const createNotebook = (notebook) => {
+
+  return $.ajax({
+    method: 'POST',
+    url: '/api/notebooks',
+    data: {notebook: notebook},
+  });
+};
