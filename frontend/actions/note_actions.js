@@ -20,3 +20,15 @@ export const createNote = (note) => {
     );
   };
 };
+
+//Return a function (Thunk Action Creator)
+//Be aware about dispatching receiveNewNote -- might cause a funky re-render
+export const updateNote = (noteID, delta) => {
+  return (dispatch) => {
+    NoteAPIUtil.updateNote(noteID, delta)
+    .then(
+      (noteJSON) => dispatch(receiveNewNote(noteJSON)),
+      (error) => console.log(error)
+    );
+  };
+};

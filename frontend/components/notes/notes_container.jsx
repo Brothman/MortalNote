@@ -18,11 +18,13 @@ class NotesContainer extends React.Component {
   }
 
   render() {
+    //a random note
+    const randomNote = this.props.notes[Object.keys(this.props.notes)[0]];
     return (
       <div className="note-container-grid">
         <Sidebar user={this.props.user}/>
         <NoteIndex notes={this.props.notes}/>
-        <Note note={this.props.fetchNotebooksAndNotes}/>
+        <Note note={randomNote}/>
       </div>
     );
   }

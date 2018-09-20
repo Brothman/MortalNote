@@ -6,3 +6,13 @@ export const createNote = (note) => {
     data: note
   });
 };
+
+//Jquery AJAX request to update a note's content (delta) to the database
+export const updateNote = (noteID, delta) => {
+  debugger
+  return $.ajax({
+    method: 'PUT',
+    url: `/api/notes/${noteID}`,
+    data: {note: {"content": delta}}
+  });
+};
