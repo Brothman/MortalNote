@@ -1,0 +1,37 @@
+.footer {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 400px minmax(200px, 1fr) 100px 50px 100px 1fr;
+  grid-template-areas:
+  " . certification   .   github   .  linked-in  . ";
+}
+
+.certification {
+  grid-area: certification;
+}
+
+.github {
+  grid-area: github;
+}
+
+.linked-in {
+  grid-area: linked-in;
+}
+
+.certification, .github, .linked-in {
+  line-height: 21px;
+  -webkit-font-smoothing: antialiased;
+  color: rgb(136, 139, 141);
+  font-family: "soleil";
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.footer a {
+  text-decoration: none;
+  transition: .1s color ease-in-out;
+}
+
+.footer a:hover {
+  color: black;
+}

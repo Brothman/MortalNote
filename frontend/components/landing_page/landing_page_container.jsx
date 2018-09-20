@@ -15,12 +15,6 @@ class LandingPage extends React.Component {
       <div className="landing-page">
         <Header />
         <MainBanner />
-        <PromotionalOffer />
-        <MotivationalMessage />
-        <PricingBanner />
-        <HowItWorks />
-        <PopularFeatures />
-        <LandingSignUpForm />
         <Footer />
       </div>
     );

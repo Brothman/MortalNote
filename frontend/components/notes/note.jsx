@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateNote } from '../../actions/note_actions.js';
 
 class Note extends React.Component {
   componentDidMount() {
@@ -22,11 +24,62 @@ class Note extends React.Component {
     //   ['clean']                                         // remove formatting button
     // ];
 
+    const Delta = Quill.import('delta');
+
     const editor = new Quill('#editor', {
       modules: { toolbar: '#toolbar' },
       theme: 'snow'
     });
+
+    //so we have access to props inside of load
+    const that = this;
+    //note is undefined
+
+    //Called only once, on componentDidMount, on first (technically second) render.
+    const load = () => {
+      //if we have a note, set the editor's content to the note's delta
+      if (that.props.note) {
+        //Set the note's delta to a variable for cleaner code
+        const delta = this.props.note.content;
+        //display the note in Rich HTML format
+        console.log(`delta: ${delta}`)
+        editor.setContents(delta)
+        // editor.root.innerHTML = delta;
+      }
+    }
+
+    //load the note's data
+    load();
+    // setInterval(()=>load(), 2000)
+
+    //store accumulated changes
+    let change = new Delta();
+
+    editor.on('text-change', delta => {
+      change = change.compose(delta)
+    });
+
+    //Save periodically (AUTOSAVE)
+    setInterval( () => {
+      if (change.length() > 0) {
+        console.log('Saving changes', change);
+        console.log(this.props.note)
+        update.call(this, change);
+        change = new Delta();
+      }
+    }, 5000);
+
+    //getContents and Set contents are where it's at
+    const update = (delta) => {
+      //current Rich HTML of our note
+      let contents = editor.getContents();
+      //SAVE TO DATABASE HERE
+      // debugger
+      const simpleDelta = delta.ops;
+      this.props.updateNote(this.props.note.id, simpleDelta);
+    }
   }
+
 
   render () {
 
@@ -51,9 +104,26 @@ class Note extends React.Component {
         <div id="editor">
           <p className="note-text">Hello World!</p>
         </div>
+
+        <div id="delta-container">
+        </div>
       </div>
     );
   }
 }
 
-export default Note;
+
+
+// const mapStateToProps = ( { entities } ) => {
+//   return {
+//     notes: getAllNotes(entities)
+//   }
+// }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateNote: (noteID, delta) => dispatch(updateNote(noteID, delta)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Note);

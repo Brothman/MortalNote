@@ -90,7 +90,7 @@
 /*!******************************************!*\
   !*** ./frontend/actions/note_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_NEW_NOTE, receiveNewNote, createNote */
+/*! exports provided: RECEIVE_NEW_NOTE, receiveNewNote, createNote, updateNote */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,6 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_NEW_NOTE", function() { return RECEIVE_NEW_NOTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveNewNote", function() { return receiveNewNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNote", function() { return createNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNote", function() { return updateNote; });
 /* harmony import */ var _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/note_api_util.js */ "./frontend/utils/note_api_util.js");
 var RECEIVE_NEW_NOTE = "RECEIVE_NEW_NOTE";
  //Regular action creator, return a plain old Javascript object.
@@ -112,6 +113,17 @@ var receiveNewNote = function receiveNewNote(note) {
 var createNote = function createNote(note) {
   return function (dispatch) {
     _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__["createNote"](note).then(function (noteJSON) {
+      return dispatch(receiveNewNote(noteJSON));
+    }, function (error) {
+      return console.log(error);
+    });
+  };
+}; //Return a function (Thunk Action Creator)
+//Be aware about dispatching receiveNewNote -- might cause a funky re-render
+
+var updateNote = function updateNote(noteID, delta) {
+  return function (dispatch) {
+    _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__["updateNote"](noteID, delta).then(function (noteJSON) {
       return dispatch(receiveNewNote(noteJSON));
     }, function (error) {
       return console.log(error);
@@ -362,7 +374,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _notes_notes_container_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./notes/notes_container.jsx */ "./frontend/components/notes/notes_container.jsx");
 /* harmony import */ var _about_us_about_us_container_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./about_us/about_us_container.jsx */ "./frontend/components/about_us/about_us_container.jsx");
 /* harmony import */ var _plans_plans_container_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./plans/plans_container.jsx */ "./frontend/components/plans/plans_container.jsx");
-/* harmony import */ var _utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils/route_util.jsx */ "./frontend/utils/route_util.jsx");
+/* harmony import */ var _help_help_container_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./help/help_container.jsx */ "./frontend/components/help/help_container.jsx");
+/* harmony import */ var _utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utils/route_util.jsx */ "./frontend/utils/route_util.jsx");
+
 
 
 
@@ -377,7 +391,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ComponentWrapper = function ComponentWrapper(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_10__["AuthRoute"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["AuthRoute"], {
     exact: true,
     path: "/",
     component: _landing_page_landing_page_container_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -388,30 +402,116 @@ var ComponentWrapper = function ComponentWrapper(props) {
     path: "/plans",
     component: _plans_plans_container_jsx__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/help-and-learning",
+    component: _help_help_container_jsx__WEBPACK_IMPORTED_MODULE_10__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/about-us",
     component: _about_us_about_us_container_jsx__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "auth/:provider/callback",
     component: _why_mortalnote_why_mortalnote_container_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_10__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["AuthRoute"], {
     path: "/login",
     component: _login_form_login_form_container_js__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_10__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["AuthRoute"], {
     path: "/signup",
     component: _signup_form_signup_form_container_js__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["ProtectedRoute"], {
     path: "/notebooks",
     component: _notebooks_notebooks_container_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["ProtectedRoute"], {
     path: "/notes",
     component: _notes_notes_container_jsx__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["ProtectedRoute"], {
     path: "/trash",
     component: _notes_notes_container_jsx__WEBPACK_IMPORTED_MODULE_7__["default"]
   }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ComponentWrapper);
+
+/***/ }),
+
+/***/ "./frontend/components/help/help_container.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/help/help_container.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../landing_page/header.jsx */ "./frontend/components/landing_page/header.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
+
+ //Duplicated from plans-container, with the inner text changed
+
+var Help = function Help(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "plans-grid"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_landing_page_header_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "plans-banner-grid",
+    style: {
+      "backgroundImage": "url(\"https://s3.us-east-2.amazonaws.com/mortalnote-images/about-us-background.png\")",
+      "backgroundColor": "#00a82d"
+    }
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "choose-plan",
+    style: {
+      "color": "white"
+    }
+  }, "Need Help?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "plan-paragraph",
+    style: {
+      "right": "-70px",
+      "color": "white"
+    }
+  }, "We have ideas."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "plan-free-1 plan"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "plan-name"
+  }, "EXISTENTIAL FEAR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "FREE"
+  }, "TRY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "plan-description"
+  }, "MortalNote's mortal note. You die. The note lives on."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "no-border signup-for-free",
+    to: "/signup"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "signup-for-free"
+  }, "CHANGE YOUR LIFE. SIGN UP!"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "plan-free-2 plan"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "plan-name"
+  }, "TERROR OF CHANGE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "FREE"
+  }, "TRY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "plan-description"
+  }, "MortalNote's stable and predictable interface. "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "no-border signup-for-free",
+    to: "/signup"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "signup-for-free"
+  }, "CHANGE YOUR LIFE. SIGN UP!"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "plan-free-3 plan"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "plan-name"
+  }, "LONELINESS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "FREE"
+  }, "TRY"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "plan-description"
+  }, "Friends. Friends are marvelous."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+    className: "no-border signup-for-free",
+    to: "/signup"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "signup-for-free"
+  }, "CHANGE YOUR LIFE. SIGN UP!")))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Help);
 
 /***/ }),
 
@@ -426,10 +526,22 @@ var ComponentWrapper = function ComponentWrapper(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+
 
 
 var Footer = function Footer(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "footer"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "certification"
+  }, "2018 MortalNote Corporation. No rights reserved."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "github",
+    href: "https://github.com/Brothman/MortalNote"
+  }, "Github"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "linked-in",
+    href: "https://www.linkedin.com/in/brothman7000/"
+  }, "LinkedIn"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
@@ -585,7 +697,7 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "landing-page"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_banner_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_promotional_offer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_motivational_message_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pricing_banner_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_how_it_works_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_popular_features_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_landing_signup_form_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_footer_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_banner_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_footer_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null));
     }
   }]);
 
@@ -1807,6 +1919,8 @@ var mapStateToProps = function mapStateToProps(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/note_actions.js */ "./frontend/actions/note_actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1827,6 +1941,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var Note =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1841,6 +1957,8 @@ function (_React$Component) {
   _createClass(Note, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this = this;
+
       // const toolbarOptions = [
       //   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       //   ['blockquote', 'code-block'],
@@ -1860,12 +1978,55 @@ function (_React$Component) {
       //
       //   ['clean']                                         // remove formatting button
       // ];
+      var Delta = Quill.import('delta');
       var editor = new Quill('#editor', {
         modules: {
           toolbar: '#toolbar'
         },
         theme: 'snow'
-      });
+      }); //so we have access to props inside of load
+
+      var that = this; //note is undefined
+      //Called only once, on componentDidMount, on first (technically second) render.
+
+      var load = function load() {
+        //if we have a note, set the editor's content to the note's delta
+        if (that.props.note) {
+          //Set the note's delta to a variable for cleaner code
+          var delta = _this.props.note.content; //display the note in Rich HTML format
+
+          console.log("delta: ".concat(delta));
+          editor.setContents(delta); // editor.root.innerHTML = delta;
+        }
+      }; //load the note's data
+
+
+      load(); // setInterval(()=>load(), 2000)
+      //store accumulated changes
+
+      var change = new Delta();
+      editor.on('text-change', function (delta) {
+        change = change.compose(delta);
+      }); //Save periodically (AUTOSAVE)
+
+      setInterval(function () {
+        if (change.length() > 0) {
+          console.log('Saving changes', change);
+          console.log(_this.props.note);
+          update.call(_this, change);
+          change = new Delta();
+        }
+      }, 5000); //getContents and Set contents are where it's at
+
+      var update = function update(delta) {
+        //current Rich HTML of our note
+        var contents = editor.getContents(); //SAVE TO DATABASE HERE
+        // debugger
+
+        var simpleDelta = delta.ops;
+
+        _this.props.updateNote(_this.props.note.id, simpleDelta);
+      };
     }
   }, {
     key: "render",
@@ -1896,14 +2057,29 @@ function (_React$Component) {
         id: "editor"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "note-text"
-      }, "Hello World!")));
+      }, "Hello World!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "delta-container"
+      }));
     }
   }]);
 
   return Note;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component); // const mapStateToProps = ( { entities } ) => {
+//   return {
+//     notes: getAllNotes(entities)
+//   }
+// }
 
-/* harmony default export */ __webpack_exports__["default"] = (Note);
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    updateNote: function updateNote(noteID, delta) {
+      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_2__["updateNote"])(noteID, delta));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(Note));
 
 /***/ }),
 
@@ -2056,6 +2232,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      //a random note
+      var randomNote = this.props.notes[Object.keys(this.props.notes)[0]];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "note-container-grid"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notebooks_sidebar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -2063,7 +2241,7 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
         notes: this.props.notes
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        note: this.props.fetchNotebooksAndNotes
+        note: randomNote
       }));
     }
   }]);
@@ -2635,16 +2813,19 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer.js */ "./frontend/reducers/users_reducer.js");
-/* harmony import */ var _notes_reducer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./notes_reducer.js */ "./frontend/reducers/notes_reducer.js");
-/* harmony import */ var _notebooks_reducer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./notebooks_reducer.js */ "./frontend/reducers/notebooks_reducer.js");
+/* harmony import */ var _note_reducer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./note_reducer.js */ "./frontend/reducers/note_reducer.js");
+/* harmony import */ var _notes_reducer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./notes_reducer.js */ "./frontend/reducers/notes_reducer.js");
+/* harmony import */ var _notebooks_reducer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./notebooks_reducer.js */ "./frontend/reducers/notebooks_reducer.js");
+
 
 
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   user: _users_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  notes: _notes_reducer_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-  notebooks: _notebooks_reducer_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+  note: _note_reducer_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+  notes: _notes_reducer_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+  notebooks: _notebooks_reducer_js__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -2667,6 +2848,48 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
   session: _session_errors_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/note_reducer.js":
+/*!*******************************************!*\
+  !*** ./frontend/reducers/note_reducer.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/note_actions.js */ "./frontend/actions/note_actions.js");
+/* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+ //default state is the empty Object
+
+var noteReducer = function noteReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  //Never mutate the original state in Redux
+  Object.freeze(state);
+
+  switch (action.type) {
+    //Add note to the Store when we receive a newly created note from the backend
+    case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NEW_NOTE"]:
+      var newState = Object.assign({}, state, _defineProperty({}, action.note.id, action.note));
+      return newState;
+    //return an empty object to symbolize empty state, i.e. no notes
+
+    case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_1__["CLEAR_NOTEBOOKS_AND_NOTES"]:
+      return {};
+    //for most actions, do nothing and return the old state
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (noteReducer);
 
 /***/ }),
 
@@ -3017,18 +3240,32 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/utils/note_api_util.js ***!
   \*****************************************/
-/*! exports provided: createNote */
+/*! exports provided: createNote, updateNote */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNote", function() { return createNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNote", function() { return updateNote; });
 //Jquery AJAX request to send the new note data to the database
 var createNote = function createNote(note) {
   return $.ajax({
     method: 'POST',
     url: '/api/notes',
     data: note
+  });
+}; //Jquery AJAX request to update a note's content (delta) to the database
+
+var updateNote = function updateNote(noteID, delta) {
+  debugger;
+  return $.ajax({
+    method: 'PUT',
+    url: "/api/notes/".concat(noteID),
+    data: {
+      note: {
+        "content": delta
+      }
+    }
   });
 };
 
