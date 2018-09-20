@@ -8,6 +8,7 @@ import NotebooksContainer from './notebooks/notebooks_container.jsx';
 import NotesContainer from './notes/notes_container.jsx';
 import AboutUs from './about_us/about_us_container.jsx';
 import Plans from './plans/plans_container.jsx';
+import Help from './help/help_container.jsx';
 
 import { AuthRoute } from '../utils/route_util.jsx';
 import { ProtectedRoute } from '../utils/route_util.jsx';
@@ -18,6 +19,7 @@ const ComponentWrapper = (props) => {
       <AuthRoute exact path='/' component={LandingPage} />
       <Route path="/why-mortalnote" component={WhyMortalNote} />
       <Route path="/plans" component={Plans} />
+      <Route path="/help-and-learning" component={Help} />
       <Route path="/about-us" component={AboutUs} />
       <Route path="auth/:provider/callback" component={WhyMortalNote} />
       <AuthRoute path='/login' component={LoginForm} />

@@ -10,9 +10,9 @@ Rails.application.routes.draw do
     #The client for Redux and React to store and render. Index to gather all
     #notebooks at once.
     resources :notebooks, only: [:create, :destroy, :show, :index]
-    resources :notes, only: [:create, :destroy, :show]
+    resources :notes, only: [:create, :destroy, :show, :update]
   end
-  
+
   get 'auth/:provider/callback', to: 'api/sessions#google_create', defaults: { format: :json }
   get "*path", to: "static_pages#root"
 end
