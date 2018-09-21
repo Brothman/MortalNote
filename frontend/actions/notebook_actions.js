@@ -5,7 +5,8 @@ import * as NotebookAPIUtil from '../utils/notebook_api_util.js';
 
 //Regular action creator, return a plain old Javascript object.
 //Destructure notes and notebooks out of the argument for cleaner code
-export const receiveNotebooksAndNotes = ( { notebooks, notes }) => {
+export const receiveNotebooksAndNotes = ( { notebooks, notes } ) => {
+  
   return {
     type: RECEIVE_NOTEBOOKS_AND_NOTES,
     notes,

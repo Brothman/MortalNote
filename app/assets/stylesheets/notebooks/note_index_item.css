@@ -38,6 +38,16 @@ div[class^="wrapper-div"]:nth-child(odd) {
 .notebook-index-item:nth-child(odd) {
   background-color: white;
 }
+div[class^="wrapper-div"] {
+  transition: .4s all ease;
+  cursor: pointer;
+}
+
+/* I add a background color change to signify we're pointing to a specific note
+    This is my addition. Evernote does not do this. */
+div[class^="wrapper-div"]:hover {
+  background-color: rgb(0, 168, 45, 0.4);
+}
 
 .sideways-arrow-icon{
   grid-area: sideways-arrow-icon;

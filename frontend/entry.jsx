@@ -17,8 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
     //define variables
     let focusable, next, submit;
 
+
     //13 is the keyCode for 'enter/return'
     if (e.keyCode == 13) {
+      //the following logic will only run if we're editing the title of a note
+      if (e.target.className == "note-title-input") {
+        const editor = document.getElementsByClassName('ql-editor')[0];
+        editor.focus();
+        //break out of the function
+        return;
+      }
          focusable = form.find('input');
          next = focusable.eq(focusable.index(this)+1);
          //next.length will be 0 if there are no more inputs
@@ -40,6 +48,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return false;
     }
+});
+
+//for the new note modal -- Even EVERNOTE doesn't have this feature!
+document.addEventListener('keydown', (e) => {
+  if (e.keyCode == 13) {
+    const newNoteModal = document.getElementsByClassName('add-note-modal-card')[0];
+
+    //check to see if newNoteModal exists -- for non-Note pages.
+    if (newNoteModal && (newNoteModal.style.display !== "none" && newNoteModal.style.display !== "")) {
+      // in case we're on the notes page, check both the [1] and [0] options
+      const submitNotebookButton = document.querySelectorAll("[class^=notebook-continue]")[1] || document.querySelectorAll("[class^=notebook-continue]")[0];
+      submitNotebookButton.click();
+    }
+  }
+
 });
 
 //JQUERY OVER
