@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { receiveNotebooksAndNotes, filterNotebooksAndNotes } from '../../actions/notebook_actions.js';
+import { withRouter } from 'react-router-dom';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class SearchBar extends React.Component {
     };
     this.handleTyping = this.handleTyping.bind(this);
     this.filterSearches = this.filterSearches.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
   handleTyping(e){
@@ -18,7 +20,31 @@ class SearchBar extends React.Component {
 
   filterSearches(){
     const searchText = this.state.searchText;
+    // if (this.props.history.location.pathname == "/notes") {
+    //   //do nothing, we're on the right page
+    // }
+    // else {
+    //   //switch to the notes page
+    //   this.props.history.push('/notes');
+    // }
     this.props.filterNotebooksAndNotes(searchText);
+  }
+
+  handleFocus(){
+    if (this.props.history.location.pathname == "/notes") {
+      //do nothing, we're on the right page
+    }
+    else {
+      //switch to the notes page
+      this.props.history.push('/notes');
+      //Async setTimeout allow the new page to render, so we can find the
+      //newly implemnted searchBar input. Then we focus on it to provide the
+      //illusion of consistentcy.
+      setTimeout(() => {
+        const searchBar = document.getElementsByClassName('searchbar-input')[0];
+        searchBar.focus();
+      }, 0);
+    }
   }
 
   render () {
@@ -35,7 +61,8 @@ class SearchBar extends React.Component {
                className="searchbar-input"
                placeholder="Search all notes..."
                onChange={this.handleTyping}
-               value={this.state.searchText}>
+               value={this.state.searchText}
+               onFocus={this.handleFocus}>
         </input>
         <img className="search-icon" src={searchUrl}/>
       </div>
@@ -56,4 +83,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchBar));
