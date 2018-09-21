@@ -1,0 +1,9 @@
+.landing-page {
+  display: grid;
+  grid-template-rows: 130px 697px 1fr;
+  height: 100vh;
+  grid-template-areas:
+  "        header         "
+  "      main-banner      "
+  "        footer         ";
+}

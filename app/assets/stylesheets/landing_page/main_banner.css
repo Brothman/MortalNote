@@ -1,0 +1,64 @@
+.main-banner-grid {
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/main-green.png");
+  background-color: #00a82d;
+  color: #fff;
+
+  display: grid;
+  grid-template-columns: 2fr 464px 1fr 464px 2fr;
+  grid-template-rows: repeat(5, 1fr);
+  /* grid-column-gap: 100px; */
+  grid-row-gap: 25px;
+  grid-template-areas:
+  " .       .                .         .          . "
+  " .   main-header          .      main-image    . "
+  " .   main-tagline         .      main-image    . "
+  " .   free-signup-button   .      main-image    . "
+  " .         .              .         .          . "
+}
+
+.main-header {
+  grid-area: main-header;
+  font-size: 56px;
+  line-height: 72px;
+  /* font-family: "Soleil_Medium", Helvetica, Arial, sans-serif; */
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+}
+
+.main-tagline {
+  grid-area: main-tagline;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 300;
+  /* to make it look lighter */
+  opacity: 0.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+.free-signup-button  {
+  grid-area: free-signup-button ;
+  color: #00a82d;
+  background-color: #fff;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  width: 240px;
+  height: 58px;
+  border-radius: 5px;
+  border: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.free-signup-button:hover {
+  cursor: pointer;
+}
+
+.free-signup-button:focus {
+  outline: none;
+}
+
+
+.main-image {
+  grid-area: main-image;
+
+}

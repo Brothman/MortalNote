@@ -4,9 +4,18 @@
     <title>Mortalnote</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/ugj3vut.css">
+    <link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
     <%= javascript_include_tag 'application' %>
+    <% if logged_in? %>
+      <script type="text/javascript">
+        window.currentUser = <%= render("api/users/user.json.jbuilder", user: current_user).html_safe %>
+      </script>
+    <% end %>
+    <%= favicon_link_tag "https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo-favicon.png", :rel => 'icon', :type => 'image/png' %>
   </head>
 
   <body>

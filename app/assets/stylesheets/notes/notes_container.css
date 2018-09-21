@@ -1,0 +1,11 @@
+.note-container-grid {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 241px 345px 1fr;
+  grid-auto-flow: column;
+}
+
+.note-index-grid {
+  background-color: #f8f8f8;
+}

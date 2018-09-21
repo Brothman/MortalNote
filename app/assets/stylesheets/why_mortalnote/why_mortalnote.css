@@ -1,0 +1,66 @@
+.why-mortalnote-grid {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-rows: 130px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  "           header            "
+  " why-mortalnote-banner-grid  "
+
+}
+
+/* .header {
+  grid-area: header;
+} */
+
+
+.why-mortalnote-banner-grid {
+  grid-area: why-mortalnote-banner-grid;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 2fr 564px 1fr 4fr 1fr;
+  grid-template-rows: 2fr 100px 200px 200px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  " .            .                         .          .                   .   "
+  " .      why-mortalnote-htag             .     why-mortalnote-img       .   "
+  " .   why-mortalnote-hidden-potential    .      why-mortalnote-img      .   "
+  " .    why-mortalnote-evernote-better    .     why-mortalnote-img       .   "
+  " .            .                         .         .                    .   ";
+  -webkit-font-smoothing: antialiased;
+  background-color: #fafafa;
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/main-green.png")
+}
+
+.why-mortalnote-htag {
+  grid-area: why-mortalnote-htag;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-size: 56px;
+  line-height: 72px;
+  font-weight: 700;
+}
+
+.why-mortalnote-hidden-potential {
+  grid-area: why-mortalnote-hidden-potential;
+}
+
+.why-mortalnote-evernote-better {
+  grid-area: why-mortalnote-evernote-better;
+}
+
+.why-mortalnote-hidden-potential, .why-mortalnote-evernote-better {
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  line-height: 40px;
+  font-size: 24px;
+  font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+}
+
+.why-mortalnote-img {
+  grid-area: why-mortalnote-img;
+}
+
+.header {
+  grid-area: header;
+}

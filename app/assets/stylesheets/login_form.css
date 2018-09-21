@@ -1,0 +1,87 @@
+.grid-login {
+  -webkit-font-smoothing: antialiased;
+  display: grid;
+  grid-area: griddy;
+  /* width: 50%; */
+  justify-self: center;
+  /* position: relative;
+  z-index: 1; */
+  top: 100px;
+
+  background-color: white;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 100px 314px 100px;
+
+/* 44px after positivity */
+
+  /* grid-template-rows: repeat(auto-fit, minmax(auto, 1fr)); */
+  grid-template-rows: 45px 82px 40px 60px 30px 42px 60px 146px 10px 60px 25px 30px;
+  grid-template-areas:
+  " .          .           . "
+  " .        logo          . "
+  " .      app-name        . "
+  " .   positive-message   . "
+  " .         .            . "
+  " .   googleSignIn       . "
+  " .         or           . "
+  " .       signup-form    . "
+  " .         .            . "
+  " .     remember-me      . "
+  " .       no-account     . "
+  " .        signUp        . ";
+}
+
+.signup-password-input-login {
+  grid-area: signup-password-input;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.signup-submit-login {
+  transition: all 1.5s ease;
+  transform: translateY(-57px);
+}
+
+.remember-me {
+  grid-area: remember-me;
+}
+
+.no-account {
+  grid-area: no-account;
+}
+
+.remember-me, .no-account {
+  color: #737373;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.remember-me{
+  transition: all 1.5s ease;
+  transform: translateY(-55px);
+}
+
+.no-account, .signUp {
+  transition: all 1.5s ease;
+  transform: translateY(-40px);
+}
+
+.signUp {
+  grid-area: signUp;
+  font-weight: 400;
+  font-size: 16px;
+  color: #00a82d;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+}
+
+.googleSignIn:focus {
+  outline: 0;
+}

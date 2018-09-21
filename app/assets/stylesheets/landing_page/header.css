@@ -1,0 +1,141 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 50px 150px 50px 464px minmax(200px, 1fr) 222px 1fr;
+  grid-template-areas:
+  " . logo-image  mortal-note  .  nav-bar-grid  .  signup-login-buttons-grid  . ";
+  align-items: center;
+  justify-items: center;
+}
+
+.logo-image {
+  grid-area: logo-image;
+  height: 50px;
+  position: relative;
+  bottom: 1px;
+}
+
+.mortal-note {
+  grid-area: mortal-note;
+  font-size: 28px;
+  font-family: "Abril Fatface";
+  position: relative;
+  bottom: 3px;
+}
+
+.nav-bar-grid {
+  grid-area: nav-bar-grid;
+}
+
+.signup-login-buttons-grid {
+  grid-area: signup-login-buttons-grid;
+}
+
+.mortal-note, .nav-bar-links {
+  color: black;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+/* NAV BAR GRID START */
+
+.nav-bar-grid {
+  display: grid;
+  grid-template-columns: 114px 30px 50px 12px 30px 129px 30px 74px 17px;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+  "  why-evernote . plans arrow1 . help-and-learning . about-us arrow2 ";
+}
+
+.nav-bar-links {
+  font-family: "Soleil_Bold", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.why-evernote {
+  grid-area: why-evernote;
+}
+
+.plans {
+  grid-area: plans;
+}
+
+.help-and-learning {
+  grid-area: help-and-learning;
+}
+
+.about-us {
+  grid-area: about-us;
+}
+
+.arrow1, .arrow2 {
+  position: relative;
+  top: 3px;
+}
+.arrow1 {
+  height: 7px;
+  grid-area: arrow1;
+}
+
+.arrow2 {
+  height: 7px;
+  grid-area: arrow2;
+}
+
+/* NAV BAR GRID FINISH */
+
+
+/* SIGNUP-LOGIN GRID START */
+
+.signup-login-buttons-grid {
+  display: grid;
+  grid-template-columns: 57px 13px 120px;
+  grid-gap: 13px;
+  align-items: center;
+}
+
+.signup-button, .login-button {
+  color: #00a82d;
+  font-family: "Soleil", Helvetica, Arial, sans-serif;
+}
+
+.signup-button {
+  font-size: 15px;
+}
+
+.or-header {
+  font-size: 13px;
+  font-family: "Soleil", Helvetica, Arial, sans-serif;
+}
+
+.signup-button:hover {
+  color: #14CC45;
+}
+
+/* Styling copied off Evernote landing page */
+.login-button {
+  border-radius: 3px;
+  border: 2px solid #00a82d;
+  color: #00a82d;
+  display: inline-block;
+  font-size: 13px;
+  height: 35px;
+  line-height: 37px;
+  padding: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: .3s border ease-in-out, .3s color ease-in-out;
+  -webkit-font-smoothing: antialiased;
+}
+
+.login-button:hover {
+  color: #14CC45;
+  border: 2px solid #14CC45;
+  transition: .1s border ease-in-out, .1s color ease-in-out;
+}
+
+/* SIGNUP-LOGIN GRID FINISHED */

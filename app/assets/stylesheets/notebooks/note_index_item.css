@@ -1,0 +1,122 @@
+.sideways-arrow-icon {
+  width: 15px;
+  height: 11px;
+}
+
+.notebook-dark-icon {
+  width: 24px;
+  height: 30px;
+}
+
+.notebook-index-item {
+  display: grid;
+  align-items: center;
+  /* grid-template-columns: 10px 18px 20px 10px 55px 18px 1fr 100px 2fr 200px 6fr 100px 60px 60px; */
+  grid-template-columns: 10px 18px 20px 10fr 39px 77px 1fr 77px 2fr 77px 6fr 77px 10px;
+  align-items: center;
+  grid-template-areas:
+  " .  sideways-arrow-icon  notebook-dark-icon   notebook-item-title  .  notebook-created-by  notebook-created-by  notebook-updated   notebook-updated  notebook-shared-with   notebook-shared-with  notebook-actions  .";
+}
+
+.note-index-item {
+  display: grid;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  /* grid-template-columns: 10px 18px 20px 10px 55px 18px 1fr 100px 2fr 200px 6fr 100px 60px 60px; */
+  grid-template-columns: 10px 18px 20px 10fr 39px 77px 1fr 77px 2fr 77px 6fr 77px 10px;
+  align-items: center;
+  grid-template-areas:
+  " .  sideways-arrow-icon  notebook-dark-icon   notebook-item-title  .  notebook-created-by  notebook-created-by  notebook-updated   notebook-updated  notebook-shared-with   notebook-shared-with  notebook-actions  .";
+}
+
+/* Nifty trick to select all div elements starting with 'wrapper-div' */
+div[class^="wrapper-div"]:nth-child(odd) {
+  background-color: white;
+}
+
+.notebook-index-item:nth-child(odd) {
+  background-color: white;
+}
+div[class^="wrapper-div"] {
+  transition: .4s all ease;
+  cursor: pointer;
+}
+
+/* I add a background color change to signify we're pointing to a specific note
+    This is my addition. Evernote does not do this. */
+div[class^="wrapper-div"]:hover {
+  background-color: rgb(0, 168, 45, 0.4);
+}
+
+.sideways-arrow-icon{
+  grid-area: sideways-arrow-icon;
+  position: relative;
+  top: 2px;
+  cursor: pointer;
+}
+
+.notebook-dark-icon {
+  grid-area: notebook-dark-icon;
+  position: relative;
+  top: 3px;
+}
+
+.notebook-item-title {
+  grid-area: notebook-item-title;
+  color: #313131;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  top: 2px;
+  left: 9px;
+}
+
+.notebook-notes-number {
+  grid-area: notebook-notes-number;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  color: #b3b3b3;
+}
+
+
+.notebook-item-title, .notebook-notes-number {
+  cursor: pointer;
+}
+
+.notebook-created-by {
+  grid-area: notebook-created-by;
+}
+
+.notebook-updated {
+  grid-area: notebook-updated;
+}
+
+.notebook-shared-with{
+  grid-area: notebook-shared-with;
+}
+
+.notebook-created-by, .notebook-updated, .notebook-shared-with {
+  color: #777777;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+
+}
+
+.notebook-actions {
+  grid-area: notebook-actions;
+}
+
+.move-right {
+  position: relative;
+  left: 24px;
+}
+
+.move-extra-right {
+  position: relative;
+  left: 30px;
+}
