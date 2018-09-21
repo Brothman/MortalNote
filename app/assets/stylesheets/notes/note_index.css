@@ -48,8 +48,9 @@
   display: grid;
   grid-auto-rows: 120px;
   align-self: flex-start;
-  /* overflow-y: auto;
-  height: 100%; */
+  overflow-y: auto;
+  /* Needed to give a fixed height for scrollbar to appear */
+  height: calc(100vh - 136px);
 }
 
 
@@ -68,6 +69,13 @@
   "  .                          .                        .        "
   "  .                   note-ii-last-updated            .        "
   "  .                          .                        .        ";
+  transition: all 0.1s ease-out;
+  cursor: pointer;
+}
+
+
+.note-index-item-grid:hover {
+  background-color: #f2f2f2;
 }
 
 .note-ii-title {

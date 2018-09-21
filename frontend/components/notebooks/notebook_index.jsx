@@ -5,6 +5,7 @@ import NoteNotebookIndexItem from './note_notebook_index_item.jsx';
 import { getAllNotebooks, getNotebooksNotes } from '../../reducers/selectors.js';
 import { createNotebook } from '../../actions/notebook_actions.js';
 import { createNote } from '../../actions/note_actions.js';
+import { withRouter } from 'react-router-dom';
 
 class NotebookIndex extends React.Component {
   constructor(props) {
@@ -80,9 +81,9 @@ class NotebookIndex extends React.Component {
       //for demonstration purposes
       const user_id = this.props.user.id;
       const notebook_id = this.state.chosenNotebook.id;
-      const content = "test content I have written a lot of words to see what happens when a note becomes very long. Will it hide the excess text?";
-      const plain_content = "Test content";
-      const title = "TEST TITLE";
+      const content = "";
+      const plain_content = "";
+      const title = "";
 
       const note = {
         note: {
@@ -96,6 +97,8 @@ class NotebookIndex extends React.Component {
 
       this.props.createNote(note);
 
+      //we now want to redirect to the note show page for this new note
+      this.props.history.push('/notes');
       //close the modal
       this.handleCloseModal();
     }
@@ -272,4 +275,4 @@ const mapDispatchToProps = ( dispatch ) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotebookIndex);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NotebookIndex));

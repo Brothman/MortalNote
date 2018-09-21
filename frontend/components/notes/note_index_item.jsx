@@ -1,20 +1,39 @@
 import React from 'react';
+import { viewNote } from '../../actions/note_actions.js';
+import { connect } from 'react-redux';
 
-//Destructure note out of props for cleaner code
-const NoteIndexItem = ( { note } ) => {
+//Destructure note and receiveNewNote and chosenNote out of props for cleaner code
+const NoteIndexItem = ( { note, viewNote, chosenNote } ) => {
+
+  const handleViewNote = () => {
+    viewNote(note);
+  };
+
+  let style;
+  if (note.id === chosenNote.id) {
+    style = {backgroundColor: '#f2f2f2'};
+  }
+  else {
+    style = {};
+  }
+
   const d = new Date(note.updated_at);
-
-  // const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  // const options = { year: 'numeric', month: 'short', day: 'numeric' };
   const options = { month: 'short', day: 'numeric' };
 
   return (
-    <div className="note-index-item-grid">
+    <div className="note-index-item-grid" onClick={handleViewNote} style={style}>
       <p className="note-ii-title"> { note.title } </p>
-      <p className="note-ii-excerpt"> { note.content } </p>
+      <p className="note-ii-excerpt"> { note.content_plain } </p>
       <p className="note-ii-last-updated"> {d.toLocaleDateString("en-US", options)} </p>
     </div>
   );
 };
 
-export default NoteIndexItem;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    viewNote: (note) => dispatch(viewNote(note))
+  };
+};
+
+
+export default connect(null, mapDispatchToProps)(NoteIndexItem);

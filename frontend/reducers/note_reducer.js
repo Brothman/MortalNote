@@ -1,4 +1,4 @@
-import { RECEIVE_NEW_NOTE } from '../actions/note_actions.js';
+import { RECEIVE_NEW_NOTE, VIEW_NOTE, CLEAR_NOTE, DELETE_NOTE, RECEIVE_UPDATED_NOTE } from '../actions/note_actions.js';
 import { CLEAR_NOTEBOOKS_AND_NOTES } from '../actions/notebook_actions.js';
 
 
@@ -9,11 +9,37 @@ const noteReducer = (state = {}, action) => {
 
   switch(action.type) {
       //Add note to the Store when we receive a newly created note from the backend
+      //Remove all old notes
     case(RECEIVE_NEW_NOTE):
-      const newState = Object.assign({}, state, {[action.note.id]: action.note});
-      return newState;
+    let newState1 = Object.assign({}, state);
+    //ensure state isn't an empty object
+    if (Object.keys(state).length > 0) {
+      //ensure that the new note belongs to this notebook
+      if (state.notebook_id === action.note.notebook_id) {
+        return action.note;
+      }
+      //otherwise return the old state (we added a note to a notebook we aren't viewing)
+      else {
+        return newState1;
+      }
+    }
+    else {
+      return action.note;
+    }
+    case(VIEW_NOTE):
+      return action.note;
+    case(CLEAR_NOTE):
+      return {};
+    case(RECEIVE_UPDATED_NOTE):
+      const newState = Object.assign({}, state);
+      //if we don't yet have a note (empty object), or are updating the current note
+      if( Object.keys(newState).length === 0 || newState.id === action.note.id ) {
+        return action.note;
+      }
     //return an empty object to symbolize empty state, i.e. no notes
     case(CLEAR_NOTEBOOKS_AND_NOTES):
+      return {};
+    case(DELETE_NOTE):
       return {};
     //for most actions, do nothing and return the old state
     default:
