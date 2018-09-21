@@ -1,0 +1,1811 @@
+.about-us-grid {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-rows: 130px 1fr;
+  -webkit-font-smoothing: antialiased;
+  grid-template-areas:
+  "          header        "
+  " about-us-banner-grid   ";
+}
+
+.header {
+  grid-area: header;
+}
+
+.about-us-banner-grid {
+  grid-area: about-us-banner-grid;
+  height: 100%;
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/about-us-background.png");
+  display: grid;
+  grid-template-columns: 2fr 564px 1fr 4fr 1fr;
+  grid-template-rows:  2fr 100px 200px 85px 200px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  " .            .                         .          .                    .   "
+  " .      about-us-htag                   .       about-us-img            .   "
+  " .      about-us-description            .       about-us-img            .   "
+  " .            .                         .       about-us-img            .   "
+  " .    about-us-description-explained    .       about-us-img            .   "
+  " .            .                         .          .                    .   ";
+  -webkit-font-smoothing: antialiased;
+  background-color: #00a82d;
+  color: white;
+}
+
+.about-us-htag {
+  grid-area: about-us-htag;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-size: 56px;
+  line-height: 72px;
+  font-weight: 700;
+}
+
+.about-us-description {
+  grid-area: about-us-description;
+}
+
+.about-us-description-explained {
+  grid-area: about-us-description-explained;
+}
+
+.about-us-description-explained, .about-us-description {
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 48px;
+  font-size: 27px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.about-us-img {
+  grid-area: about-us-img;
+  align-self: center;
+}
+.footer {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 400px minmax(200px, 1fr) 100px 50px 100px 1fr;
+  grid-template-areas:
+  " . certification   .   github   .  linked-in  . ";
+}
+
+.certification {
+  grid-area: certification;
+}
+
+.github {
+  grid-area: github;
+}
+
+.linked-in {
+  grid-area: linked-in;
+}
+
+.certification, .github, .linked-in {
+  line-height: 21px;
+  -webkit-font-smoothing: antialiased;
+  color: rgb(136, 139, 141);
+  font-family: "soleil";
+  font-weight: 300;
+  font-size: 12px;
+}
+
+.footer a {
+  text-decoration: none;
+  transition: .1s color ease-in-out;
+}
+
+.footer a:hover {
+  color: black;
+}
+.header {
+  display: grid;
+  grid-template-columns: 1fr 50px 150px 50px 464px minmax(200px, 1fr) 222px 1fr;
+  grid-template-areas:
+  " . logo-image  mortal-note  .  nav-bar-grid  .  signup-login-buttons-grid  . ";
+  align-items: center;
+  justify-items: center;
+}
+
+.logo-image {
+  grid-area: logo-image;
+  height: 50px;
+  position: relative;
+  bottom: 1px;
+}
+
+.mortal-note {
+  grid-area: mortal-note;
+  font-size: 28px;
+  font-family: "Abril Fatface";
+  position: relative;
+  bottom: 3px;
+}
+
+.nav-bar-grid {
+  grid-area: nav-bar-grid;
+}
+
+.signup-login-buttons-grid {
+  grid-area: signup-login-buttons-grid;
+}
+
+.mortal-note, .nav-bar-links {
+  color: black;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+/* NAV BAR GRID START */
+
+.nav-bar-grid {
+  display: grid;
+  grid-template-columns: 114px 30px 50px 12px 30px 129px 30px 74px 17px;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+  "  why-evernote . plans arrow1 . help-and-learning . about-us arrow2 ";
+}
+
+.nav-bar-links {
+  font-family: "Soleil_Bold", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.why-evernote {
+  grid-area: why-evernote;
+}
+
+.plans {
+  grid-area: plans;
+}
+
+.help-and-learning {
+  grid-area: help-and-learning;
+}
+
+.about-us {
+  grid-area: about-us;
+}
+
+.arrow1, .arrow2 {
+  position: relative;
+  top: 3px;
+}
+.arrow1 {
+  height: 7px;
+  grid-area: arrow1;
+}
+
+.arrow2 {
+  height: 7px;
+  grid-area: arrow2;
+}
+
+/* NAV BAR GRID FINISH */
+
+
+/* SIGNUP-LOGIN GRID START */
+
+.signup-login-buttons-grid {
+  display: grid;
+  grid-template-columns: 57px 13px 120px;
+  grid-gap: 13px;
+  align-items: center;
+}
+
+.signup-button, .login-button {
+  color: #00a82d;
+  font-family: "Soleil", Helvetica, Arial, sans-serif;
+}
+
+.signup-button {
+  font-size: 15px;
+}
+
+.or-header {
+  font-size: 13px;
+  font-family: "Soleil", Helvetica, Arial, sans-serif;
+}
+
+.signup-button:hover {
+  color: #14CC45;
+}
+
+/* Styling copied off Evernote landing page */
+.login-button {
+  border-radius: 3px;
+  border: 2px solid #00a82d;
+  color: #00a82d;
+  display: inline-block;
+  font-size: 13px;
+  height: 35px;
+  line-height: 37px;
+  padding: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: .3s border ease-in-out, .3s color ease-in-out;
+  -webkit-font-smoothing: antialiased;
+}
+
+.login-button:hover {
+  color: #14CC45;
+  border: 2px solid #14CC45;
+  transition: .1s border ease-in-out, .1s color ease-in-out;
+}
+
+/* SIGNUP-LOGIN GRID FINISHED */
+.landing-page {
+  display: grid;
+  grid-template-rows: 130px 697px 1fr;
+  height: 100vh;
+  grid-template-areas:
+  "        header         "
+  "      main-banner      "
+  "        footer         ";
+}
+.main-banner-grid {
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/main-green.png");
+  background-color: #00a82d;
+  color: #fff;
+
+  display: grid;
+  grid-template-columns: 2fr 464px 1fr 464px 2fr;
+  grid-template-rows: repeat(5, 1fr);
+  /* grid-column-gap: 100px; */
+  grid-row-gap: 25px;
+  grid-template-areas:
+  " .       .                .         .          . "
+  " .   main-header          .      main-image    . "
+  " .   main-tagline         .      main-image    . "
+  " .   free-signup-button   .      main-image    . "
+  " .         .              .         .          . "
+}
+
+.main-header {
+  grid-area: main-header;
+  font-size: 56px;
+  line-height: 72px;
+  /* font-family: "Soleil_Medium", Helvetica, Arial, sans-serif; */
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+}
+
+.main-tagline {
+  grid-area: main-tagline;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 300;
+  /* to make it look lighter */
+  opacity: 0.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+.free-signup-button  {
+  grid-area: free-signup-button ;
+  color: #00a82d;
+  background-color: #fff;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  width: 240px;
+  height: 58px;
+  border-radius: 5px;
+  border: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.free-signup-button:hover {
+  cursor: pointer;
+}
+
+.free-signup-button:focus {
+  outline: none;
+}
+
+
+.main-image {
+  grid-area: main-image;
+
+}
+.grid-login {
+  -webkit-font-smoothing: antialiased;
+  display: grid;
+  grid-area: griddy;
+  /* width: 50%; */
+  justify-self: center;
+  /* position: relative;
+  z-index: 1; */
+  top: 100px;
+
+  background-color: white;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 100px 314px 100px;
+
+/* 44px after positivity */
+
+  /* grid-template-rows: repeat(auto-fit, minmax(auto, 1fr)); */
+  grid-template-rows: 45px 82px 40px 60px 30px 42px 60px 146px 10px 60px 25px 30px;
+  grid-template-areas:
+  " .          .           . "
+  " .        logo          . "
+  " .      app-name        . "
+  " .   positive-message   . "
+  " .         .            . "
+  " .   googleSignIn       . "
+  " .         or           . "
+  " .       signup-form    . "
+  " .         .            . "
+  " .     remember-me      . "
+  " .       no-account     . "
+  " .        signUp        . ";
+}
+
+.signup-password-input-login {
+  grid-area: signup-password-input;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.signup-submit-login {
+  transition: all 1.5s ease;
+  transform: translateY(-57px);
+}
+
+.remember-me {
+  grid-area: remember-me;
+}
+
+.no-account {
+  grid-area: no-account;
+}
+
+.remember-me, .no-account {
+  color: #737373;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.remember-me{
+  transition: all 1.5s ease;
+  transform: translateY(-55px);
+}
+
+.no-account, .signUp {
+  transition: all 1.5s ease;
+  transform: translateY(-40px);
+}
+
+.signUp {
+  grid-area: signUp;
+  font-weight: 400;
+  font-size: 16px;
+  color: #00a82d;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+}
+
+.googleSignIn:focus {
+  outline: 0;
+}
+.add-note-modal-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 2px 15px rgba(0, 0, 0, .2);
+  border-radius: 4px;
+  width: 600px;
+  height: 527px;
+
+  display: none;
+  z-index: 5;
+  grid-template-columns: 20px 560px 20px;
+  grid-template-rows: 25px 25px 5px 30px 10px 325px 20px 20px 40px 20px;
+  grid-template-areas:
+  "   .                        .                                 .          "
+  "   .                   note-modal-header                      .          "
+  "   .                        .                                 .          "
+  "   .               grey-tiny-border-1                         .          "
+  "   .                        .                                 .          "
+  "   .             add-note-notebook-items                      .          "
+  "   .                grey-tiny-border-2                        .          "
+  "   .                        .                                 .          "
+  "   .               notebook-modal-buttons                     .          "
+  "   .                        .                                 .          ";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.note-modal-header {
+  grid-area: note-modal-header;
+  font-size: 18px;
+  color: #555555;
+  font-weight: 500;
+}
+
+.grey-tiny-border-1 {
+  grid-area: grey-tiny-border-1;
+}
+.grey-tiny-border-2 {
+  grid-area: grey-tiny-border-2;
+}
+
+.grey-tiny-border-1, .grey-tiny-border-2 {
+  border-bottom: 1px solid #ededed;
+  height: 100%;
+  width: 100%;
+}
+
+.add-note-x-icon {
+  width: 16px;
+  position: relative;
+  left: 565px;
+  top: 25px;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: all 0.1s ease-out;
+}
+
+.add-note-x-icon:hover {
+  opacity: 0.5;
+}
+
+.add-note-notebook-items {
+  grid-area: add-note-notebook-items;
+  display: grid;
+  grid-auto-rows: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.note-notebook-index-item {
+  display: grid;
+  grid-template-columns: 48px 25px 1fr;
+  align-items: center;
+  grid-template-areas:
+  "   .   notebook-dark-icon    notebook-item-title    .   ";
+}
+
+/* The !important flag tells CSS to prioritze this over inline styles */
+.note-notebook-index-item:hover {
+  background-color: #f5f5f5!important;
+  cursor: pointer;
+}
+.sideways-arrow-icon {
+  width: 15px;
+  height: 11px;
+}
+
+.notebook-dark-icon {
+  width: 24px;
+  height: 30px;
+}
+
+.notebook-index-item {
+  display: grid;
+  align-items: center;
+  /* grid-template-columns: 10px 18px 20px 10px 55px 18px 1fr 100px 2fr 200px 6fr 100px 60px 60px; */
+  grid-template-columns: 10px 18px 20px 10fr 39px 77px 1fr 77px 2fr 77px 6fr 77px 10px;
+  align-items: center;
+  grid-template-areas:
+  " .  sideways-arrow-icon  notebook-dark-icon   notebook-item-title  .  notebook-created-by  notebook-created-by  notebook-updated   notebook-updated  notebook-shared-with   notebook-shared-with  notebook-actions  .";
+}
+
+.note-index-item {
+  display: grid;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  /* grid-template-columns: 10px 18px 20px 10px 55px 18px 1fr 100px 2fr 200px 6fr 100px 60px 60px; */
+  grid-template-columns: 10px 18px 20px 10fr 39px 77px 1fr 77px 2fr 77px 6fr 77px 10px;
+  align-items: center;
+  grid-template-areas:
+  " .  sideways-arrow-icon  notebook-dark-icon   notebook-item-title  .  notebook-created-by  notebook-created-by  notebook-updated   notebook-updated  notebook-shared-with   notebook-shared-with  notebook-actions  .";
+}
+
+/* Nifty trick to select all div elements starting with 'wrapper-div' */
+div[class^="wrapper-div"]:nth-child(odd) {
+  background-color: white;
+}
+
+.notebook-index-item:nth-child(odd) {
+  background-color: white;
+}
+div[class^="wrapper-div"] {
+  transition: .4s all ease;
+  cursor: pointer;
+}
+
+/* I add a background color change to signify we're pointing to a specific note
+    This is my addition. Evernote does not do this. */
+div[class^="wrapper-div"]:hover {
+  background-color: rgb(0, 168, 45, 0.4);
+}
+
+.sideways-arrow-icon{
+  grid-area: sideways-arrow-icon;
+  position: relative;
+  top: 2px;
+  cursor: pointer;
+}
+
+.notebook-dark-icon {
+  grid-area: notebook-dark-icon;
+  position: relative;
+  top: 3px;
+}
+
+.notebook-item-title {
+  grid-area: notebook-item-title;
+  color: #313131;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  top: 2px;
+  left: 9px;
+}
+
+.notebook-notes-number {
+  grid-area: notebook-notes-number;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  color: #b3b3b3;
+}
+
+
+.notebook-item-title, .notebook-notes-number {
+  cursor: pointer;
+}
+
+.notebook-created-by {
+  grid-area: notebook-created-by;
+}
+
+.notebook-updated {
+  grid-area: notebook-updated;
+}
+
+.notebook-shared-with{
+  grid-area: notebook-shared-with;
+}
+
+.notebook-created-by, .notebook-updated, .notebook-shared-with {
+  color: #777777;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+
+}
+
+.notebook-actions {
+  grid-area: notebook-actions;
+}
+
+.move-right {
+  position: relative;
+  left: 24px;
+}
+
+.move-extra-right {
+  position: relative;
+  left: 30px;
+}
+.notebook-container-grid {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 241px 1fr;
+  grid-auto-flow: column;
+}
+.notebook-index-grid {
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  grid-template-rows: 80px 25px 11px 1fr;
+  /* grid-auto-rows: 40px; */
+  align-items: center;
+  grid-template-areas:
+  " .       notebook-title             . "
+  " .   top-of-notebook-index-items    . "
+  " .               .                  . "
+  " .       column-names               . ";
+}
+
+.notebook-index-items {
+  grid-area: notebookIndexItems;
+  display: grid;
+  grid-auto-rows: 40px;
+  height: 100%;
+  /* align-items: center; */
+}
+
+
+/* Top of Notebook Index Items START  */
+
+.top-of-notebook-index-items {
+  display: grid;
+  align-items: center;
+  grid-area: top-of-notebook-index-items;
+  grid-template-columns: 150px 1fr 26px 115px 22px;
+  grid-template-areas:
+  "my-notebook-list   .    new-notebook-icon   new-notebook   .    sort-by-icon";
+  font-size: 15px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.my-notebook-list {
+  grid-area: my-notebook-list;
+}
+
+.new-notebook-icon {
+  width: 24px;
+  grid-area: new-notebook-icon;
+}
+
+.new-notebook {
+  grid-area: new-notebook;
+  color: #00a82d;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  bottom: 1px;
+}
+
+.new-notebook, .new-notebook-icon {
+  cursor: pointer;
+}
+
+.new-notebook-icon:hover, .new-notebook:hover {
+  opacity: 0.8;
+}
+
+.sort-by-icon {
+  grid-area: sort-by-icon;
+  width: 25px;
+  cursor: pointer;
+}
+
+/* Top of Notebook Index Items FINISH  */
+
+
+/*Column-Names Grid START */
+
+.column-names {
+  display: grid;
+  overflow: scroll;
+  grid-area: column-names;
+  grid-template-columns: 10px 77px 10fr 77px 1fr 77px 2fr 77px 6fr 77px 10px;
+  grid-template-rows: 38px;
+  grid-auto-rows: 40px;
+  background-color: #f8f8f8;
+  border-top: 2px solid #666;
+  text-rendering: optimizeLegibility;
+  height: 100%;
+  align-items: center;
+  grid-template-areas:
+  " .  title-cn  .   created-by-cn  .  updated-cn   .   shared-with-cn  .  actions-cn  . "
+  " notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems notebookIndexItems ";
+  /* As a test  */
+}
+
+.title-cn {
+  grid-area: title-cn;
+}
+
+.created-by-cn {
+  grid-area: created-by-cn;
+}
+
+.updated-cn {
+  grid-area: updated-cn;
+}
+
+.shared-with-cn {
+  grid-area: shared-with-cn;
+}
+
+.actions-cn {
+  grid-area: actions-cn;
+  justify-self: flex-end;
+}
+
+
+
+/* Column-Names Grid FINISH */
+
+.column-names p {
+  color: #b3b3b3;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.notebook-title {
+  font-size: 20px;
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  grid-area: notebook-title;
+  font-weight: 400;
+}
+
+/* NOTEBOOK MODAL START */
+
+.add-notebook-modal-container {
+  display: none;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(42, 51, 60, .4);
+  z-index: 1;
+}
+
+.add-notebook-modal-card {
+  grid-area: add-notebook-modal-card;
+  display: none;
+  grid-template-columns: 20px 500px 20px;
+  grid-template-rows: 25px 30px 5px 30px 30px 65px 20px 20px 40px 20px;
+  grid-template-areas:
+  "   .                        .                                 .   "
+  "   .               notebook-modal-header                      .   "
+  "   .                        .                                 .   "
+  "   .                 notebook-modal-text                      .   "
+  "   .                        .                                 .   "
+  "   .                 notebook-modal-name                      .   "
+  "  grey-tiny-border   grey-tiny-border           grey-tiny-border  "
+  "   .                        .                                 .   "
+  "   .               notebook-modal-buttons                     .   "
+  "   .                        .                                 .   ";
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .08), 0 2px 15px rgba(0, 0, 0, .2);
+  z-index: 2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.notebook-modal-header {
+  grid-area: notebook-modal-header;
+  font-size: 18px;
+  color: #555555;
+  font-weight: 500;
+}
+
+.notebook-modal-text {
+  grid-area: notebook-modal-text;
+  font-size: 13px;
+  color: #777777;
+  line-height: 18px;
+  font-weight: 300;
+}
+
+.notebook-modal-name {
+  grid-area: notebook-modal-name;
+  display: flex;
+  flex-direction: column;
+  color: #7a8083;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.notebook-modal-input {
+  position: relative;
+  top: 5px;
+  font-size: 16px;
+  height: 40px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .7);
+  text-indent: 10px;
+}
+
+.notebook-modal-input:focus {
+  outline: 0;
+}
+
+.grey-tiny-border {
+  grid-area: grey-tiny-border;
+  border-bottom: 1px solid #ededed;
+  height: 100%;
+  width: 100%;
+}
+
+.x-icon {
+  width: 16px;
+  position: relative;
+  left: 500px;
+  top: 25px;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: all 0.1s ease-out;
+}
+
+.x-icon:hover {
+  opacity: 0.5;
+}
+
+.notebook-modal-buttons {
+  grid-area: notebook-modal-buttons;
+  display: grid;
+  grid-template-columns: 1fr 75px 10px 75px;
+  grid-template-areas:
+  " .    notebook-cancel   .    notebook-continue ";
+}
+
+.notebook-cancel {
+  grid-area: notebook-cancel;
+  color: #b3b3b3;
+  border: 1px solid #ededed;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+}
+
+.notebook-cancel:hover {
+  border: 1px solid #c3c3c3;
+  background: Transparent;
+  color: #999;
+}
+
+.notebook-cancel:focus, .notebook-continue-grey:focus, .notebook-continue-green:focus {
+  outline: 0;
+}
+
+.notebook-continue-grey {
+  grid-area: notebook-continue;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #dcdfe3;
+  border: 0;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: all 0.1s ease-out;
+}
+
+.notebook-continue-green {
+  grid-area: notebook-continue;
+  cursor: pointer;
+  background-color: #00a82d;
+  border: none;
+  color: #ffffff;
+  border: 0;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: all 0.1s ease-out;
+}
+
+.notebook-continue-green:hover {
+  background: #0e753d;
+}
+
+/* NOTEBOOK MODAL FINISH */
+.sidebar-grid {
+  display: grid;
+  background-color: #191919;
+  color: #ccc;
+  /* grid-template-columns: 10px 1fr 10px; */
+  grid-template-rows: 69px 28px 17px 42px 12px repeat(3, 32px) 1fr 75px;
+  grid-template-areas:
+  "      user-info        "
+  "      searchbar        "
+  "           .           "
+  "      new-note         "
+  "         .             "
+  "       all-notes       "
+  "   notebooks-button    "
+  "         trash         "
+  "         .             "
+  "         logout        ";
+}
+
+.tester {
+  grid-area: tester;
+}
+
+.notes-icon, .trash-icon, .notebook-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.user-info {
+  grid-area: user-info;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.searchbar {
+  grid-area: searchbar;
+  display: grid;
+  grid-template-columns: 13px 1fr 13px;
+  grid-template-areas:
+  "  .  searchbar-input  search-icon   .";
+}
+
+.searchbar-input {
+  height: 28px;
+  background-color: #333333;
+  grid-area: searchbar-input;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+  text-indent: 11px;
+  line-height: 30px;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.searchbar-input::placeholder {
+  /* font-size: 40px; */
+  color: #aaa;
+}
+
+.searchbar-input:focus {
+  outline: none;
+}
+
+.search-icon {
+  width: 30px;
+  grid-area: search-icon;
+  position: relative;
+  right: 29px;
+}
+
+.sidebar-grid a {
+  text-decoration: none;
+}
+
+.new-note {
+  grid-area: new-note;
+  width: 100%;
+  justify-self: flex-start;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 18px 36px 2px 70px 20px;
+  grid-template-areas:
+  "  .  new-note-plus-circle  .  new-note-text  .";
+  cursor: pointer;
+}
+
+.new-note-plus-circle {
+  grid-area: new-note-plus-circle;
+  width: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Transform to make it appear like the circle image is expanding from one center */
+.new-note:hover .new-note-plus-circle {
+  width: 35px;
+  transform: translateX(-3px);
+}
+
+.new-note-text {
+  grid-area: new-note-text;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  top: 1px;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.all-notes {
+  grid-area: all-notes;
+}
+
+.notebooks-button {
+  grid-area: notebooks-button;
+}
+
+.trash {
+  grid-area: trash;
+}
+
+.new-note, .all-notes, .notebooks-button, .trash {
+  background-color: inherit;
+  color: #ccc;
+  border: 0;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.all-notes, .notebooks-button, .trash {
+  justify-self: flex-start;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 18px 28px 70px 20px;
+  grid-template-areas:
+  "  .  icon   text  .";
+  cursor: pointer;
+}
+
+.all-notes:hover, .notebooks-button:hover, .trash:hover {
+  background-color: #333333;
+}
+
+.all-notes-text, .notebooks-button-text, .trash-text {
+  display: inline-block;
+  grid-area: text;
+}
+
+.notes-icon, .notebook-icon, .trash-icon {
+  grid-area: icon;
+}
+
+.logout {
+  grid-area: logout;
+  width: 120px;
+  height: 40px;
+  justify-self: center;
+  align-self: flex-start;
+  background-color: #00a82d;
+  border-radius: 7px;
+  color: white;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  box-shadow: 3px 3px 10px 5px #000;
+  cursor: pointer;
+}
+.note-index-grid {
+  display: grid;
+  align-items: center;
+  grid-template-rows: 23px 40px 43px 20px 10px 1fr;
+  grid-template-columns: 25px 1fr 30px;
+  grid-template-areas:
+  "  .                          .                        .        "
+  "  .                  note-index-header                .        "
+  "  .                          .                        .        "
+  "  .                   note-index-top-items            .        "
+  "  .                          .                        .        "
+  "  all-notes-grid      all-notes-grid          all-notes-grid   ";
+}
+
+.note-index-header {
+  grid-area: note-index-header;
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  color: #333333;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.note-index-top-items {
+  grid-area: note-index-top-items;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 249px;
+}
+
+.note-index-action-icon {
+  width: 25px;
+}
+
+.number-of-notes {
+  font-size: 13px;
+  font-weight: 300;
+  color: #a6a6a6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5;
+}
+
+.all-notes-grid {
+  grid-area: all-notes-grid;
+  display: grid;
+  grid-auto-rows: 120px;
+  align-self: flex-start;
+  overflow-y: auto;
+  /* Needed to give a fixed height for scrollbar to appear */
+  height: calc(100vh - 136px);
+}
+
+
+/* We get 120px to play with */
+.note-index-item-grid {
+  display: grid;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  grid-template-rows: 17px 25px 1px 40px 5px 15px 10px;
+  grid-template-columns: 25px 1fr 30px;
+  grid-template-areas:
+  "  .                          .                        .        "
+  "  .                     note-ii-title                 .        "
+  "  .                          .                        .        "
+  "  .                     note-ii-excerpt               .        "
+  "  .                          .                        .        "
+  "  .                   note-ii-last-updated            .        "
+  "  .                          .                        .        ";
+  transition: all 0.1s ease-out;
+  cursor: pointer;
+}
+
+
+.note-index-item-grid:hover {
+  background-color: #f2f2f2;
+}
+
+.note-ii-title {
+  grid-area: note-ii-title;
+  color: #333333;
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.note-ii-excerpt  {
+  grid-area: note-ii-excerpt;
+  /* No idea why the following lines work, but necessary to make ellipsis
+     appear on the second line of text */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+
+  font-size: 13px;
+  color: #4d4d4d;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5;
+}
+
+.note-ii-last-updated {
+  grid-area: note-ii-last-updated;
+  font-size: 12px;
+  color: #a6a6a6;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  line-height: 1.5;
+}
+.quill {
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(70px, auto) 70px 1fr;
+  grid-template-columns: 1fr 1px;
+  grid-template-areas:
+  "     ql-toolbar       note-trash-icon  "
+  "  note-title-input          .  "
+  "     ql-container            .    ";
+}
+
+.ql-toolbar {
+  grid-area: ql-toolbar;
+  transition: 0.3s opacity ease;
+}
+.ql-container {
+  grid-area: ql-container;
+}
+
+.note-title-input {
+  grid-area: note-title-input;
+  font-size: 34px;
+  outline: none;
+  cursor: text;
+  font-weight: 300;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  text-rendering: optimizeLegibility;
+  text-indent: 13px;
+  padding: 0;
+}
+
+.note-trash-icon {
+  grid-area: note-trash-icon;
+  width: 25px;
+  height: 25px;
+  position: relative;
+  /* bottom: 500px; */
+  right: 30px;
+  top: 8px;
+  cursor: pointer;
+  transition: 0.1s opacity ease;
+}
+
+.note-trash-icon:hover {
+  opacity: 0.5;
+}
+.note-container-grid {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 241px 345px 1fr;
+  grid-auto-flow: column;
+}
+
+.note-index-grid {
+  background-color: #f8f8f8;
+}
+.plans-grid {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-rows: 130px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  "           header            "
+  " why-mortalnote-banner-grid  "
+
+}
+
+.plans-banner-grid {
+  grid-area: why-mortalnote-banner-grid;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 368px 15px 368px 15px 368px 1fr;
+  grid-template-rows: 2fr 90px 130px 371px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  " .            .            .              .                  .              .          .   "
+  " .            .        choose-plan   choose-plan       choose-plan          .          .   "
+  " .            .      plan-paragraph  plan-paragraph   plan-paragraph        .          .   "
+  " .          plan-free-1    .      plan-free-2                .          plan-free-3    .   "
+  " .            .            .              .                  .              .          .   ";
+  -webkit-font-smoothing: antialiased;
+  background-color: #fafafa;
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/main-green.png")
+}
+
+.choose-plan {
+  grid-area: choose-plan;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 72px;
+}
+
+.plan-paragraph {
+  grid-area: plan-paragraph;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 40px;
+  white-space: nowrap;
+  position: relative;
+  right: 68px;
+}
+
+.plan-free-1 {
+  grid-area: plan-free-1;
+}
+
+.plan-free-2 {
+  grid-area: plan-free-2;
+}
+
+.plan-free-3 {
+  grid-area: plan-free-3;
+}
+
+.plan {
+  display: grid;
+  grid-template-rows: 40px 22px 30px 73px 40px 82px 58px 35px;
+  grid-template-columns: 22px 1fr 20px;
+  grid-template-areas:
+  "   .          .           .    "
+  "   .      plan-name       .    "
+  "   .           .          .    "
+  "   .         FREE         .    "
+  "   .   plan-description   .    "
+  "   .           .          .    "
+  "   .   signup-for-free    .    "
+  "   .         .            .    ";
+  -webkit-font-smoothing: antialiased;
+  border: 2px solid #000;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+}
+
+.plan-name {
+  grid-area: plan-name;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+}
+
+.FREE {
+  grid-area: FREE;
+  font-size: 52px;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  line-height: 40px;
+}
+
+.plan-description {
+  grid-area: plan-description;
+  font-size: 22px;
+  letter-spacing: 0;
+  line-height: 40px;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+}
+
+.signup-for-free {
+  grid-area: signup-for-free;
+  color: white;
+  background-color: #00a82d;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  width: 240px;
+  height: 58px;
+  border-radius: 5px;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  width: 100%;
+}
+
+.signup-for-free:hover {
+  background-color: #14cc45;
+}
+
+.signup-for-free:focus {
+  outline: 0;
+}
+
+.signup-for-free:active {
+  outline: 0;
+  /* border: 1px solid rgb(216, 216, 216); */
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  border-width: 1px;
+  border-style: solid;
+}
+
+.no-border:active {
+  border: 0;
+}
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	/* font: inherit; */
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.grid {
+  -webkit-font-smoothing: antialiased;
+  display: grid;
+  grid-area: griddy;
+  /* width: 50%; */
+  justify-self: center;
+  /* position: relative;
+  z-index: 1; */
+  top: 100px;
+
+  background-color: white;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 100px 314px 100px;
+
+/* 44px after positivity */
+
+  /* grid-template-rows: repeat(auto-fit, minmax(auto, 1fr)); */
+  grid-template-rows: 45px 82px 40px 60px 30px 42px 60px 146px 60px 15px 25px 30px 45px;
+  grid-template-areas:
+  " .          .           . "
+  " .        logo          . "
+  " .      app-name        . "
+  " .   positive-message   . "
+  " .         .            . "
+  " .   googleSignIn       . "
+  " .         or           . "
+  " .       signup-form    . "
+  " .   terms-of-service   . "
+  " .         .            . "
+  " .    already-account   . "
+  " .        signIn        . "
+  " .          .           . ";
+}
+
+.grid-container {
+  height: 100vh;
+  width: 100wh;
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/signup-background.png");
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr auto 4fr;
+   grid-template-areas:
+  "       .        "
+  "     griddy     "
+  "       .        "
+}
+
+@media only screen and (max-width: 709px){
+   .grid-container {
+     background-image: none;
+   }
+
+   .grid {
+     box-shadow: none;
+   }
+}
+
+.app-name {
+  margin: 0;
+  grid-area: app-name;
+  font-size: 40px;
+  /*Evernote uses svgs for a propietary logo. This is the closest font I found. */
+  font-family: "Abril Fatface";
+}
+
+/* Styling copied off Evernote login page */
+.positive-message {
+  margin: 0;
+  grid-area: positive-message;
+  color: #333333;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.logo {
+  margin: 0;
+  padding: 0;
+  grid-area: logo;
+  width: 82px;
+  height: 82px;
+  background-color: inherit;
+}
+
+/* Styling copied off Evernote login page */
+.already-account {
+  margin: 0;
+  grid-area: already-account;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #737373;
+  /* To handle animated password bar appearing */
+  /* transform: translateY(-60px);
+  transition: all 1.5s ease; */
+}
+
+/* Turn the form into its own grid for styling purposes */
+.signup-form {
+  margin: 0;
+  width: 100%;
+  grid-area: signup-form;
+  display: grid;
+  grid-gap: 6px;
+  grid-template-rows: 45px 45px 1px 46px;
+  grid-template-areas:
+   " signup-email-input "
+  " signup-password-input "
+  "         .          "
+  " signup-submit ";
+}
+
+.signup-email-input {
+  grid-area: signup-email-input;
+}
+
+.signup-password-input {
+  grid-area: signup-password-input;
+  /* display: none; */
+  /* visibility: hidden;
+  opacity: 0; */
+}
+
+.signup-email-input, .signup-password-input {
+  /* width: 100%; */
+  border-radius: 7px;
+  border: 1px solid #DEDEDE;
+  text-indent: 15px;
+  transition: visibility 3s, opacity 3s ease;
+}
+
+.signup-form {
+  transition: all 1s ease;
+}
+
+.signup-email-input:focus, .signup-password-input:focus {
+  outline: none;
+  border: 2px solid #DFF2E7;
+}
+
+.signup-email-input::placeholder, .signup-password-input::placeholder {
+  font-size: 16px;
+  color: #8A8A8A;
+}
+
+/* Styling copied off Evernote login page */
+.signup-submit {
+  /* display: none; */
+  height: 100%;
+  grid-area: signup-submit;
+  background-color: #00a82d;
+  border-radius: 7px;
+  color: white;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  /* To handle animated password bar appearing */
+  /* transition: all 1.5s ease;
+  transform: translateY(-60px); */
+}
+
+.signup-submit:hover {
+  background-color: #008f26;
+  cursor: pointer;
+}
+
+/* Styling copied off Evernote login page */
+.signIn {
+  margin: 0;
+  grid-area: signIn;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  color: #00a82d;
+  text-decoration: none;
+  /* To handle animated password bar appearing */
+  /* transform: translateY(-60px);
+  transition: all 1.5s ease; */
+}
+
+/* Styling copied off Evernote login page */
+.terms-of-service {
+  margin: 0;
+  grid-area: terms-of-service;
+  width: 280px;
+  line-height: 15px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-style: normal;
+  font-size: 12px;
+  color: #a6a6a6;
+  /* To handle animated password bar appearing */
+  /* transform: translateY(-60px);
+  transition: all 1.5s ease; */
+  /* To handle animated password bar appearing */
+}
+
+/* Make 'or' a grid with the two elements on the side as the border */
+.or {
+  margin: 0;
+  grid-area: or;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-gap: 10px;
+  align-items: center;
+}
+
+.or-text {
+  margin: 0;
+  color: #ababab;
+  font-size: 14px;
+  font-weight: 100;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+}
+
+ .grey-border {
+
+    height: 2px;
+    background-color: #E5E5E5;
+    content: '\a0';
+  }
+
+.googleSignIn {
+  margin: 0;
+  grid-area: googleSignIn;
+  height: 42px;
+  width: 100%;
+  border: 1px solid #d0d0d0;
+  background-color: inherit;
+  border-radius: 7px;
+  transition: all .2s ease;
+  font-size: 15px;
+  color: #6a6a6a;
+}
+
+.googleSignIn:hover {
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.form-links {
+  text-decoration: none;
+  color: #00a82d;
+  font-weight: 400;
+}
+
+/* .whitespace {
+  grid-area: whitespace;
+  background-image: url('https://s3.us-east-2.amazonaws.com/mortalnote-images/signup-background.png');
+  height: 100%;
+  width: 100%;
+} */
+
+.google-logo {
+  position: relative;
+  right: 7px;
+  top: 4px;
+}
+
+.errors-container {
+  color: #cc4539;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif, helvetica, arial, sans-serif;
+  font-size: 75%;
+}
+.why-mortalnote-grid {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-rows: 130px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  "           header            "
+  " why-mortalnote-banner-grid  "
+
+}
+
+/* .header {
+  grid-area: header;
+} */
+
+
+.why-mortalnote-banner-grid {
+  grid-area: why-mortalnote-banner-grid;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 2fr 564px 1fr 4fr 1fr;
+  grid-template-rows: 2fr 100px 200px 200px 1fr;
+  /* grid-row-gap: 25px; */
+  grid-template-areas:
+  " .            .                         .          .                   .   "
+  " .      why-mortalnote-htag             .     why-mortalnote-img       .   "
+  " .   why-mortalnote-hidden-potential    .      why-mortalnote-img      .   "
+  " .    why-mortalnote-evernote-better    .     why-mortalnote-img       .   "
+  " .            .                         .         .                    .   ";
+  -webkit-font-smoothing: antialiased;
+  background-color: #fafafa;
+  background-image: url("https://s3.us-east-2.amazonaws.com/mortalnote-images/main-green.png")
+}
+
+.why-mortalnote-htag {
+  grid-area: why-mortalnote-htag;
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  font-size: 56px;
+  line-height: 72px;
+  font-weight: 700;
+}
+
+.why-mortalnote-hidden-potential {
+  grid-area: why-mortalnote-hidden-potential;
+}
+
+.why-mortalnote-evernote-better {
+  grid-area: why-mortalnote-evernote-better;
+}
+
+.why-mortalnote-hidden-potential, .why-mortalnote-evernote-better {
+  font-family: "soleil", Helvetica, Arial, sans-serif;
+  line-height: 40px;
+  font-size: 24px;
+  font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+}
+
+.why-mortalnote-img {
+  grid-area: why-mortalnote-img;
+}
+
+.header {
+  grid-area: header;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
