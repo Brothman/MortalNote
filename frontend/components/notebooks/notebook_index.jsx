@@ -184,7 +184,9 @@ class NotebookIndex extends React.Component {
 
         <span className="top-of-notebook-index-items">
           <p className="my-notebook-list">My notebook list</p>
-          <img className="new-notebook-icon" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/add-notebook-icon.svg"/>
+          <img className="new-notebook-icon"
+               src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/add-notebook-icon.svg"
+               onClick={this.handleNewNotebookModal} />
           <p className="new-notebook" onClick={this.handleNewNotebookModal}>New Notebook</p>
           <img className= "sort-by-icon" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/actions-big-icon.svg" />
         </span>
@@ -197,7 +199,15 @@ class NotebookIndex extends React.Component {
           <p className="actions-cn">ACTIONS</p>
           <img className="selected-column-arrow" />
           <div className="notebook-index-items">
-            {notebookIndexItems()}
+            {notebookIndexItems().sort((a, b) => {
+              // sort alphabetically
+              if (a.props.notebook.title > b.props.notebook.title) {
+                return 1;
+              }
+              else {
+                return -1;
+              }
+            })}
           </div>
         </span>
 
@@ -239,7 +249,14 @@ class NotebookIndex extends React.Component {
           <h6 className="note-modal-header">Create new note in...</h6>
           <div className="grey-tiny-border-1" />
           <div className="add-note-notebook-items">
-            {addNoteNotebookItems()}
+            {addNoteNotebookItems().sort((a, b) => {
+              if (a.props.notebook.title > b.props.notebook.title) {
+                return 1;
+              }
+              else {
+                return -1;
+              }
+            })}
           </div>
           <div className="grey-tiny-border-2" />
           <div className="notebook-modal-buttons">

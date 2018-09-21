@@ -13,7 +13,6 @@ class NotebooksContainer extends React.Component {
 
   componentDidMount() {
     this.props.fetchNotebooksAndNotes();
-    // console.log(this.props.fetchNotebooksAndNotes())
   }
 
   handleLogout() {

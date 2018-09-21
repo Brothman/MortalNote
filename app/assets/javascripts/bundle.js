@@ -1509,7 +1509,8 @@ function (_React$Component) {
         className: "my-notebook-list"
       }, "My notebook list"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "new-notebook-icon",
-        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/add-notebook-icon.svg"
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/add-notebook-icon.svg",
+        onClick: this.handleNewNotebookModal
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "new-notebook",
         onClick: this.handleNewNotebookModal
@@ -1532,7 +1533,14 @@ function (_React$Component) {
         className: "selected-column-arrow"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notebook-index-items"
-      }, notebookIndexItems())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, notebookIndexItems().sort(function (a, b) {
+        // sort alphabetically
+        if (a.props.notebook.title > b.props.notebook.title) {
+          return 1;
+        } else {
+          return -1;
+        }
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add-notebook-modal-container",
         onClick: this.handleCloseModal
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1574,7 +1582,13 @@ function (_React$Component) {
         className: "grey-tiny-border-1"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add-note-notebook-items"
-      }, addNoteNotebookItems()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, addNoteNotebookItems().sort(function (a, b) {
+        if (a.props.notebook.title > b.props.notebook.title) {
+          return 1;
+        } else {
+          return -1;
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grey-tiny-border-2"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notebook-modal-buttons"
@@ -1883,7 +1897,7 @@ function (_React$Component) {
   _createClass(NotebooksContainer, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchNotebooksAndNotes(); // console.log(this.props.fetchNotebooksAndNotes())
+      this.props.fetchNotebooksAndNotes();
     }
   }, {
     key: "handleLogout",
@@ -3846,7 +3860,6 @@ var getAllNotebooks = function getAllNotebooks(_ref) {
   });
 };
 var getNotebooksNotes = function getNotebooksNotes(notes, noteIDS) {
-  // debugger
   return noteIDS.map(function (noteID) {
     return notes[noteID];
   });
@@ -4077,7 +4090,6 @@ var createNote = function createNote(note) {
 }; //Jquery AJAX request to update a note's content (delta) to the database
 
 var updateNote = function updateNote(noteID, content, content_plain, title) {
-  // debugger
   return $.ajax({
     method: 'PUT',
     url: "/api/notes/".concat(noteID),
@@ -4092,7 +4104,6 @@ var updateNote = function updateNote(noteID, content, content_plain, title) {
 }; //Jquery AJAX request to update a note's content (delta) to the database
 
 var deleteNote = function deleteNote(noteID) {
-  // debugger
   return $.ajax({
     method: 'DELETE',
     url: "/api/notes/".concat(noteID)

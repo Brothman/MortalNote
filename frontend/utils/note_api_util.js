@@ -9,7 +9,6 @@ export const createNote = (note) => {
 
 //Jquery AJAX request to update a note's content (delta) to the database
 export const updateNote = (noteID, content, content_plain, title) => {
-  // debugger
   return $.ajax({
     method: 'PUT',
     url: `/api/notes/${noteID}`,
@@ -19,7 +18,6 @@ export const updateNote = (noteID, content, content_plain, title) => {
 
 //Jquery AJAX request to update a note's content (delta) to the database
 export const deleteNote = (noteID) => {
-  // debugger
   return $.ajax({
     method: 'DELETE',
     url: `/api/notes/${noteID}`,
