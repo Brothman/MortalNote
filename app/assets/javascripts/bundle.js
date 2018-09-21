@@ -2927,7 +2927,13 @@ function (_React$Component) {
         className: "grey-tiny-border-1"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add-note-notebook-items"
-      }, addNoteNotebookItems()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, addNoteNotebookItems().sort(function (a, b) {
+        if (a.props.notebook.title > b.props.notebook.title) {
+          return 1;
+        } else {
+          return -1;
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "grey-tiny-border-2"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notebook-modal-buttons"
@@ -4437,7 +4443,7 @@ function fromByteArray (uint8) {
 
 var base64 = __webpack_require__(/*! base64-js */ "./node_modules/base64-js/index.js")
 var ieee754 = __webpack_require__(/*! ieee754 */ "./node_modules/ieee754/index.js")
-var isArray = __webpack_require__(/*! isarray */ "./node_modules/buffer/node_modules/isarray/index.js")
+var isArray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js")
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -6216,22 +6222,6 @@ function isnan (val) {
 }
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
-
-/***/ }),
-
-/***/ "./node_modules/buffer/node_modules/isarray/index.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/buffer/node_modules/isarray/index.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
-};
-
 
 /***/ }),
 
@@ -8911,8 +8901,10 @@ module.exports = invariant;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+var toString = {}.toString;
+
 module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
+  return toString.call(arr) == '[object Array]';
 };
 
 
@@ -31474,7 +31466,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isarray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js")
+var isarray = __webpack_require__(/*! isarray */ "./node_modules/path-to-regexp/node_modules/isarray/index.js")
 
 /**
  * Expose `pathToRegexp`.
@@ -31900,6 +31892,20 @@ function pathToRegexp (path, keys, options) {
 
   return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/path-to-regexp/node_modules/isarray/index.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/path-to-regexp/node_modules/isarray/index.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
 
 
 /***/ }),

@@ -184,7 +184,14 @@ class NotesContainer extends React.Component {
             <h6 className="note-modal-header">Create new note in...</h6>
             <div className="grey-tiny-border-1" />
             <div className="add-note-notebook-items">
-              {addNoteNotebookItems()}
+              {addNoteNotebookItems().sort((a, b) => {
+                if (a.props.notebook.title > b.props.notebook.title) {
+                  return 1;
+                }
+                else {
+                  return -1;
+                }
+              })}
             </div>
             <div className="grey-tiny-border-2" />
             <div className="notebook-modal-buttons">
