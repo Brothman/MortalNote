@@ -7,7 +7,6 @@ export const getAllNotebooks = ( { notebooks }) => {
 };
 
 export const getNotebooksNotes = ( notes, noteIDS ) => {
-  // debugger
   return noteIDS.map((noteID) => {
     return notes[noteID];
   });
@@ -41,7 +40,7 @@ export const getAllNotes = ( { notes }) => {
   //So we map through each ID key, and return an array filled with the notebooks
   //Underneath each ID.
   const noteArray = Object.keys(notes).map(id => notes[id]);
-  
+
   if (noteArray.length > 0) {
     return noteArray.sort(sortByMostRecent);
   }
