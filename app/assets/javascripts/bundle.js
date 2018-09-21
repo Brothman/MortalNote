@@ -266,7 +266,8 @@ var filterNotebooksAndNotes = function filterNotebooksAndNotes(searchText) {
       var notes = notebooksAndNotes.notes; // _.pick(object, ['a', 'c']);const acceptedValues = ["value1", "value3"]
 
       var filteredNotes = Object.keys(notes).reduce(function (r, e) {
-        if (notes[e].content.toUpperCase().includes(searchText.toUpperCase())) {
+        //search both note Titles and their contents
+        if (notes[e].content_plain.toUpperCase().includes(searchText.toUpperCase()) || notes[e].title.toUpperCase().includes(searchText.toUpperCase())) {
           r[e] = notes[e];
           return r;
         } else {
@@ -1837,10 +1838,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions.js */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _sidebar_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sidebar.jsx */ "./frontend/components/notebooks/sidebar.jsx");
-/* harmony import */ var _notebook_index_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./notebook_index.jsx */ "./frontend/components/notebooks/notebook_index.jsx");
-/* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
+/* harmony import */ var _sidebar_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sidebar.jsx */ "./frontend/components/notebooks/sidebar.jsx");
+/* harmony import */ var _notebook_index_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./notebook_index.jsx */ "./frontend/components/notebooks/notebook_index.jsx");
+/* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1858,7 +1858,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 
 
 
@@ -1896,12 +1895,9 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notebook-container-grid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidebar_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidebar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
         user: this.props.user
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notebook_index_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "logout",
-        onClick: this.handleLogout
-      }, "Logout"));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notebook_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
     }
   }]);
 
@@ -1918,10 +1914,7 @@ var mapStateToProps = function mapStateToProps(_ref) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchNotebooksAndNotes: function fetchNotebooksAndNotes() {
-      return dispatch(Object(_actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_5__["fetchNotebooksAndNotes"])());
-    },
-    logout: function logout() {
-      return dispatch(Object(_actions_session_actions_js__WEBPACK_IMPORTED_MODULE_2__["logout"])());
+      return dispatch(Object(_actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_4__["fetchNotebooksAndNotes"])());
     }
   };
 };
@@ -2055,6 +2048,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _searchbar_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./searchbar.jsx */ "./frontend/components/notebooks/searchbar.jsx");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _actions_session_actions_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/session_actions.js */ "./frontend/actions/session_actions.js");
+
 
 
 
@@ -2065,10 +2060,11 @@ var Sidebar = function Sidebar(props) {
     var addNotebookModalContainer = document.getElementsByClassName('add-notebook-modal-container')[0];
     addNotebookModalContainer.style.display = "block";
     var addNoteModalCard = document.getElementsByClassName('add-note-modal-card')[0];
-    addNoteModalCard.style.display = "grid"; //ensure the cursor is ready to go in the input textbox
-    //Adds ease of use for the user as they can start typing right away
-    // const notebookInput = document.getElementsByClassName('notebook-modal-input')[0];
-    // notebookInput.focus();
+    addNoteModalCard.style.display = "grid";
+  };
+
+  var handleLogout = function handleLogout() {
+    props.logout();
   };
 
   var username = props.user.email.substring(0, props.user.email.lastIndexOf("@"));
@@ -2123,7 +2119,10 @@ var Sidebar = function Sidebar(props) {
     src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/trash-icon.svg"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "trash-text"
-  }, "  Trash ")));
+  }, "  Trash ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "logout",
+    onClick: handleLogout
+  }, "Logout"));
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -2132,7 +2131,15 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(Sidebar));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    logout: function logout() {
+      return dispatch(Object(_actions_session_actions_js__WEBPACK_IMPORTED_MODULE_4__["logout"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Sidebar));
 
 /***/ }),
 
@@ -3559,8 +3566,14 @@ var noteReducer = function noteReducer() {
   Object.freeze(state);
 
   switch (action.type) {
+    //a cheap way to clear the note on this action
+    //signifies we're changing the notes and notebooks we're viewing
+    //let one of our components dispatch an action to view the note
+    case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_NOTEBOOKS_AND_NOTES"]:
+      return {};
     //Add note to the Store when we receive a newly created note from the backend
     //Remove all old notes
+
     case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NEW_NOTE"]:
       var newState1 = Object.assign({}, state); //ensure state isn't an empty object
 

@@ -71,7 +71,8 @@ export const filterNotebooksAndNotes = (searchText) => {
         // _.pick(object, ['a', 'c']);const acceptedValues = ["value1", "value3"]
 
         let filteredNotes = Object.keys(notes).reduce(function(r, e) {
-          if (notes[e].content.toUpperCase().includes(searchText.toUpperCase()) ) {
+          //search both note Titles and their contents
+          if (notes[e].content_plain.toUpperCase().includes(searchText.toUpperCase()) || notes[e].title.toUpperCase().includes(searchText.toUpperCase()) ) {
             r[e] = notes[e];
             return r;
           }

@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from './searchbar.jsx';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logout } from '../../actions/session_actions.js';
 
 const Sidebar = (props) => {
   const handleNewNoteModal = () => {
@@ -10,11 +11,10 @@ const Sidebar = (props) => {
 
     const addNoteModalCard = document.getElementsByClassName('add-note-modal-card')[0];
     addNoteModalCard.style.display = "grid";
+  };
 
-    //ensure the cursor is ready to go in the input textbox
-    //Adds ease of use for the user as they can start typing right away
-    // const notebookInput = document.getElementsByClassName('notebook-modal-input')[0];
-    // notebookInput.focus();
+  const handleLogout = () => {
+    props.logout();
   };
 
   const username = props.user.email.substring(0, props.user.email.lastIndexOf("@"));
@@ -48,6 +48,8 @@ const Sidebar = (props) => {
              src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/trash-icon.svg" />
         <p className="trash-text">  Trash </p>
       </NavLink>
+
+      <button className="logout" onClick={handleLogout}>Logout</button>
     </div>
   );
 };
@@ -58,4 +60,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Sidebar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
