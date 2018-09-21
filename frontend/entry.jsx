@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root.jsx';
 import configureStore from './store/store.js';
+import { fetchNotebooksAndNotes } from './actions/notebook_actions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -64,6 +65,8 @@ document.addEventListener('keydown', (e) => {
   }
 
 });
+
+
 
 //JQUERY OVER
 
