@@ -1936,6 +1936,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1958,6 +1959,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
 var SearchBar =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1974,6 +1976,7 @@ function (_React$Component) {
     };
     _this.handleTyping = _this.handleTyping.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.filterSearches = _this.filterSearches.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleFocus = _this.handleFocus.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -1987,8 +1990,31 @@ function (_React$Component) {
   }, {
     key: "filterSearches",
     value: function filterSearches() {
-      var searchText = this.state.searchText;
+      var searchText = this.state.searchText; // if (this.props.history.location.pathname == "/notes") {
+      //   //do nothing, we're on the right page
+      // }
+      // else {
+      //   //switch to the notes page
+      //   this.props.history.push('/notes');
+      // }
+
       this.props.filterNotebooksAndNotes(searchText);
+    }
+  }, {
+    key: "handleFocus",
+    value: function handleFocus() {
+      if (this.props.history.location.pathname == "/notes") {//do nothing, we're on the right page
+      } else {
+        //switch to the notes page
+        this.props.history.push('/notes'); //Async setTimeout allow the new page to render, so we can find the
+        //newly implemnted searchBar input. Then we focus on it to provide the
+        //illusion of consistentcy.
+
+        setTimeout(function () {
+          var searchBar = document.getElementsByClassName('searchbar-input')[0];
+          searchBar.focus();
+        }, 0);
+      }
     }
   }, {
     key: "render",
@@ -2003,7 +2029,8 @@ function (_React$Component) {
         className: "searchbar-input",
         placeholder: "Search all notes...",
         onChange: this.handleTyping,
-        value: this.state.searchText
+        value: this.state.searchText,
+        onFocus: this.handleFocus
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "search-icon",
         src: searchUrl
@@ -2030,7 +2057,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(SearchBar));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(SearchBar)));
 
 /***/ }),
 
