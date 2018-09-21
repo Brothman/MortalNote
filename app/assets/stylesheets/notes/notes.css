@@ -1,7 +1,7 @@
 .quill {
   height: 100%;
   display: grid;
-  grid-template-rows: 70px 70px 1fr;
+  grid-template-rows: minmax(70px, auto) 70px 1fr;
   grid-template-columns: 1fr 1px;
   grid-template-areas:
   "     ql-toolbar       note-trash-icon  "
@@ -35,7 +35,7 @@
   height: 25px;
   position: relative;
   /* bottom: 500px; */
-  right: 50px;
+  right: 30px;
   top: 8px;
   cursor: pointer;
   transition: 0.1s opacity ease;

@@ -1,5 +1,5 @@
 import { RECEIVE_NEW_NOTE, VIEW_NOTE, CLEAR_NOTE, DELETE_NOTE, RECEIVE_UPDATED_NOTE } from '../actions/note_actions.js';
-import { CLEAR_NOTEBOOKS_AND_NOTES } from '../actions/notebook_actions.js';
+import { CLEAR_NOTEBOOKS_AND_NOTES, RECEIVE_NOTEBOOKS_AND_NOTES } from '../actions/notebook_actions.js';
 
 
 //default state is the empty Object
@@ -8,6 +8,11 @@ const noteReducer = (state = {}, action) => {
   Object.freeze(state);
 
   switch(action.type) {
+    //a cheap way to clear the note on this action
+    //signifies we're changing the notes and notebooks we're viewing
+    //let one of our components dispatch an action to view the note
+    case(RECEIVE_NOTEBOOKS_AND_NOTES):
+      return {};
       //Add note to the Store when we receive a newly created note from the backend
       //Remove all old notes
     case(RECEIVE_NEW_NOTE):
