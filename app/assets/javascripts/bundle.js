@@ -186,7 +186,7 @@ var deleteNote = function deleteNote(noteID) {
 /*!**********************************************!*\
   !*** ./frontend/actions/notebook_actions.js ***!
   \**********************************************/
-/*! exports provided: RECEIVE_NOTEBOOKS_AND_NOTES, RECEIVE_NEW_NOTEBOOK, CLEAR_NOTEBOOKS_AND_NOTES, receiveNotebooksAndNotes, receiveNewNotebook, clearNotebooksAndNotes, fetchNotebooksAndNotes, createNotebook */
+/*! exports provided: RECEIVE_NOTEBOOKS_AND_NOTES, RECEIVE_NEW_NOTEBOOK, CLEAR_NOTEBOOKS_AND_NOTES, receiveNotebooksAndNotes, receiveNewNotebook, clearNotebooksAndNotes, fetchNotebooksAndNotes, createNotebook, filterNotebooksAndNotes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -199,6 +199,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearNotebooksAndNotes", function() { return clearNotebooksAndNotes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchNotebooksAndNotes", function() { return fetchNotebooksAndNotes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNotebook", function() { return createNotebook; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filterNotebooksAndNotes", function() { return filterNotebooksAndNotes; });
 /* harmony import */ var _utils_notebook_api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/notebook_api_util.js */ "./frontend/utils/notebook_api_util.js");
 var RECEIVE_NOTEBOOKS_AND_NOTES = "RECEIVE_NOTEBOOKS_AND_NOTES";
 var RECEIVE_NEW_NOTEBOOK = "RECEIVE_NEW_NOTEBOOK";
@@ -247,6 +248,46 @@ var createNotebook = function createNotebook(notebook) {
   return function (dispatch) {
     _utils_notebook_api_util_js__WEBPACK_IMPORTED_MODULE_0__["createNotebook"](notebook).then(function (notebookJSON) {
       return dispatch(receiveNewNotebook(notebookJSON));
+    }, function (error) {
+      return console.log(error);
+    });
+  };
+}; //Return a function that takes a dispatch (Thunk Action)
+//Use an AJAX request to get our notebooks and notes from the database
+//On success, filter all the notes and notebooks base on searchText
+//Then call receiveNoteBooksAndNotes with the response to add the
+//filtered notebooks and notes to our web application's state/store.
+//HIGHLY MEMORY EXPENSIVE --> ROOM TO REFACTOR AND IMPROVE
+
+var filterNotebooksAndNotes = function filterNotebooksAndNotes(searchText) {
+  return function (dispatch) {
+    _utils_notebook_api_util_js__WEBPACK_IMPORTED_MODULE_0__["fetchNotebooksAndNotes"]().then(function (notebooksAndNotes) {
+      var notebooks = notebooksAndNotes.notebooks;
+      var notes = notebooksAndNotes.notes; // _.pick(object, ['a', 'c']);const acceptedValues = ["value1", "value3"]
+
+      var filteredNotes = Object.keys(notes).reduce(function (r, e) {
+        if (notes[e].content.toUpperCase().includes(searchText.toUpperCase())) {
+          r[e] = notes[e];
+          return r;
+        } else {
+          return r;
+        }
+      }, {});
+      var filteredNotebooks = Object.keys(notebooks).reduce(function (r, e) {
+        //iterate through all the note IDS
+        Object.keys(filteredNotes).forEach(function (filteredNoteID) {
+          if (notebooks[e].notes.includes(parseInt(filteredNoteID))) {
+            r[e] = notebooks[e];
+            return r;
+          }
+        }); //return r if no match
+
+        return r;
+      }, {});
+      dispatch(receiveNotebooksAndNotes({
+        notebooks: filteredNotebooks,
+        notes: filteredNotes
+      }));
     }, function (error) {
       return console.log(error);
     });
@@ -1900,22 +1941,103 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
-var SearchBar = function SearchBar(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "searchbar"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
-    className: "searchbar-input",
-    placeholder: "Search all notes..."
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "search-icon",
-    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/search-icon-gray.svg"
-  }));
+
+
+
+var SearchBar =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SearchBar, _React$Component);
+
+  function SearchBar(props) {
+    var _this;
+
+    _classCallCheck(this, SearchBar);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchBar).call(this, props));
+    _this.state = {
+      searchText: ""
+    };
+    _this.handleTyping = _this.handleTyping.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.filterSearches = _this.filterSearches.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(SearchBar, [{
+    key: "handleTyping",
+    value: function handleTyping(e) {
+      this.setState({
+        searchText: e.target.value
+      }, this.filterSearches);
+    }
+  }, {
+    key: "filterSearches",
+    value: function filterSearches() {
+      var searchText = this.state.searchText;
+      this.props.filterNotebooksAndNotes(searchText);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var searchIconArray = ["https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/search-icon-gray.svg", "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/search-icon-green.svg"]; //change the searchIcon to a green color when the searchbar is being used
+
+      var searchUrl = this.state.searchText.length === 0 ? searchIconArray[0] : searchIconArray[1];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "searchbar"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "searchbar-input",
+        placeholder: "Search all notes...",
+        onChange: this.handleTyping,
+        value: this.state.searchText
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "search-icon",
+        src: searchUrl
+      }));
+    }
+  }]);
+
+  return SearchBar;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var entities = _ref.entities;
+  return {
+    notebooks: entities.notebooks,
+    notes: entities.notes
+  };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (SearchBar);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    filterNotebooksAndNotes: function filterNotebooksAndNotes(searchText) {
+      return dispatch(Object(_actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_2__["filterNotebooksAndNotes"])(searchText));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(SearchBar));
 
 /***/ }),
 
@@ -3271,7 +3393,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_root_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/root.jsx */ "./frontend/components/root.jsx");
 /* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store.js */ "./frontend/store/store.js");
+/* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 

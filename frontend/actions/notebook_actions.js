@@ -6,7 +6,6 @@ import * as NotebookAPIUtil from '../utils/notebook_api_util.js';
 //Regular action creator, return a plain old Javascript object.
 //Destructure notes and notebooks out of the argument for cleaner code
 export const receiveNotebooksAndNotes = ( { notebooks, notes } ) => {
-  
   return {
     type: RECEIVE_NOTEBOOKS_AND_NOTES,
     notes,
@@ -40,7 +39,7 @@ export const fetchNotebooksAndNotes = () => {
     .then(
       (notebooksAndNotes) => dispatch(receiveNotebooksAndNotes(notebooksAndNotes)),
       (error) => console.log(error)
-    )
+    );
   };
 };
 
@@ -51,6 +50,52 @@ export const createNotebook = (notebook) => {
     .then(
       (notebookJSON) => dispatch(receiveNewNotebook(notebookJSON)),
       (error) => console.log(error)
-    )
+    );
+  };
+};
+
+//Return a function that takes a dispatch (Thunk Action)
+//Use an AJAX request to get our notebooks and notes from the database
+//On success, filter all the notes and notebooks base on searchText
+//Then call receiveNoteBooksAndNotes with the response to add the
+//filtered notebooks and notes to our web application's state/store.
+//HIGHLY MEMORY EXPENSIVE --> ROOM TO REFACTOR AND IMPROVE
+export const filterNotebooksAndNotes = (searchText) => {
+  return (dispatch) => {
+    NotebookAPIUtil.fetchNotebooksAndNotes()
+    .then(
+      (notebooksAndNotes) => {
+
+        const notebooks = notebooksAndNotes.notebooks;
+        const notes = notebooksAndNotes.notes;
+        // _.pick(object, ['a', 'c']);const acceptedValues = ["value1", "value3"]
+
+        let filteredNotes = Object.keys(notes).reduce(function(r, e) {
+          if (notes[e].content.toUpperCase().includes(searchText.toUpperCase()) ) {
+            r[e] = notes[e];
+            return r;
+          }
+          else {
+            return r;
+          }
+        }, {});
+
+
+        const filteredNotebooks = Object.keys(notebooks).reduce(function(r, e) {
+          //iterate through all the note IDS
+          Object.keys(filteredNotes).forEach((filteredNoteID) => {
+            if (notebooks[e].notes.includes(parseInt(filteredNoteID)) ) {
+              r[e] = notebooks[e];
+              return r;
+            }
+        });
+          //return r if no match
+            return r;
+        }, {});
+
+        dispatch(receiveNotebooksAndNotes({notebooks: filteredNotebooks, notes: filteredNotes}));
+      },
+      (error) => console.log(error)
+    );
   };
 };
