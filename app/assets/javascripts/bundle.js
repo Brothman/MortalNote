@@ -1401,7 +1401,7 @@ function (_React$Component) {
         var notebook_id = this.state.chosenNotebook.id;
         var content = "";
         var plain_content = "";
-        var title = "";
+        var title = "Untitled";
         var note = {
           note: {
             user_id: user_id,
@@ -2284,7 +2284,6 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      // this.loadNote(prevProps);
       var note = this.props.note;
 
       if (!this.state.loaded && note) {
@@ -2323,14 +2322,20 @@ function (_React$Component) {
           loaded: true
         });
       }
-    } //Allows for autofocus in Title Input when creating a new note
+    } //Allows for autofocus in Title Input when New Note, i.e. 'Untitled'
 
   }, {
     key: "setFocus",
     value: function setFocus() {
-      if (this.state.content == "" && this.state.title == "") {
+      console.log(this.state.content_plain);
+      console.log(this.state.title);
+
+      if (this.state.content_plain == "" && this.state.title == "Untitled") {
         var titleInput = document.getElementsByClassName('note-title-input')[0];
         titleInput.focus();
+      } else {
+        //if we're not focused on the titleInput, ensure we can see the toolbar
+        this.makeToolbarAppear();
       }
     }
   }, {
@@ -2789,7 +2794,7 @@ function (_React$Component) {
           var notebook_id = this.props.notebooks[Object.keys(this.props.notebooks)[0]].id;
           var content = "";
           var content_plain = "";
-          var title = "";
+          var title = "Untitled";
           var note = {
             note: {
               user_id: user_id,
@@ -2853,7 +2858,7 @@ function (_React$Component) {
         var notebook_id = this.state.chosenNotebook.id;
         var content = "";
         var content_plain = "";
-        var title = "";
+        var title = "Untitled";
         var note = {
           note: {
             user_id: user_id,

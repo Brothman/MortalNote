@@ -58,7 +58,7 @@ class NotesContainer extends React.Component {
       const notebook_id = this.props.notebooks[Object.keys(this.props.notebooks)[0]].id;
       const content = "";
       const content_plain = "";
-      const title = "";
+      const title = "Untitled";
 
       const note = {
         note: {
@@ -117,7 +117,7 @@ class NotesContainer extends React.Component {
       const notebook_id = this.state.chosenNotebook.id;
       const content = "";
       const content_plain = "";
-      const title = "";
+      const title = "Untitled";
 
       const note = {
         note: {

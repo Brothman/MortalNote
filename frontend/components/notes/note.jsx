@@ -48,7 +48,7 @@ class Note extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // this.loadNote(prevProps);
+
     const note = this.props.note;
     if (!this.state.loaded && note) {
       // I load the data if it's the first time we're loading a note
@@ -89,11 +89,17 @@ class Note extends React.Component {
     }
    }
 
-   //Allows for autofocus in Title Input when creating a new note
+   //Allows for autofocus in Title Input when New Note, i.e. 'Untitled'
    setFocus() {
-     if (this.state.content == "" && this.state.title == "") {
+     console.log(this.state.content_plain)
+     console.log(this.state.title)
+     if (this.state.content_plain == "" && this.state.title == "Untitled") {
        const titleInput = document.getElementsByClassName('note-title-input')[0];
        titleInput.focus();
+     }
+     else {
+       //if we're not focused on the titleInput, ensure we can see the toolbar
+         this.makeToolbarAppear();
      }
    }
 
@@ -234,7 +240,7 @@ class Note extends React.Component {
       <div className="note">
         <ReactQuill value={this.state.content}
                     onChange={this.handleQuillChange}
-                    modules={{toolbar}}/>
+                    modules={{toolbar}} />
         <input type="text"
                className="note-title-input"
                onChange={this.handleTitleChange}

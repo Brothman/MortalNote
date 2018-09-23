@@ -83,7 +83,7 @@ class NotebookIndex extends React.Component {
       const notebook_id = this.state.chosenNotebook.id;
       const content = "";
       const plain_content = "";
-      const title = "";
+      const title = "Untitled";
 
       const note = {
         note: {

@@ -9,6 +9,19 @@ class Api::UsersController < ApplicationController
       render :json => ["Invalid Email Address. Must Include '@'"], status: 422
     elsif @user.save
       login(@user)
+      #create a first notebook for the user -- needed to handle
+      #the first note post signup
+      first_notebook = Notebook.create({title: "First Notebook", user_id: @user.id})
+      #create a first note in that first notebook
+      first_note = Note.create(
+        {
+          title: "Untitled",
+          user_id: @user.id,
+          notebook_id: first_notebook.id,
+          content: "",
+          content_plain: ""
+        }
+      )
       render 'api/users/show'
     else
       errors = @user.errors.full_messages
