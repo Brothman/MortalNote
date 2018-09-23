@@ -67,7 +67,7 @@
 .sort-by-icon {
   grid-area: sort-by-icon;
   width: 25px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 /* Top of Notebook Index Items FINISH  */
