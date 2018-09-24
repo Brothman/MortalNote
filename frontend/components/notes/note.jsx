@@ -91,8 +91,6 @@ class Note extends React.Component {
 
    //Allows for autofocus in Title Input when New Note, i.e. 'Untitled'
    setFocus() {
-     console.log(this.state.content_plain)
-     console.log(this.state.title)
      if (this.state.content_plain == "" && this.state.title == "Untitled") {
        const titleInput = document.getElementsByClassName('note-title-input')[0];
        titleInput.focus();
@@ -244,8 +242,11 @@ class Note extends React.Component {
         <input type="text"
                className="note-title-input"
                onChange={this.handleTitleChange}
-               value={this.state.title}
-               onFocus={this.makeToolbarDisappear}/>
+               value={
+                 (this.state.title == "Untitled") ? "" : this.state.title
+               }
+               onFocus={this.makeToolbarDisappear}
+               placeholder={"Untitled"}/>
              <img className="note-trash-icon"
                   src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/trash-icon.svg"
                   onClick={this.deleteNote} />

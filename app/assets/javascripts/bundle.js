@@ -2327,9 +2327,6 @@ function (_React$Component) {
   }, {
     key: "setFocus",
     value: function setFocus() {
-      console.log(this.state.content_plain);
-      console.log(this.state.title);
-
       if (this.state.content_plain == "" && this.state.title == "Untitled") {
         var titleInput = document.getElementsByClassName('note-title-input')[0];
         titleInput.focus();
@@ -2524,8 +2521,9 @@ function (_React$Component) {
         type: "text",
         className: "note-title-input",
         onChange: this.handleTitleChange,
-        value: this.state.title,
-        onFocus: this.makeToolbarDisappear
+        value: this.state.title == "Untitled" ? "" : this.state.title,
+        onFocus: this.makeToolbarDisappear,
+        placeholder: "Untitled"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "note-trash-icon",
         src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/trash-icon.svg",

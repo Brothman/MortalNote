@@ -21,6 +21,21 @@ class Api::SessionsController < ApplicationController
       #How to find this auth??
       @user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
       login(@user)
+      #if user has no notebooks, create a first notebook for the user
+      if @user.notebooks.length == 0
+        #the first notebook post signup
+        first_notebook = Notebook.create({title: "First Notebook", user_id: @user.id})
+        #create a first note in that first notebook
+        first_note = Note.create(
+          {
+              title: "Untitled",
+              user_id: @user.id,
+              notebook_id: first_notebook.id,
+              content: "",
+              content_plain: ""
+            }
+          )
+      end
       # render 'api/users/show'
       redirect_to root_url
       # redirect_to "static_pages#root"
