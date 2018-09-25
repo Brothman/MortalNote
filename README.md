@@ -4,9 +4,14 @@
   <img alt="MortalNote Wolf Logo" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo-tiny.png" />
 </p>
 
-MortalNote is an Evernote clone that implements pixel perfect replication and identical, albeit limited, functionality.
+<p align="center">
+  MortalNote is an Evernote clone that implements pixel perfect replication and identical, albeit limited, functionality.
+</p>
 
-MortalNote is the creation of [Benji Rothman](https://www.linkedin.com/in/brothman7000). 
+<p align="center">
+  MortalNote is the creation of <a href="https://www.linkedin.com/in/brothman7000" > Benji Rothman. </a> 
+</p>
+
 
 ## Access
 You can [access](http://mortal-note.herokuapp.com/) the site at <http://mortal-note.herokuapp.com>
