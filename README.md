@@ -1,7 +1,9 @@
 
 <h1 align="center" font-size="80"> MortalNote </h1>
 <p align="center">
-  <img alt="MortalNote Wolf Logo" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo-tiny.png" />
+  <a href="http://mortal-note.herokuapp.com">
+    <img alt="MortalNote Wolf Logo" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/wolf-logo-tiny.png" />
+  </a>
 </p>
 
 <p align="center">
