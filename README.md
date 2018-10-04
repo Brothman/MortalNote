@@ -50,6 +50,10 @@ React Quill provides a built-in mechanism for uploading and storing images. I wi
 
 I want to provide a tiny icon that allows a note to become full-screen, which removes the note-index-items and the sidebar. Clicking the icon again exits full-screen.
 
+#### Add Code Snippets to ReadME
+
+I will add code snippets under the key feature sections.
+
 ## How to Sign Up
 
 1. Go to <http://mortal-note.herokuapp.com>.
