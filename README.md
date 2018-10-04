@@ -46,6 +46,10 @@ The Searchbar currently hits the database on each keystroke to fetch all the use
 
 React Quill provides a built-in mechanism for uploading and storing images. I will learn this specific API and implment image uploading in MortalNote.
 
+#### Full Screen Note Expansion
+
+I want to provide a tiny icon that allows a note to become full-screen, which removes the note-index-items and the sidebar. Clicking the icon again exits full-screen.
+
 ## How to Sign Up
 
 1. Go to <http://mortal-note.herokuapp.com>.
