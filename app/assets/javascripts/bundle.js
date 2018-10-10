@@ -3863,6 +3863,7 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      //comment for heroku
       var note = this.props.note;
 
       if (!this.state.loaded && note) {

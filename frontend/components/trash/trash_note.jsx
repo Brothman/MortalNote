@@ -49,7 +49,7 @@ class Note extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-
+        //comment for heroku
         const note = this.props.note;
         if (!this.state.loaded && note) {
             // I load the data if it's the first time we're loading a note
