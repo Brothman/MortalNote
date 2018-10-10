@@ -183,7 +183,7 @@ class NotesContainer extends React.Component {
         <NoteIndex notes={this.props.notes}
                    notebooks={this.props.notebooks}
                    chosenNote={randomNote} />
-                 <Note note={randomNote} />
+        {Object.keys(this.props.notes).length > 0 ? <Note note={randomNote} /> : null}
 
           <div className="add-notebook-modal-container" onClick={this.handleCloseModal}>
           </div>

@@ -2999,9 +2999,9 @@ function (_React$Component) {
         notes: this.props.notes,
         notebooks: this.props.notebooks,
         chosenNote: randomNote
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }), Object.keys(this.props.notes).length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_note_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
         note: randomNote
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add-notebook-modal-container",
         onClick: this.handleCloseModal
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
