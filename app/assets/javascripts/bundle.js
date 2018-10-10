@@ -736,10 +736,16 @@ var Header = function Header(props) {
     to: "/about-us"
   }, "About Us"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "arrow1",
-    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/black_arrow.svg"
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/black_arrow.svg",
+    style: {
+      visibility: "hidden"
+    }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "arrow2",
-    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/black_arrow.svg"
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/black_arrow.svg",
+    style: {
+      visibility: "hidden"
+    }
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "signup-login-buttons-grid"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {

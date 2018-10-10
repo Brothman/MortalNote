@@ -13,8 +13,12 @@ const Header = (props) => {
         <Link className="nav-bar-links plans" to ="/plans">Plans </Link>
         <Link className="nav-bar-links help-and-learning" to ="/help-and-learning">Help & Learning</Link>
         <Link className="nav-bar-links about-us" to ="/about-us">About Us</Link>
-        <img className="arrow1" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/black_arrow.svg" />
-        <img className="arrow2" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/black_arrow.svg" />
+        <img className="arrow1" 
+             src="https://s3.us-east-2.amazonaws.com/mortalnote-images/black_arrow.svg"
+             style={{ visibility: "hidden" }} />
+        <img className="arrow2" 
+             src="https://s3.us-east-2.amazonaws.com/mortalnote-images/black_arrow.svg"
+             style={{visibility:"hidden"}} />
       </div>
       <div className="signup-login-buttons-grid">
         <Link className="signup-button" to ="/signup">Sign up</Link>
