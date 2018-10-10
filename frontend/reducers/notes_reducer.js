@@ -1,5 +1,5 @@
 import { RECEIVE_NOTEBOOKS_AND_NOTES, CLEAR_NOTEBOOKS_AND_NOTES } from '../actions/notebook_actions.js';
-import { RECEIVE_NEW_NOTE, RECEIVE_UPDATED_NOTE, DELETE_NOTE } from '../actions/note_actions.js';
+import { RECEIVE_NEW_NOTE, RECEIVE_UPDATED_NOTE, DELETE_NOTE, RECEIVE_DELETED_NOTES, RECEIVE_RESTORED_NOTE } from '../actions/note_actions.js';
 
 //default state is the empty Object
 const notesReducer = (state = {}, action) => {
@@ -40,6 +40,24 @@ const notesReducer = (state = {}, action) => {
     //return an empty object to symbolize empty state, i.e. no notes
     case(CLEAR_NOTEBOOKS_AND_NOTES):
       return {};
+    case (RECEIVE_DELETED_NOTES):
+        //if user has no notes, return empty object, clean slate
+        if (action.notes === undefined) {
+          return {};
+        }
+        //Otherwise add the notes to the store. Includes all the users notes
+        //So can replace entire old store
+        else {
+          return action.notes;
+        }
+    case (RECEIVE_RESTORED_NOTE):
+      const newState4 = Object.assign({}, state);
+      const noteID = action.note.id;
+      //Delete the new notes Id from the notes Array for the corresponding notebook
+      if (newState4[noteID]) {
+        delete newState4[noteID];
+      }
+      return newState4;
     //for most actions, do nothing and return the old state
     case(DELETE_NOTE):
         const newState3 = Object.assign({}, state);

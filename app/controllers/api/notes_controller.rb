@@ -50,6 +50,12 @@ class Api::NotesController < ApplicationController
     end
   end
 
+  def fetchDeleted
+    id = current_user.id
+    @notes = Note.where(deleted: true, user_id: id)
+    render 'api/notes/deleted'
+  end
+
   private
   #A helper method to grab the data used to create a new note
   def note_params

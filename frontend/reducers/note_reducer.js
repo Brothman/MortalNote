@@ -1,4 +1,4 @@
-import { RECEIVE_NEW_NOTE, VIEW_NOTE, CLEAR_NOTE, DELETE_NOTE, RECEIVE_UPDATED_NOTE } from '../actions/note_actions.js';
+import { RECEIVE_NEW_NOTE, VIEW_NOTE, CLEAR_NOTE, DELETE_NOTE, RECEIVE_UPDATED_NOTE, RECEIVE_RESTORED_NOTE } from '../actions/note_actions.js';
 import { CLEAR_NOTEBOOKS_AND_NOTES, RECEIVE_NOTEBOOKS_AND_NOTES } from '../actions/notebook_actions.js';
 
 
@@ -43,6 +43,8 @@ const noteReducer = (state = {}, action) => {
       }
     //return an empty object to symbolize empty state, i.e. no notes
     case(CLEAR_NOTEBOOKS_AND_NOTES):
+      return {};
+    case (RECEIVE_RESTORED_NOTE):
       return {};
     case(DELETE_NOTE):
       return {};

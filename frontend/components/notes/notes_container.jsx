@@ -49,7 +49,11 @@ class NotesContainer extends React.Component {
   componentDidMount() {
     //fetch all notes and notebooks if no notebook and notes preloaded
     //this.props.notes is an array. It will be an empty array if nothing preloaded.
-    if (Object.keys(this.props.notebooks).length === 0) {
+    if (Object.keys(this.props.notebooks).length === 0 ) {
+      this.props.fetchNotebooksAndNotes();
+    }
+    //Also fetch if we're coming from the trash page
+    else if (Object.keys(this.props.notebooks).length === 1 && Object.values(this.props.notebooks)[0].title === "Trash") {
       this.props.fetchNotebooksAndNotes();
     }
     //create a first note if there are no notes in this notebook

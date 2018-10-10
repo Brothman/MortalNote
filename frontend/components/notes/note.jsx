@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux';
-import { updateNote, deleteNote } from '../../actions/note_actions.js';
+import { updateNote, tempDeleteNote } from '../../actions/note_actions.js';
 
 class Note extends React.Component {
   constructor(props) {
@@ -184,17 +184,30 @@ class Note extends React.Component {
       }
   }
 
-  deleteNote(){
-    //make sure notes and notebooks are defined
-    if (this.props.notebooks && this.props.note) {
-      const myNotebook = this.props.notebooks[this.props.note.notebook_id];
-      //either our current notebook holds more than one item, or we have multiple
-      //notebooks live at the moment
-      if (myNotebook.notes.length > 1  || Object.keys(this.props.notebooks).length > 1) {
-        this.props.deleteNote(this.props.note.id);
+  // SAVE FOR TRASH COMPONENT
+  // deleteNote(){
+  //   //make sure notes and notebooks are defined
+  //   if (this.props.notebooks && this.props.note) {
+  //     const myNotebook = this.props.notebooks[this.props.note.notebook_id];
+  //     //either our current notebook holds more than one item, or we have multiple
+  //     //notebooks live at the moment
+  //     if (myNotebook.notes.length > 1  || Object.keys(this.props.notebooks).length > 1) {
+  //       this.props.deleteNote(this.props.note.id);
+  //     }
+  //   }
+  // }
+
+    deleteNote(){
+      //make sure notes and notebooks are defined
+      if (this.props.notebooks && this.props.note) {
+        const myNotebook = this.props.notebooks[this.props.note.notebook_id];
+        //either our current notebook holds more than one item, or we have multiple
+        //notebooks live at the moment
+        if (myNotebook.notes.length > 1 || Object.keys(this.props.notebooks).length > 1) {
+          this.props.tempDeleteNote(this.props.note.id, this.props.note.notebook_id);
+        }
       }
     }
-  }
 
   render () {
     // const toolbar = [
@@ -233,7 +246,7 @@ class Note extends React.Component {
 
       ['clean']                                         // remove formatting button
     ];
-
+    
     return (
       <div className="note">
         <ReactQuill value={this.state.content}
@@ -265,7 +278,7 @@ const mapStateToProps = ( { entities } ) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateNote: (noteID, content, content_plain, title) => dispatch(updateNote(noteID, content, content_plain, title)),
-    deleteNote: (noteID) => dispatch(deleteNote(noteID))
+    tempDeleteNote: (noteID, notebookID) => dispatch(tempDeleteNote(noteID, notebookID))
   };
 };
 

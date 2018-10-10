@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root "static_pages#root"
 
   namespace :api, defaults: { format: :json } do
+    #placed first so it gets activated before notes#show
+    get '/notes/deleted', to: 'notes#fetchDeleted'
+
     resources :users, only: [:show, :create]
     resource :session, only: [:create, :destroy]
 
@@ -10,7 +13,8 @@ Rails.application.routes.draw do
     #The client for Redux and React to store and render. Index to gather all
     #notebooks at once.
     resources :notebooks, only: [:create, :destroy, :show, :index]
-    resources :notes, only: [:create, :destroy, :show, :update]
+    resources :notes, only: [:create, :destroy, :show, :update] 
+
   end
 
   get 'auth/:provider/callback', to: 'api/sessions#google_create', defaults: { format: :json }

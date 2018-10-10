@@ -1249,7 +1249,18 @@ div[class^="wrapper-div"]:hover {
   transition: 0.1s opacity ease;
 }
 
-.note-trash-icon:hover {
+.note-trash-open-icon {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  /* bottom: 500px; */
+  right: 50px;
+  top: 8px;
+  cursor: pointer;
+  transition: 0.1s opacity ease;
+}
+
+.note-trash-icon:hover, .note-trash-open-icon:hover {
   opacity: 0.5;
 }
 .note-container-grid {

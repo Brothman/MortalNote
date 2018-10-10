@@ -90,7 +90,7 @@
 /*!******************************************!*\
   !*** ./frontend/actions/note_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_NEW_NOTE, DELETE_NOTE, VIEW_NOTE, RECEIVE_UPDATED_NOTE, CLEAR_NOTE, receiveNewNote, viewNote, removeNote, receiveUpdatedNote, clearNote, createNote, updateNote, deleteNote */
+/*! exports provided: RECEIVE_NEW_NOTE, DELETE_NOTE, VIEW_NOTE, RECEIVE_UPDATED_NOTE, RECEIVE_DELETED_NOTES, CLEAR_NOTE, RECEIVE_RESTORED_NOTE, receiveNewNote, viewNote, removeNote, receiveUpdatedNote, receiveDeletedNotes, receiveRestoredNote, clearNote, createNote, updateNote, deleteNote, tempDeleteNote, restoreNote, fetchDeletedNotes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99,21 +99,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_NOTE", function() { return DELETE_NOTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VIEW_NOTE", function() { return VIEW_NOTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_UPDATED_NOTE", function() { return RECEIVE_UPDATED_NOTE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_DELETED_NOTES", function() { return RECEIVE_DELETED_NOTES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_NOTE", function() { return CLEAR_NOTE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_RESTORED_NOTE", function() { return RECEIVE_RESTORED_NOTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveNewNote", function() { return receiveNewNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "viewNote", function() { return viewNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeNote", function() { return removeNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveUpdatedNote", function() { return receiveUpdatedNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveDeletedNotes", function() { return receiveDeletedNotes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveRestoredNote", function() { return receiveRestoredNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearNote", function() { return clearNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNote", function() { return createNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNote", function() { return updateNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteNote", function() { return deleteNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tempDeleteNote", function() { return tempDeleteNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "restoreNote", function() { return restoreNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchDeletedNotes", function() { return fetchDeletedNotes; });
 /* harmony import */ var _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/note_api_util.js */ "./frontend/utils/note_api_util.js");
 var RECEIVE_NEW_NOTE = "RECEIVE_NEW_NOTE";
 var DELETE_NOTE = "DELETE_NOTE";
 var VIEW_NOTE = "VIEW_NOTE";
 var RECEIVE_UPDATED_NOTE = "RECEIVE_UPDATED_NOTE";
+var RECEIVE_DELETED_NOTES = "RECEIVE_DELETED_NOTES";
 var CLEAR_NOTE = "CLEAR_NOTE";
+var RECEIVE_RESTORED_NOTE = "RECEIVE_RESTORED_NOTE";
  //Regular action creator, return a plain old Javascript object.
 
 var receiveNewNote = function receiveNewNote(note) {
@@ -140,6 +149,20 @@ var removeNote = function removeNote(note) {
 var receiveUpdatedNote = function receiveUpdatedNote(note) {
   return {
     type: RECEIVE_UPDATED_NOTE,
+    note: note
+  };
+}; //Regular action creator, return a plain old Javascript object.
+
+var receiveDeletedNotes = function receiveDeletedNotes(notes) {
+  return {
+    type: RECEIVE_DELETED_NOTES,
+    notes: notes
+  };
+}; //Regular action creator, return a plain old Javascript object.
+
+var receiveRestoredNote = function receiveRestoredNote(note) {
+  return {
+    type: RECEIVE_RESTORED_NOTE,
     note: note
   };
 }; //Regular action creator, return a plain old Javascript object.
@@ -174,6 +197,36 @@ var deleteNote = function deleteNote(noteID) {
   return function (dispatch) {
     _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__["deleteNote"](noteID).then(function (noteJSON) {
       return dispatch(removeNote(noteJSON));
+    }, function (error) {
+      return console.log(error);
+    });
+  };
+}; //Return a function (Thunk Action Creator)
+
+var tempDeleteNote = function tempDeleteNote(noteID, notebookID) {
+  return function (dispatch) {
+    _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__["tempDeleteNote"](noteID).then(function (noteJSON) {
+      return dispatch(removeNote(noteJSON));
+    }, function (error) {
+      return console.log(error);
+    });
+  };
+}; //Return a function (Thunk Action Creator)
+
+var restoreNote = function restoreNote(noteID, notebookID) {
+  return function (dispatch) {
+    _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__["restoreNote"](noteID).then(function (noteJSON) {
+      return dispatch(receiveRestoredNote(noteJSON));
+    }, function (error) {
+      return console.log(error);
+    });
+  };
+}; //Return a function (Thunk Action Creator)
+
+var fetchDeletedNotes = function fetchDeletedNotes() {
+  return function (dispatch) {
+    _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_0__["fetchDeletedNotes"]().then(function (noteJSON) {
+      return dispatch(receiveDeletedNotes(noteJSON));
     }, function (error) {
       return console.log(error);
     });
@@ -463,10 +516,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _why_mortalnote_why_mortalnote_container_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./why_mortalnote/why_mortalnote_container.jsx */ "./frontend/components/why_mortalnote/why_mortalnote_container.jsx");
 /* harmony import */ var _notebooks_notebooks_container_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./notebooks/notebooks_container.jsx */ "./frontend/components/notebooks/notebooks_container.jsx");
 /* harmony import */ var _notes_notes_container_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./notes/notes_container.jsx */ "./frontend/components/notes/notes_container.jsx");
-/* harmony import */ var _about_us_about_us_container_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./about_us/about_us_container.jsx */ "./frontend/components/about_us/about_us_container.jsx");
-/* harmony import */ var _plans_plans_container_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./plans/plans_container.jsx */ "./frontend/components/plans/plans_container.jsx");
-/* harmony import */ var _help_help_container_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./help/help_container.jsx */ "./frontend/components/help/help_container.jsx");
-/* harmony import */ var _utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../utils/route_util.jsx */ "./frontend/utils/route_util.jsx");
+/* harmony import */ var _trash_trash_container_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./trash/trash_container.jsx */ "./frontend/components/trash/trash_container.jsx");
+/* harmony import */ var _about_us_about_us_container_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./about_us/about_us_container.jsx */ "./frontend/components/about_us/about_us_container.jsx");
+/* harmony import */ var _plans_plans_container_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./plans/plans_container.jsx */ "./frontend/components/plans/plans_container.jsx");
+/* harmony import */ var _help_help_container_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./help/help_container.jsx */ "./frontend/components/help/help_container.jsx");
+/* harmony import */ var _utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../utils/route_util.jsx */ "./frontend/utils/route_util.jsx");
+
 
 
 
@@ -482,7 +537,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ComponentWrapper = function ComponentWrapper(props) {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["AuthRoute"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_12__["AuthRoute"], {
     exact: true,
     path: "/",
     component: _landing_page_landing_page_container_jsx__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -491,31 +546,31 @@ var ComponentWrapper = function ComponentWrapper(props) {
     component: _why_mortalnote_why_mortalnote_container_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/plans",
-    component: _plans_plans_container_jsx__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _plans_plans_container_jsx__WEBPACK_IMPORTED_MODULE_10__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/help-and-learning",
-    component: _help_help_container_jsx__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _help_help_container_jsx__WEBPACK_IMPORTED_MODULE_11__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/about-us",
-    component: _about_us_about_us_container_jsx__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _about_us_about_us_container_jsx__WEBPACK_IMPORTED_MODULE_9__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "auth/:provider/callback",
     component: _why_mortalnote_why_mortalnote_container_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_12__["AuthRoute"], {
     path: "/login",
     component: _login_form_login_form_container_js__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_12__["AuthRoute"], {
     path: "/signup",
     component: _signup_form_signup_form_container_js__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_12__["ProtectedRoute"], {
     path: "/notebooks",
     component: _notebooks_notebooks_container_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_12__["ProtectedRoute"], {
     path: "/notes",
     component: _notes_notes_container_jsx__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_11__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_util_jsx__WEBPACK_IMPORTED_MODULE_12__["ProtectedRoute"], {
     path: "/trash",
-    component: _notes_notes_container_jsx__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _trash_trash_container_jsx__WEBPACK_IMPORTED_MODULE_8__["default"]
   }));
 };
 
@@ -2442,7 +2497,19 @@ function (_React$Component) {
       if (this.state.content !== this.state.old_content || this.state.title !== this.state.old_title) {
         update.call(this, this.state.content, this.state.content_plain, this.state.title);
       }
-    }
+    } // SAVE FOR TRASH COMPONENT
+    // deleteNote(){
+    //   //make sure notes and notebooks are defined
+    //   if (this.props.notebooks && this.props.note) {
+    //     const myNotebook = this.props.notebooks[this.props.note.notebook_id];
+    //     //either our current notebook holds more than one item, or we have multiple
+    //     //notebooks live at the moment
+    //     if (myNotebook.notes.length > 1  || Object.keys(this.props.notebooks).length > 1) {
+    //       this.props.deleteNote(this.props.note.id);
+    //     }
+    //   }
+    // }
+
   }, {
     key: "deleteNote",
     value: function deleteNote() {
@@ -2452,7 +2519,7 @@ function (_React$Component) {
         //notebooks live at the moment
 
         if (myNotebook.notes.length > 1 || Object.keys(this.props.notebooks).length > 1) {
-          this.props.deleteNote(this.props.note.id);
+          this.props.tempDeleteNote(this.props.note.id, this.props.note.notebook_id);
         }
       }
     }
@@ -2552,8 +2619,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     updateNote: function updateNote(noteID, content, content_plain, title) {
       return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_3__["updateNote"])(noteID, content, content_plain, title));
     },
-    deleteNote: function deleteNote(noteID) {
-      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_3__["deleteNote"])(noteID));
+    tempDeleteNote: function tempDeleteNote(noteID, notebookID) {
+      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_3__["tempDeleteNote"])(noteID, notebookID));
     }
   };
 };
@@ -2794,26 +2861,29 @@ function (_React$Component) {
       //this.props.notes is an array. It will be an empty array if nothing preloaded.
       if (Object.keys(this.props.notebooks).length === 0) {
         this.props.fetchNotebooksAndNotes();
-      } //create a first note if there are no notes in this notebook
-      else if (this.props.notes.length === 0) {
-          var user_id = this.props.user.id;
-          var notebook_id = this.props.notebooks[Object.keys(this.props.notebooks)[0]].id;
-          var content = "";
-          var content_plain = "";
-          var title = "Untitled";
-          var deleted = false;
-          var note = {
-            note: {
-              user_id: user_id,
-              notebook_id: notebook_id,
-              content: content,
-              content_plain: content_plain,
-              title: title,
-              deleted: deleted
-            }
-          };
-          this.props.createNote(note);
-        } //store all notebooks and notes in the State for the add-note-modal
+      } //Also fetch if we're coming from the trash page
+      else if (Object.keys(this.props.notebooks).length === 1 && Object.values(this.props.notebooks)[0].title === "Trash") {
+          this.props.fetchNotebooksAndNotes();
+        } //create a first note if there are no notes in this notebook
+        else if (this.props.notes.length === 0) {
+            var user_id = this.props.user.id;
+            var notebook_id = this.props.notebooks[Object.keys(this.props.notebooks)[0]].id;
+            var content = "";
+            var content_plain = "";
+            var title = "Untitled";
+            var deleted = false;
+            var note = {
+              note: {
+                user_id: user_id,
+                notebook_id: notebook_id,
+                content: content,
+                content_plain: content_plain,
+                title: title,
+                deleted: deleted
+              }
+            };
+            this.props.createNote(note);
+          } //store all notebooks and notes in the State for the add-note-modal
       //THIS IS INEFFICIENT USE OF RESOURCES
       //However, I am on a time crunch, and a working inefficient product
       //Is better than a non-working efficient website.
@@ -3376,6 +3446,721 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/trash/trash_container.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/trash/trash_container.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _notebooks_sidebar_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../notebooks/sidebar.jsx */ "./frontend/components/notebooks/sidebar.jsx");
+/* harmony import */ var _notes_note_index_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../notes/note_index.jsx */ "./frontend/components/notes/note_index.jsx");
+/* harmony import */ var _trash_note_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./trash_note.jsx */ "./frontend/components/trash/trash_note.jsx");
+/* harmony import */ var _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/notebook_actions.js */ "./frontend/actions/notebook_actions.js");
+/* harmony import */ var _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/note_actions.js */ "./frontend/actions/note_actions.js");
+/* harmony import */ var _reducers_selectors_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../reducers/selectors.js */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _utils_notebook_api_util_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/notebook_api_util.js */ "./frontend/utils/notebook_api_util.js");
+/* harmony import */ var _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utils/note_api_util.js */ "./frontend/utils/note_api_util.js");
+/* harmony import */ var _notebooks_note_notebook_index_item_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../notebooks/note_notebook_index_item.jsx */ "./frontend/components/notebooks/note_notebook_index_item.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+var NotesContainer =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(NotesContainer, _React$Component);
+
+  function NotesContainer(props) {
+    var _this;
+
+    _classCallCheck(this, NotesContainer);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(NotesContainer).call(this, props));
+    _this.state = {
+      notebooks: [],
+      notes: {},
+      chosenNotebook: false,
+      chosenNotebookSpan: false,
+      deletedNotes: []
+    };
+    _this.selectNotebook = _this.selectNotebook.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleCloseModal = _this.handleCloseModal.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleNoteSubmitModal = _this.handleNoteSubmitModal.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.selectRandomNote = _this.selectRandomNote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(NotesContainer, [{
+    key: "selectNotebook",
+    value: function selectNotebook(notebook, e) {
+      var target = e.currentTarget; //reset the former chosen background, if a span is in state
+
+      if (this.state.chosenNotebookSpan) {
+        this.state.chosenNotebookSpan.style.backgroundColor = "white";
+      }
+
+      this.setState({
+        chosenNotebook: notebook,
+        chosenNotebookSpan: target
+      }, function () {
+        //ensure we change the add-note-modal submit button
+        var notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[0];
+        notebookSubmitButton.className = "notebook-continue-green"; //lets change the background color of the specific notebook chosen
+
+        target.style.backgroundColor = "#f5f5f5";
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      //fetch all notes and notebooks if no notebook and notes preloaded
+      //this.props.notes is an array. It will be an empty array if nothing preloaded.
+      if (Object.keys(this.props.notebooks).length === 0) {
+        this.props.fetchDeletedNotes();
+      } //create a first note if there are no notes in this notebook
+      else if (this.props.notes.length === 0) {
+          var user_id = this.props.user.id;
+          var notebook_id = this.props.notebooks[Object.keys(this.props.notebooks)[0]].id;
+          var content = "";
+          var content_plain = "";
+          var title = "Untitled";
+          var deleted = false;
+          var note = {
+            note: {
+              user_id: user_id,
+              notebook_id: notebook_id,
+              content: content,
+              content_plain: content_plain,
+              title: title,
+              deleted: deleted
+            }
+          };
+          this.props.createNote(note);
+        } //store all notebooks and notes in the State for the add-note-modal
+      //THIS IS INEFFICIENT USE OF RESOURCES
+      //However, I am on a time crunch, and a working inefficient product
+      //Is better than a non-working efficient website.
+
+
+      _utils_notebook_api_util_js__WEBPACK_IMPORTED_MODULE_8__["fetchNotebooksAndNotes"]().then(function (res) {
+        _this2.setState({
+          notebooks: Object(_reducers_selectors_js__WEBPACK_IMPORTED_MODULE_7__["getAllNotebooks"])({
+            notebooks: res.notebooks
+          }),
+          notes: res.notes
+        });
+      }); //fetch Deleted Notes
+
+      this.props.fetchDeletedNotes();
+    } //remove the note from the store to say it's unselected
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clearNote();
+    }
+  }, {
+    key: "handleCloseModal",
+    value: function handleCloseModal() {
+      var addNotebookModalContainer = document.getElementsByClassName('add-notebook-modal-container')[0];
+      addNotebookModalContainer.style.display = "none"; //ensure both background and modal disappears
+
+      var addNoteModalCard = document.getElementsByClassName('add-note-modal-card')[0];
+      addNoteModalCard.style.display = "none"; //clear chosen notebook when the add-note-modal closes
+
+      if (this.state.chosenNotebookSpan) {
+        this.state.chosenNotebookSpan.style.backgroundColor = "white";
+      }
+
+      this.setState({
+        chosenNotebook: false,
+        chosenNotebookSpan: false
+      }); //Ensure the new-note-button becomes grey again
+
+      var notebookSubmitButton2 = document.querySelectorAll("[class^=notebook-continue]")[0];
+      notebookSubmitButton2.className = "notebook-continue-grey";
+    }
+  }, {
+    key: "handleNoteSubmitModal",
+    value: function handleNoteSubmitModal(e) {
+      var notebookSubmitButton = document.querySelectorAll("[class^=notebook-continue]")[0]; //only create the note if we have a green submit button
+
+      if (notebookSubmitButton.className === "notebook-continue-green") {
+        //for demonstration purposes
+        var user_id = this.props.user.id;
+        var notebook_id = this.state.chosenNotebook.id;
+        var content = "";
+        var content_plain = "";
+        var title = "Untitled";
+        var deleted = false;
+        var note = {
+          note: {
+            user_id: user_id,
+            notebook_id: notebook_id,
+            content: content,
+            content_plain: content_plain,
+            title: title,
+            deleted: deleted
+          }
+        };
+        _utils_note_api_util_js__WEBPACK_IMPORTED_MODULE_9__["createNote"](note); //close the modal
+
+        this.handleCloseModal();
+      } else {//do nothing
+      }
+    }
+  }, {
+    key: "selectRandomNote",
+    value: function selectRandomNote() {
+      //a random note
+      var randomNote; //Check if it's not an empty object ->
+      //Convert keys to array and make sure it has at least one key
+
+      if (Object.keys(this.props.note).length > 0) {
+        randomNote = this.props.note;
+      } else if (Object.keys(this.props.notes).length > 0) {
+        randomNote = this.props.notes[Object.keys(this.props.notes)[0]];
+      }
+
+      return randomNote;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      //a random note
+      var randomNote = this.selectRandomNote();
+
+      var addNoteNotebookItems = function addNoteNotebookItems() {
+        return _this3.state.notebooks.map(function (notebook, idx) {
+          // Since data is normalized, each notebook is under a key of its id
+          // Consequently we need to get the values, which turns out to be an
+          // array of one object, and thus we must take the first item of the
+          // resulting array.
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notebooks_note_notebook_index_item_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
+            key: idx,
+            notebook: notebook,
+            selectNotebook: _this3.selectNotebook.bind(_this3, notebook)
+          });
+        });
+      };
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "note-container-grid"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notebooks_sidebar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        user: this.props.user
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_notes_note_index_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        notes: this.props.notes,
+        notebooks: this.props.notebooks,
+        chosenNote: randomNote
+      }), Object.keys(this.props.notes).length > 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_trash_note_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        note: randomNote
+      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "add-notebook-modal-container",
+        onClick: this.handleCloseModal
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "add-note-modal-card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        className: "note-modal-header"
+      }, "Create new note in..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "grey-tiny-border-1"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "add-note-notebook-items"
+      }, addNoteNotebookItems().sort(function (a, b) {
+        if (a.props.notebook.title > b.props.notebook.title) {
+          return 1;
+        } else {
+          return -1;
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "grey-tiny-border-2"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "notebook-modal-buttons"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "notebook-cancel",
+        onClick: this.handleCloseModal
+      }, "Cancel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "notebook-continue-grey",
+        onClick: this.handleNoteSubmitModal
+      }, "Continue")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "add-note-x-icon",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/x-icon2.svg",
+        onClick: this.handleCloseModal
+      })));
+    }
+  }]);
+
+  return NotesContainer;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var entities = _ref.entities;
+  return {
+    user: Object.values(entities.user)[0],
+    notes: Object(_reducers_selectors_js__WEBPACK_IMPORTED_MODULE_7__["getAllNotes"])(entities),
+    note: entities.note,
+    notebooks: entities.notebooks
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchNotebooksAndNotes: function fetchNotebooksAndNotes() {
+      return dispatch(Object(_actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_5__["fetchNotebooksAndNotes"])());
+    },
+    clearNote: function clearNote() {
+      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_6__["clearNote"])());
+    },
+    receiveUpdatedNote: function receiveUpdatedNote(note) {
+      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_6__["receiveUpdatedNote"])(note));
+    },
+    receiveNotebooksAndNotes: function receiveNotebooksAndNotes(obj) {
+      return dispatch(Object(_actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_5__["receiveNotebooksAndNotes"])(obj));
+    },
+    fetchDeletedNotes: function fetchDeletedNotes() {
+      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_6__["fetchDeletedNotes"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(NotesContainer));
+
+/***/ }),
+
+/***/ "./frontend/components/trash/trash_note.jsx":
+/*!**************************************************!*\
+  !*** ./frontend/components/trash/trash_note.jsx ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_quill__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-quill */ "./node_modules/react-quill/lib/index.js");
+/* harmony import */ var react_quill__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_quill__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/note_actions.js */ "./frontend/actions/note_actions.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+
+
+var Note =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Note, _React$Component);
+
+  function Note(props) {
+    var _this;
+
+    _classCallCheck(this, Note);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Note).call(this, props));
+    var note = _this.props.note; //load empty values to be filled in componentWillReceiveProps
+
+    _this.state = {
+      content: "",
+      old_content: "",
+      content_plain: "",
+      title: "",
+      old_title: "",
+      loaded: false
+    };
+    _this.handleQuillChange = _this.handleQuillChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.loadNote = _this.loadNote.bind(_assertThisInitialized(_assertThisInitialized(_this)), _this.props);
+    _this.handleTitleChange = _this.handleTitleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.makeToolbarDisappear = _this.makeToolbarDisappear.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.makeToolbarAppear = _this.makeToolbarAppear.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.setFocus = _this.setFocus.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.deleteNote = _this.deleteNote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.restoreNote = _this.restoreNote.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(Note, [{
+    key: "handleTitleChange",
+    value: function handleTitleChange(e) {
+      this.setState({
+        title: e.currentTarget.value
+      });
+    }
+  }, {
+    key: "makeToolbarDisappear",
+    value: function makeToolbarDisappear() {
+      var toolbar = document.getElementsByClassName('ql-toolbar')[0];
+      toolbar.style.opacity = 0; //Make asynchronous so animation effect happens, then we remove the ability
+      //To click on the buttons, even though they're invisible
+
+      setTimeout(function () {
+        return toolbar.style.display = "none";
+      }, 200);
+    }
+  }, {
+    key: "makeToolbarAppear",
+    value: function makeToolbarAppear() {
+      var toolbar = document.getElementsByClassName('ql-toolbar')[0];
+      toolbar.style.display = "block"; //Make asynchronous so we see the animation effect
+
+      setTimeout(function () {
+        return toolbar.style.opacity = 1;
+      }, 0);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var note = this.props.note;
+
+      if (!this.state.loaded && note) {
+        // I load the data if it's the first time we're loading a note
+        this.setState({
+          content: note.content,
+          old_content: note.content,
+          content_plain: note.content_plain,
+          title: note.title,
+          old_title: note.title,
+          loaded: true
+        }, this.setFocus);
+      } //I also load the data if it's a new note (different id)
+      else if (note && prevProps.note && note.id !== prevProps.note.id) {
+          this.setState({
+            content: note.content,
+            old_content: note.content,
+            content_plain: note.content_plain,
+            title: note.title,
+            old_title: note.title
+          }, this.setFocus);
+        }
+    }
+  }, {
+    key: "loadNote",
+    value: function loadNote(prevProps) {
+      var note = this.props.note; // I load the data if it's the first time we're loading a note
+
+      if (!this.state.loaded && note) {
+        this.setState({
+          content: note.content,
+          old_content: note.content,
+          content_plain: note.content_plain,
+          title: note.title,
+          old_title: note.title,
+          loaded: true
+        });
+      }
+    } //Allows for autofocus in Title Input when New Note, i.e. 'Untitled'
+
+  }, {
+    key: "setFocus",
+    value: function setFocus() {
+      if (this.state.content_plain == "" && this.state.title == "Untitled") {
+        var titleInput = document.getElementsByClassName('note-title-input')[0];
+        titleInput.focus();
+      } else {
+        //if we're not focused on the titleInput, ensure we can see the toolbar
+        this.makeToolbarAppear();
+      }
+    }
+  }, {
+    key: "setUpTitleInput",
+    value: function setUpTitleInput() {
+      //grab the title input and quill elements off the DOM
+      var titleInput = document.getElementsByClassName('note-title-input')[0];
+      var trashIcon = document.getElementsByClassName('note-trash-icon')[0];
+      var quill = document.getElementsByClassName('quill')[0]; //allow the title input to be a child of quill, so we can make quill a grid
+
+      quill.appendChild(titleInput);
+      quill.appendChild(trashIcon);
+    } //Autosave happens here
+
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.setUpTitleInput();
+      this.loadNote({});
+      var toolbarOptions = [['bold', 'italic', 'underline', 'strike'], // toggled buttons
+      ['blockquote', 'code-block'], [{
+        'header': 1
+      }, {
+        'header': 2
+      }], // custom button values
+      [{
+        'list': 'ordered'
+      }, {
+        'list': 'bullet'
+      }], [{
+        'script': 'sub'
+      }, {
+        'script': 'super'
+      }], // superscript/subscript
+      [{
+        'indent': '-1'
+      }, {
+        'indent': '+1'
+      }], // outdent/indent
+      [{
+        'direction': 'rtl'
+      }], // text direction
+      [{
+        'size': ['small', false, 'large', 'huge']
+      }], // custom dropdown
+      [{
+        'header': [1, 2, 3, 4, 5, 6, false]
+      }], [{
+        'color': []
+      }, {
+        'background': []
+      }], // dropdown with defaults from theme
+      [{
+        'font': []
+      }], [{
+        'align': []
+      }], ['clean'] // remove formatting button
+      ]; //Ensure that focusing on the editor textbox makes the toolbar appear
+
+      var editor = document.getElementsByClassName('ql-editor')[0];
+      editor.addEventListener('focus', this.makeToolbarAppear); //Save periodically (AUTOSAVE EVERY 3 SECONDS)
+
+      setInterval(function () {
+        //Ensures autosave happens for both title and text changes
+        if (_this2.state.content !== _this2.state.old_content || _this2.state.title !== _this2.state.old_title) {
+          //ensure that an autosave won't happen unless new changes occur
+          _this2.setState({
+            old_content: _this2.state.content,
+            old_title: _this2.state.title
+          }, function () {
+            update.call(_this2, _this2.state.content, _this2.state.content_plain, _this2.state.title);
+          });
+        }
+      }, 3000); //fire off a Redux action to send the updated note to RAILS
+
+      var update = function update(content, content_plain, title) {
+        _this2.props.updateNote(_this2.props.note.id, content, content_plain, title);
+      };
+    }
+  }, {
+    key: "handleQuillChange",
+    value: function handleQuillChange(content, delta, source, editor) {
+      this.setState({
+        content: content,
+        content_plain: editor.getText().trim()
+      });
+    } //To ensure we SAVE before we change the page, if needed
+
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      var _this3 = this;
+
+      //fire off a Redux action to send the updated note to RAILS
+      var update = function update(content, content_plain, title) {
+        _this3.props.updateNote(_this3.props.note.id, content, content_plain, title);
+      }; //ensure that an save won't happen unless new changes occur
+
+
+      if (this.state.content !== this.state.old_content || this.state.title !== this.state.old_title) {
+        update.call(this, this.state.content, this.state.content_plain, this.state.title);
+      }
+    } // SAVE FOR TRASH COMPONENT
+    // deleteNote(){
+    //   //make sure notes and notebooks are defined
+    //   if (this.props.notebooks && this.props.note) {
+    //     const myNotebook = this.props.notebooks[this.props.note.notebook_id];
+    //     //either our current notebook holds more than one item, or we have multiple
+    //     //notebooks live at the moment
+    //     if (myNotebook.notes.length > 1  || Object.keys(this.props.notebooks).length > 1) {
+    //       this.props.deleteNote(this.props.note.id);
+    //     }
+    //   }
+    // }
+
+  }, {
+    key: "deleteNote",
+    value: function deleteNote() {
+      //make sure notes and notebooks are defined
+      if (this.props.notes && this.props.note) {
+        //ensure our trash notebook holds more than one note
+        if (Object.keys(this.props.notes).length > 1) {
+          this.props.deleteNote(this.props.note.id);
+        }
+      }
+    }
+  }, {
+    key: "restoreNote",
+    value: function restoreNote() {
+      //make sure notes and notebooks are defined
+      if (this.props.notes && this.props.note) {
+        this.props.restoreNote(this.props.note.id, this.props.note.notebook_id);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      // const toolbar = [
+      //   [{ 'font': [] }],
+      //   ['italic', 'underline', 'strike'],
+      //   [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      //   [{ 'script': 'sub'}, { 'script': 'super' }],
+      //   [{ 'indent': '-1'}, { 'indent': '+1' }],
+      //   [{ 'direction': 'rtl' }],
+      //
+      //   [{ 'size': ['small', false, 'large', 'huge'] }],
+      //   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      //
+      //   [{ 'color': [] }, { 'background': [] }],
+      //   [{ 'align': [] }],
+      //
+      //   ['clean']
+      // ];
+      var toolbar = [['bold', 'italic', 'underline', 'strike'], // toggled buttons
+      ['blockquote', 'code-block'], [{
+        'header': 1
+      }, {
+        'header': 2
+      }], // custom button values
+      [{
+        'list': 'ordered'
+      }, {
+        'list': 'bullet'
+      }], [{
+        'script': 'sub'
+      }, {
+        'script': 'super'
+      }], // superscript/subscript
+      [{
+        'indent': '-1'
+      }, {
+        'indent': '+1'
+      }], // outdent/indent
+      [{
+        'direction': 'rtl'
+      }], // text direction
+      [{
+        'size': ['small', false, 'large', 'huge']
+      }], // custom dropdown
+      [{
+        'header': [1, 2, 3, 4, 5, 6, false]
+      }], [{
+        'color': []
+      }, {
+        'background': []
+      }], // dropdown with defaults from theme
+      [{
+        'font': []
+      }], [{
+        'align': []
+      }], ['clean'] // remove formatting button
+      ];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "note"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_quill__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        value: this.state.content,
+        onChange: this.handleQuillChange,
+        modules: {
+          toolbar: toolbar
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "note-title-input",
+        onChange: this.handleTitleChange,
+        value: this.state.title == "Untitled" ? "" : this.state.title,
+        onFocus: this.makeToolbarDisappear,
+        placeholder: "Untitled"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "note-trash-icon",
+        src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/trash-icon.svg",
+        onClick: this.deleteNote
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "note-trash-open-icon fas fa-redo-alt",
+        onClick: this.restoreNote
+      }));
+    }
+  }]);
+
+  return Note;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var entities = _ref.entities;
+  return {
+    notebooks: entities.notebooks,
+    notes: entities.notes
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    updateNote: function updateNote(noteID, content, content_plain, title) {
+      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_3__["updateNote"])(noteID, content, content_plain, title));
+    },
+    deleteNote: function deleteNote(noteID) {
+      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_3__["deleteNote"])(noteID));
+    },
+    restoreNote: function restoreNote(noteID, notebookID) {
+      return dispatch(Object(_actions_note_actions_js__WEBPACK_IMPORTED_MODULE_3__["restoreNote"])(noteID, notebookID));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Note));
+
+/***/ }),
+
 /***/ "./frontend/components/why_mortalnote/why_mortalnote_container.jsx":
 /*!*************************************************************************!*\
   !*** ./frontend/components/why_mortalnote/why_mortalnote_container.jsx ***!
@@ -3669,6 +4454,9 @@ var noteReducer = function noteReducer() {
     case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_1__["CLEAR_NOTEBOOKS_AND_NOTES"]:
       return {};
 
+    case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_RESTORED_NOTE"]:
+      return {};
+
     case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_0__["DELETE_NOTE"]:
       return {};
     //for most actions, do nothing and return the old state
@@ -3743,6 +4531,25 @@ var notebooksReducer = function notebooksReducer() {
     case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_NEW_NOTEBOOK"]:
       var newState1 = Object.assign({}, state, _defineProperty({}, action.notebook.id, action.notebook));
       return newState1;
+    //return a stubbed trash notebook for the trash page
+
+    case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_DELETED_NOTES"]:
+      return {
+        0: {
+          title: "Trash",
+          notes: []
+        }
+      };
+
+    case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_RESTORED_NOTE"]:
+      var newState3 = Object.assign({}, state);
+      var notebookId2 = action.note.notebook_id; //Delete the new notes Id from the notes Array for the corresponding notebook
+
+      if (newState3[notebookId2]) {
+        newState3[notebookId2].notes.push(action.note.id);
+      }
+
+      return newState3;
     //return an empty object to symbolize empty state, i.e. no notebooks
 
     case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__["CLEAR_NOTEBOOKS_AND_NOTES"]:
@@ -3814,6 +4621,26 @@ var notesReducer = function notesReducer() {
 
     case _actions_notebook_actions_js__WEBPACK_IMPORTED_MODULE_0__["CLEAR_NOTEBOOKS_AND_NOTES"]:
       return {};
+
+    case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_DELETED_NOTES"]:
+      //if user has no notes, return empty object, clean slate
+      if (action.notes === undefined) {
+        return {};
+      } //Otherwise add the notes to the store. Includes all the users notes
+      //So can replace entire old store
+      else {
+          return action.notes;
+        }
+
+    case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_RESTORED_NOTE"]:
+      var newState4 = Object.assign({}, state);
+      var noteID = action.note.id; //Delete the new notes Id from the notes Array for the corresponding notebook
+
+      if (newState4[noteID]) {
+        delete newState4[noteID];
+      }
+
+      return newState4;
     //for most actions, do nothing and return the old state
 
     case _actions_note_actions_js__WEBPACK_IMPORTED_MODULE_1__["DELETE_NOTE"]:
@@ -3861,7 +4688,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: getAllNotebooks, getNotebooksNotes, getNotebooksNotesNormalized, getAllNotes */
+/*! exports provided: getAllNotebooks, getNotebooksNotes, getNotebooksNotesNormalized, getAllDeletedNotes, getAllNotes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3869,6 +4696,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotebooks", function() { return getAllNotebooks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotebooksNotes", function() { return getNotebooksNotes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNotebooksNotesNormalized", function() { return getNotebooksNotesNormalized; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllDeletedNotes", function() { return getAllDeletedNotes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllNotes", function() { return getAllNotes; });
 //Destructure notebooks out of the state for cleaner code
 var getAllNotebooks = function getAllNotebooks(_ref) {
@@ -3892,8 +4720,19 @@ var getNotebooksNotesNormalized = function getNotebooksNotesNormalized(notes, no
   });
   return normalizedNotes;
 };
-var getAllNotes = function getAllNotes(_ref2) {
+var getAllDeletedNotes = function getAllDeletedNotes(_ref2) {
   var notes = _ref2.notes;
+  var deletedNotes = [];
+  Object.keys(notes).map(function (id) {
+    if (notes[id].deleted === true) {
+      deletedNotes.push(notes[id]);
+    }
+  });
+  debugger;
+  return deletedNotes;
+};
+var getAllNotes = function getAllNotes(_ref3) {
+  var notes = _ref3.notes;
 
   //this function is used to place the most recent notes on top
   var sortByMostRecent = function sortByMostRecent(a, b) {
@@ -4099,7 +4938,7 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/utils/note_api_util.js ***!
   \*****************************************/
-/*! exports provided: createNote, updateNote, deleteNote */
+/*! exports provided: createNote, updateNote, deleteNote, tempDeleteNote, restoreNote, fetchDeletedNotes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4107,6 +4946,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNote", function() { return createNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNote", function() { return updateNote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteNote", function() { return deleteNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tempDeleteNote", function() { return tempDeleteNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "restoreNote", function() { return restoreNote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchDeletedNotes", function() { return fetchDeletedNotes; });
 //Jquery AJAX request to send the new note data to the database
 var createNote = function createNote(note) {
   return $.ajax({
@@ -4128,12 +4970,43 @@ var updateNote = function updateNote(noteID, content, content_plain, title) {
       }
     }
   });
-}; //Jquery AJAX request to update a note's content (delta) to the database
+}; //Jquery AJAX request to delete a note from the database
 
 var deleteNote = function deleteNote(noteID) {
   return $.ajax({
     method: 'DELETE',
     url: "/api/notes/".concat(noteID)
+  });
+}; //Jquery AJAX request to update a note's content (deleted = true) to the database
+
+var tempDeleteNote = function tempDeleteNote(noteID) {
+  return $.ajax({
+    method: 'PUT',
+    url: "/api/notes/".concat(noteID),
+    data: {
+      note: {
+        deleted: true
+      }
+    }
+  });
+}; //Jquery AJAX request to update a note's content (deleted = true) to the database
+
+var restoreNote = function restoreNote(noteID) {
+  return $.ajax({
+    method: 'PUT',
+    url: "/api/notes/".concat(noteID),
+    data: {
+      note: {
+        deleted: false
+      }
+    }
+  });
+}; //Jquery AJAX request to update a note's content (delta) to the database
+
+var fetchDeletedNotes = function fetchDeletedNotes() {
+  return $.ajax({
+    method: 'GET',
+    url: "/api/notes/deleted"
   });
 };
 

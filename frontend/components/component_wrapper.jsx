@@ -6,6 +6,7 @@ import LandingPage from './landing_page/landing_page_container.jsx';
 import WhyMortalNote from './why_mortalnote/why_mortalnote_container.jsx';
 import NotebooksContainer from './notebooks/notebooks_container.jsx';
 import NotesContainer from './notes/notes_container.jsx';
+import TrashContainer from './trash/trash_container.jsx';
 import AboutUs from './about_us/about_us_container.jsx';
 import Plans from './plans/plans_container.jsx';
 import Help from './help/help_container.jsx';
@@ -26,7 +27,7 @@ const ComponentWrapper = (props) => {
       <AuthRoute path='/signup' component={SignUpForm} />
       <ProtectedRoute path='/notebooks' component={NotebooksContainer} />
       <ProtectedRoute path='/notes' component={NotesContainer} />
-      <ProtectedRoute path='/trash' component={NotesContainer} />
+      <ProtectedRoute path='/trash' component={TrashContainer} />
     </div>
   );
 };

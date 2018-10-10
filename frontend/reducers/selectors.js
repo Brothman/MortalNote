@@ -20,6 +20,17 @@ export const getNotebooksNotesNormalized = ( notes, noteIDS ) => {
   return normalizedNotes;
 }
 
+export const getAllDeletedNotes = ({ notes }) => {
+  const deletedNotes = [];
+  Object.keys(notes).map(id => {
+    if (notes[id].deleted === true) {
+      deletedNotes.push(notes[id]);
+    }
+  });
+  debugger
+  return deletedNotes;
+}
+
 export const getAllNotes = ( { notes }) => {
   //this function is used to place the most recent notes on top
   const sortByMostRecent = (a, b) => {

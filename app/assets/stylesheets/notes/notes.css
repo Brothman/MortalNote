@@ -33,14 +33,27 @@
   grid-area: note-trash-icon;
   width: 25px;
   height: 25px;
-  position: relative;
+  position: fixed;
   /* bottom: 500px; */
-  right: 30px;
+  right: 10px;
   top: 8px;
   cursor: pointer;
   transition: 0.1s opacity ease;
 }
 
-.note-trash-icon:hover {
+.note-trash-open-icon {
+  grid-area: note-trash-icon;
+  width: 17px;
+  height: 17px;
+  position: fixed;
+  /* bottom: 500px; */
+  right: 14px;
+  top: 35px;
+  cursor: pointer;
+  transition: 0.1s opacity ease;
+  color: #aaa;
+}
+
+.note-trash-icon:hover, .note-trash-open-icon:hover {
   opacity: 0.5;
 }
