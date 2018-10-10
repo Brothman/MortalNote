@@ -84,6 +84,7 @@ class NotebookIndex extends React.Component {
       const content = "";
       const plain_content = "";
       const title = "Untitled";
+      const deleted = false;
 
       const note = {
         note: {
@@ -91,7 +92,8 @@ class NotebookIndex extends React.Component {
           notebook_id,
           content,
           plain_content,
-          title
+          title,
+          deleted
         }
       };
 
@@ -188,7 +190,10 @@ class NotebookIndex extends React.Component {
                src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/add-notebook-icon.svg"
                onClick={this.handleNewNotebookModal} />
           <p className="new-notebook" onClick={this.handleNewNotebookModal}>New Notebook</p>
-          <img className= "sort-by-icon" src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/actions-big-icon.svg" />
+          <img className= "sort-by-icon" 
+               style={{visibility: 'hidden'}}
+               src="https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/actions-big-icon.svg" 
+               />
         </span>
 
         <span className="column-names">

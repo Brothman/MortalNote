@@ -1402,13 +1402,15 @@ function (_React$Component) {
         var content = "";
         var plain_content = "";
         var title = "Untitled";
+        var deleted = false;
         var note = {
           note: {
             user_id: user_id,
             notebook_id: notebook_id,
             content: content,
             plain_content: plain_content,
-            title: title
+            title: title,
+            deleted: deleted
           }
         };
         this.props.createNote(note); //we now want to redirect to the note show page for this new note
@@ -1516,6 +1518,9 @@ function (_React$Component) {
         onClick: this.handleNewNotebookModal
       }, "New Notebook"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "sort-by-icon",
+        style: {
+          visibility: 'hidden'
+        },
         src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/actions-big-icon.svg"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "column-names"
@@ -2606,7 +2611,10 @@ var NoteIndex = function NoteIndex(_ref) {
     className: "number-of-notes"
   }, " ", notes.length, " Notes "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "note-index-action-icon",
-    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/actions-big-icon.svg"
+    src: "https://s3.us-east-2.amazonaws.com/mortalnote-images/evernote-svgs/actions-big-icon.svg",
+    style: {
+      visibility: "hidden"
+    }
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "note-index-tag-icon"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2793,13 +2801,15 @@ function (_React$Component) {
           var content = "";
           var content_plain = "";
           var title = "Untitled";
+          var deleted = false;
           var note = {
             note: {
               user_id: user_id,
               notebook_id: notebook_id,
               content: content,
               content_plain: content_plain,
-              title: title
+              title: title,
+              deleted: deleted
             }
           };
           this.props.createNote(note);
@@ -2857,13 +2867,15 @@ function (_React$Component) {
         var content = "";
         var content_plain = "";
         var title = "Untitled";
+        var deleted = false;
         var note = {
           note: {
             user_id: user_id,
             notebook_id: notebook_id,
             content: content,
             content_plain: content_plain,
-            title: title
+            title: title,
+            deleted: deleted
           }
         };
         this.props.createNote(note); //close the modal

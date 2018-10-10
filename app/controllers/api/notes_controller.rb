@@ -53,6 +53,6 @@ class Api::NotesController < ApplicationController
   private
   #A helper method to grab the data used to create a new note
   def note_params
-    params.require(:note).permit(:title, :content_plain, :user_id, :notebook_id, :content)
+    params.require(:note).permit(:title, :content_plain, :user_id, :notebook_id, :content, :deleted)
   end
 end

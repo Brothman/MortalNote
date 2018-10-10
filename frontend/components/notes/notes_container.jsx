@@ -59,6 +59,7 @@ class NotesContainer extends React.Component {
       const content = "";
       const content_plain = "";
       const title = "Untitled";
+      const deleted = false;
 
       const note = {
         note: {
@@ -66,7 +67,8 @@ class NotesContainer extends React.Component {
           notebook_id,
           content,
           content_plain,
-          title
+          title,
+          deleted
         }
       };
 
@@ -118,6 +120,7 @@ class NotesContainer extends React.Component {
       const content = "";
       const content_plain = "";
       const title = "Untitled";
+      const deleted = false;
 
       const note = {
         note: {
@@ -125,7 +128,8 @@ class NotesContainer extends React.Component {
           notebook_id,
           content,
           content_plain,
-          title
+          title,
+          deleted
         }
       };
 

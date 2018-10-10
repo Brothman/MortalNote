@@ -26,8 +26,10 @@ else
   json.notes do
     @notebooks.each do |notebook|
       notebook.notes.each do |note|
-        json.set! note.id do
-          json.partial! 'api/notes/note', note: note
+        unless (note.deleted)
+          json.set! note.id do
+            json.partial! 'api/notes/note', note: note
+          end
         end
       end
     end
