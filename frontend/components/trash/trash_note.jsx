@@ -276,7 +276,7 @@ class Note extends React.Component {
     }
 }
 
-
+//comment for heroku
 const mapStateToProps = ({ entities }) => {
     return {
         notebooks: entities.notebooks,

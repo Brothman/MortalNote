@@ -4137,7 +4137,8 @@ function (_React$Component) {
   }]);
 
   return Note;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component); //comment for heroku
+
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var entities = _ref.entities;
