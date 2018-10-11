@@ -202,10 +202,7 @@ class Note extends React.Component {
     deleteNote() {
         //make sure notes and notebooks are defined
         if (this.props.notes && this.props.note) {
-            //ensure our trash notebook holds more than one note
-            if (Object.keys(this.props.notes).length > 1) {
-                this.props.deleteNote(this.props.note.id);
-            }
+            this.props.deleteNote(this.props.note.id);
         }
     }
 
