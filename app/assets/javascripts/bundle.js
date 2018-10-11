@@ -4921,10 +4921,6 @@ __webpack_require__.r(__webpack_exports__);
  // basic middleware package
 
 var middlewares = [redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]]; //add redux logger if we're not in production
-// if (process.env.NODE_ENV !== "production") {
-//   const { logger } = require('redux-logger');
-//   middlewares.push(logger);
-// }
 
 var configureStore = function configureStore() {
   var preLoadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
